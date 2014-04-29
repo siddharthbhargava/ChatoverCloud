@@ -78,24 +78,30 @@ db3.require('mongojs').connect(databaseUrl, collections3);
 function insertToClient(json){
 
 dbC.Client.insert(json, function(err, success) {
-if( err || !saved ) console.log("Insert Failed.");
-else console.log("Insert operation Succesful");
+if( err || !saved ) 
+	console.log("Insert Failed.");
+else 
+	console.log("Insert operation Succesful");
 });
 }
 
 function insertToOfflineDB(json){
 
 dbO.offlineDB.insert(json, function(err, success) {
-if( err || !saved ) console.log("Insert Failed.");
-else console.log("Insert operation Succesful");
+if( err || !saved ) 
+	console.log("Insert Failed.");
+else 
+	console.log("Insert operation Succesful");
 });
 }
 
 function insertToConversationDB(json){
 
 dbCO.conversationDB.insert(json, function(err, success) {
-  if( err || !saved ) console.log("Insert Failed.");
-  else console.log("Insert operation Succesful");
+  if( err || !saved ) 
+	  console.log("Insert Failed.");
+  else 
+	  console.log("Insert operation Succesful");
 });
 }
 
@@ -103,8 +109,10 @@ dbCO.conversationDB.insert(json, function(err, success) {
 function insertToKnowledgeDB(json){
 
 dbK.knowledgeDB.insert(json, function(err, success) {
-  if( err || !saved ) console.log("Insert Failed.");
-  else console.log("Insert operation Succesful");
+  if( err || !saved ) 
+	  console.log("Insert Failed.");
+  else 
+	  console.log("Insert operation Succesful");
 });
 }
 
@@ -114,16 +122,20 @@ dbK.knowledgeDB.insert(json, function(err, success) {
 function updateClient(json){
 
 dbC.Client.update(json, function(err, success) {
-if( err || !saved ) console.log("Update Failed.");
-else console.log("Update operation Succesful");
+if( err || !saved ) 
+	console.log("Update Failed.");
+else 
+	console.log("Update operation Succesful");
 });
 }
 
 function updateKnowledgeDB(json){
 
 dbK.knowledgeDB.update(json, function(err, success) {
-if( err || !saved ) console.log("Update Failed.");
-else console.log("Update operation Succesful");
+if( err || !saved ) 
+	console.log("Update Failed.");
+else 
+	console.log("Update operation Succesful");
 });
 }
 
@@ -133,24 +145,30 @@ else console.log("Update operation Succesful");
 function removeClient(json){
 
 dbC.Client.remove(json, function(err, success) {
-if( err || !saved ) console.log("Remove operation Failed.");
-else console.log("Remove operation Succesful");
+if( err || !saved ) 
+	console.log("Remove operation Failed.");
+else 
+	console.log("Remove operation Succesful");
 });
 }
 
 function removeOfflineMessages(json){
 
 dbO.offlineDB.remove(json, function(err, success) {
-if( err || !saved ) console.log("Remove operation Failed.");
-else console.log("Remove operation Succesful");
+if( err || !saved ) 
+	console.log("Remove operation Failed.");
+else 
+	console.log("Remove operation Succesful");
 });
 }
 
 function removeConversations(json){
 
 dbCO.conversationDB.remove(json, function(err, success) {
-if( err || !saved ) console.log("Remove operation Failed.");
-else console.log("Remove operation Succesful");
+if( err || !saved ) 
+	console.log("Remove operation Failed.");
+else 
+	console.log("Remove operation Succesful");
 });
 }
 
@@ -158,8 +176,12 @@ else console.log("Remove operation Succesful");
 function removeKnowledgeFAQ(json){
 
 dbK.knowledgeDB.remove(json, function(err, success) {
-if( err || !saved ) console.log("Remove operation Failed.");
-else console.log("Remove operation Succesful");
+if( err || !saved ) {
+	console.log("Remove operation Failed.");
+}
+else{ 
+	console.log("Remove operation Succesful");
+}
 });
 }
 
@@ -183,13 +205,13 @@ dbCO.conversation.find("{json.clientName, json.customerName}");
 
 function offlineMessages(json){
 
-dbO.offlineDB.find("{json.clientName, json.clientMessage, json.customerName, json.customerMessage.},{json.unread: 1}")
+dbO.offlineDB.find("{json.clientName, json.clientMessage, json.customerName, json.customerMessage.},{json.unread: 1}");
 
 }
 
 function knowledgeQuery(json){
 	
-dbK.knowledgeDB.find(/*Match Keywords of user entered chat with the keywords in the collection */)
+dbK.knowledgeDB.find(/*Match Keywords of user entered chat with the keywords in the collection */);
 	
 }
 
