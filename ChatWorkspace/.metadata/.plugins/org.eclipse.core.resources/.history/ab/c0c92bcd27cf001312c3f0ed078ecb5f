@@ -18,6 +18,6 @@ exports.processrequest = function(req, res){
 		//res.setDateHeader("Expires", 0); // prevents caching at the proxy
 		// server
 		//res.setHeader("Cache-Control", "no-store");
-		res.send("0, Message acknowledged");
+		res.send("0, Message acknowledged from server");
 		//res.end();
 	};

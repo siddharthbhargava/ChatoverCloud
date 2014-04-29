@@ -9,15 +9,6 @@ var ejs = require("ejs");
 var app = express();
 var customer = require("./routes/customer");
 
-
-var allowCrossDomain = function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,POST');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
-
-    next();
-}
-
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
@@ -30,7 +21,6 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(express.cookieParser());
 app.use(express.session({secret: '1234567890QWERTY'}));
-app.use(allowCrossDomain);
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -40,7 +30,24 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
-app.post('/customerrequest', customer.processrequest);
+app.post('/customerrequest', function(req, res){
+	  //res.send("respond with a resource");
+	console.log("Inside Customer Process Request");
+	if(!req.body.hasOwnProperty('message')) {
+		res.statusCode = 400;
+		return res.send('1, Error 400: Post syntax incorrect.');
+	}
+	console.log("Message from Customer : " + message);
+	res.setContentType("text/xml");
+	res.statusCode=200;
+	res.setHeader("Cache-Control", "no-cache"); // HTTP 1.1
+	res.setHeader("Pragma", "no-cache"); // HTTP 1.0
+	res.setDateHeader("Expires", 0); // prevents caching at the proxy
+	// server
+	res.setHeader("Cache-Control", "no-store");
+	res.send("0, Message acknowledged from server" );
+	res.end();
+});
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });

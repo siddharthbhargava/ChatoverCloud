@@ -25,25 +25,29 @@ margin:0px;
 
 
 <script type="text/javascript">
-
+var req;
 function addText(abcd) {
 
   olist = document.getElementById('list');
   op = document.createElement('p');
-  op.innerHTML = document.frmOne.tb1.value;
+  op.innerHTML = "You : " + document.frmOne.tb1.value;
   ocontent = document.getElementById('content');
   ocontent.appendChild(op);
   olist.scrollTop = olist.scrollHeight;
+  params="message="+document.frmOne.tb1.value;
+  callCloudAjax("http://localhost:3000/customerrequest",params,processRequest);
+  
 } 
 
 function addResponse(resp) {
 
   olist = document.getElementById('list');
   op = document.createElement('p');
-  op.innerHTML = resp;
+  op.innerHTML = "Server : " + resp;
   ocontent = document.getElementById('content');
   ocontent.appendChild(op);
   olist.scrollTop = olist.scrollHeight;
+ 
 } 
 
 
@@ -63,15 +67,16 @@ function initRequest()
 	}
 
 }
-var req;
+
 function callCloudAjax(url, params, process) 
 {
 	if(process!=null)
 	{
+		
 		req = initRequest();
 		req.onreadystatechange = process;
-		req.open("POST", url, true);
-		xmlhttp.setRequestHeader("Content-type","ChatCustomerMessage");
+		req.open("POST",url,true);
+		req.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 		req.send(params);
 	}
 }
@@ -86,7 +91,7 @@ function processRequest()
 			if (results != null) 
 			{
 				var results_array = results.split(",");
-				value = trim(results);
+				var value = trim(results);
 				if ((value != "") && (value.length != 0)) 
 				{
 					if (results_array[0] == "1") 
@@ -107,6 +112,10 @@ function processRequest()
 		}
 	}
 } 
+
+function trim(x) {
+    return x.replace(/^\s+|\s+$/gm,'');
+}
 </script>
 
 </head> 
