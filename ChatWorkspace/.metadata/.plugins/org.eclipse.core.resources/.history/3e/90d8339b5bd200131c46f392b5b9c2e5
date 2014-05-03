@@ -1,0 +1,118 @@
+
+var client = require('./connectionToDB.js');
+
+function insertClient(json){
+	
+	/*
+	 * The above JSON object passed as a parameter must be of the form:
+	 * {"clientID":value,
+	 *  "clientName":value,
+	 *  "email":value,
+	 *  "domain":value}
+	 */
+	var connection = client.clientDBConnection;
+	
+	connection.insert(json, function(err,res){
+		if(!err){
+			console.log('Insert Operation Successful.');	
+		}
+		else{
+			console.log('Error in Insertion.');
+		}
+	})
+}
+
+exports.insertClient = insertClient;
+
+function updateClient(json){
+	
+	/*
+	 * The above JSON object passed as a parameter must be of the form:
+	 * {"clientID":value,
+	 *  "clientName":value,
+	 *  "email":value,
+	 *  "domain":value}
+	 */
+	var connection = client.clientDBConnection;
+	
+	connection.update(json, function(err,res){
+		if(!err){
+			console.log('Update Operation Successful.');	
+		}
+		else{
+			console.log('Error in Updating Collection.');
+		}
+	})
+}
+
+exports.updateClient = updateClient;
+
+function removeClient(json){
+	
+	/*
+	 * The above JSON object passed as a parameter must be of the form:
+	 * {"clientID":value,
+	 * 	"password":value,
+	 *  "clientName":value,
+	 *  "email":value,
+	 *  "domain":value}
+	 */
+	var connection = client.clientDBConnection;
+	
+	connection.remove(json, function(err,res){
+		if(!err){
+			console.log('Remove Operation Successful.');	
+		}
+		else{
+			console.log('Error in Remove Operation.');
+		}
+	})
+}
+
+exports.removetClient = removeClient;
+
+function findAllClients(){
+	
+	/*This function will return all the clients. No need tp pass any JSON object*/
+	
+	var connection = client.clientDBConnection;
+	
+	connection.find(function(err,res){
+		console.log(res);
+	})
+}
+exports.findAllClients = findAllClients;
+
+function findClientByID(json){
+	
+	/*The JSON object needs to pass the client ID, to extract all other details.*/
+	
+	var connection = client.clientDBConnection;
+	
+	connection.find(json.clientID, function(err,res){
+		if(err){
+			console.log("No such client exists.");
+		}
+		else{
+			console.log(res);
+		}
+	})
+}
+
+exports.findClientByID = findClientByID;
+
+function validateClientLogin(json){
+	
+	var connection = client.clientDBConnection;
+	
+	connection.find({"clientID":json.clientID, "password": json.password},function(err,res){
+		if(err){
+			console.log("UserID or Password Incorrect");
+		}
+		else{
+			console.log("Client Authenticated");
+		}
+	});
+}
+	
+exports.validateClientLogin = validateClientLogin;

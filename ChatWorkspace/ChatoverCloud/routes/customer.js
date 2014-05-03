@@ -4,7 +4,7 @@
 exports.processrequest = function(req, res){
 	  //res.send("respond with a resource");
 		console.log("Inside Customer Process Request");
-		console.log(req.body);
+		//console.log(req.body);
 		if(!req.body.hasOwnProperty('message')) {
 			console.log("Does not have message");
 			res.statusCode = 400;
@@ -18,6 +18,6 @@ exports.processrequest = function(req, res){
 		//res.setDateHeader("Expires", 0); // prevents caching at the proxy
 		// server
 		//res.setHeader("Cache-Control", "no-store");
-		res.send("0, Message acknowledged");
+		res.send("0, Message mil gaya Chill maar");
 		//res.end();
 	};

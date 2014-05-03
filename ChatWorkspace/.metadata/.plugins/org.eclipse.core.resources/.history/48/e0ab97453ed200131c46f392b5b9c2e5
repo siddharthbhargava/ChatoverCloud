@@ -1,0 +1,37 @@
+var assert = require('assert');
+var mongojs = require('mongojs');
+var db = mongojs('chatDB', ['clientDB']);
+
+function clientConnection(){
+
+	db.createCollection('clientDB', function(err,collection) {
+	assert(!err);
+	return collection;
+	});
+}
+
+
+function conversationConnection(){
+
+	db.createCollection('conversationDB', function(err,collection) {
+	assert(!err);
+	return collection;
+	});
+}
+
+
+function conversationConnection(){
+
+	db.createCollection('offlineDB', function(err,collection) {
+	assert(!err);
+	return collection;
+	});
+}
+
+function conversationConnection(){
+
+	db.createCollection('knowledgeDB', function(err,collection) {
+	assert(!err);
+	return collection;
+	});
+}

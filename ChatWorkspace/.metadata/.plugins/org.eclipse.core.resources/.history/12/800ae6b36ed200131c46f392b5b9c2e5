@@ -1,0 +1,66 @@
+
+var offline = require('./connectionToDB.js');
+
+function insertOfflineMessage(json){
+	
+	var connection = offline.offlineDBConnection;
+	
+	connection.insert(json, function(err,res){
+		if(!err){
+			console.log('Insert Operation Successful.');	
+		}
+		else{
+			console.log('Error in Insertion.');
+		}
+	})
+}
+
+exports.insertOfflineMessage = insertOfflineMessage;
+
+function updateOfflineMessages(json){
+	
+	var connection = offline.offlineDBConnection;
+	
+	connection.update(json, function(err,res){
+		if(!err){
+			console.log('Update Operation Successful.');	
+		}
+		else{
+			console.log('Error in Updating Collection.');
+		}
+	})
+}
+
+exports.updateOfflineMessages = updateOfflineMessages;
+
+function removeOfflineMessages(json){
+	
+	var connection = offline.offlineDBConnection;
+	
+	connection.remove(json, function(err,res){
+		if(!err){
+			console.log('Remove Operation Successful.');	
+		}
+		else{
+			console.log('Error in Remove operation.');
+		}
+	})
+}
+
+exports.removeOfflineMessages = removeOfflineMessages;
+
+function findAllOfflineMessages(){
+	
+	var connection = offline.offlineDBConnection;
+	
+	connection.find(json, function(err, results){
+		if(!err){
+			console.log(results)
+		}
+		else{
+			console.log(err);
+		}
+	});
+}
+
+exports.findAllOfflineMessages = findAllOfflineMessages;
