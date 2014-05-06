@@ -35,7 +35,7 @@ function addText(abcd) {
   ocontent.appendChild(op);
   olist.scrollTop = olist.scrollHeight;
   params="message="+document.frmOne.tb1.value;
-  callCloudAjax("http://localhost:3000/customerrequest",params,processRequest);
+  callCloudAjax("http://ec2-54-219-134-234.us-west-1.compute.amazonaws.com:3000/customerrequest",params,processRequest);
   
 } 
 
