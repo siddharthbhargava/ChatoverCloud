@@ -39,13 +39,17 @@ exports.getCategories = function(req, res){
 		if(err)
 			console.log(err);
 		else
-			res.send("0, Message mil gaya Chill maar");
+			{
+			console.log(result);
+			var cat= result.split(",");
+			console.log(cat);
+			res.send("0," + cat);
+			}
 	}, req.body.clientId);
 	//res.setHeader("Cache-Control", "no-cache"); // HTTP 1.1
 	//res.setHeader("Pragma", "no-cache"); // HTTP 1.0
 	//res.setDateHeader("Expires", 0); // prevents caching at the proxy
 	// server
 	//res.setHeader("Cache-Control", "no-store");
-	res.send("0, Message mil gaya Chill maar");
 	//res.end();
 };
