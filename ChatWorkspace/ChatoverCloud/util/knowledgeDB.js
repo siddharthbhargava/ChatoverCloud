@@ -1,5 +1,4 @@
-
-var knowledge = require('./connectionToDB.js');
+var MongoClient = require('mongodb').MongoClient;
 
 function insertKnowledgeDBMessage(json){
 	
@@ -11,21 +10,30 @@ function insertKnowledgeDBMessage(json){
 	 * 	"question":value,
 	 * 	"answer":value
 	 */
-	var connection = knowledge.knowledgeDBConnection;
 	
 	if(json.clientID!=NULL && json.keywords!=NULL && json.questionCategory!=NULL && json.question!=NULL && json.answer!=NULL){
-	connection.insert(json, function(err,res){
-		if(!err){
-			console.log('Insert Operation Successful.');	
-		}
+		
+		MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
+			  if(err) throw err;
+			  else
+				{
+				  db.collection("knowledgeDB", function (err, connection){
+					  
+					  connection.insert(json, function(err,res){
+						  if(!err){
+							  console.log('Insert Operation Successful.');	
+						  }
+						  else{
+							  console.log('Error in Insertion.');
+						  }
+					  });
+				  });
+				}
+		});
+	}
 		else{
-			console.log('Error in Insertion.');
+			console.log("Insufficient data.")
 		}
-	});
-	}
-	else{
-		console.log("Insufficient data.");
-	}
 }
 
 exports.insertKnowledgeDBMessage = insertKnowledgeDBMessage;
@@ -43,20 +51,26 @@ function updateKnowledgeDBMessages(json){
 	
 	if(json.clientID!=NULL && json.keywords!=NULL && json.questionCategory!=NULL && json.question!=NULL && json.answer!=NULL){
 	
-	var connection = knowledge.knowledgeDBConnection;
-		
-	connection.update(json, function(err,res){
-		if(!err){
-			console.log('Update Operation Successful.');	
-		}
+		MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
+			  if(err) throw err;
+			  else
+				{
+				  db.collection("knowledgeDB", function (err, connection){
+					  connection.update(json, function(err,res){
+						  if(!err){
+							  console.log('Update Operation Successful.');	
+						  }
+						  else{
+							  console.log('Error in Updating Collection.');
+						  }
+					  });
+				  });
+				}
+		});
+	}
 		else{
-			console.log('Error in Updating Collection.');
+			console.log("Insufficient data.")
 		}
-	});
-	}
-	else{
-		console.log("Insufficient Data.");
-	}
 }
 
 exports.updateKnowledgeDBMessages = updateKnowledgeDBMessages;
@@ -73,15 +87,72 @@ function removeKnowledgeDBMessages(json){
 	 */
 	if(json.clientID!=NULL && json.keywords!=NULL && json.questionCategory!=NULL && json.question!=NULL && json.answer!=NULL){
 	
-	var connection = knowledge.knowledgeDBConnection;
-	
-	connection.remove(json, function(err,res){
-		if(!err){
-			console.log('Remove Operation Successful.');	
-		}
+		MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
+			  if(err) throw err;
+			  else
+				{
+				  db.collection("knowledgeDB", function (err, connection){
+					  connection.remove(json, function(err,res){
+						  if(!err){
+							  console.log('Update Operation Successful.');	
+						  }
+						  else{
+							  console.log('Error in Updating Collection.');
+						  }
+					  });
+				  });
+				}
+		});
+	}
 		else{
-			console.log('Error in Remove operation.');
+			console.log("Insufficient data.")
 		}
+}
+exports.removeKnowledgeDBMessages = removeKnowledgeDBMessages;
+
+function findAllKnowledgeDBMessages(callback){
+	
+	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
+		  if(err) throw err;
+		  else
+			{
+			  db.collection("knowledgeDB", function (err, connection){
+				  connection.find(function(err, results){
+					  if(!err){
+						  callback(results,err);
+					  }
+					  else{
+						  console.log(err);
+					  }
+				  });
+			  });
+			}
+	});
+}
+
+exports.findAllKnowledgeDBMessages = findAllKnowledgeDBMessages;
+
+function findKnowledgeDBByClient(callback,json){
+	/*
+	 * The above JSON object must contain the clientID in the form: {"clientID":value}
+	 */
+	if(json.clientID){
+	
+	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
+		  if(err) throw err;
+		  else
+			{
+			  db.collection("knowledgeDB", function (err, connection){
+				  connection.find({"clientID":json.clientID},function(err,res){
+					  if(err){
+						  console.log("Incorrect Client ID");
+					  }
+					  else{
+						  callback(res,err);
+					  }
+				  });
+			  });
+			}
 	});
 	}
 	else{
@@ -89,55 +160,67 @@ function removeKnowledgeDBMessages(json){
 	}
 }
 
-exports.removeKnowledgeDBMessages = removeKnowledgeDBMessages;
-
-function findAllKnowledgeDBMessages(){
-	
-	var connection = knowledge.knowledgeDBConnection;
-	
-	connection.find(function(err, results){
-		if(!err){
-			console.log(results)
-		}
-		else{
-			console.log(err);
-		}
-	});
-}
-
-exports.findAllKnowledgeDBMessages = findAllKnowledgeDBMessages;
-
-function findKnowledgeDBByClient(json){
-	/*
-	 * The above JSON object must contain the clientID in the form: {"clientID":value}
-	 */
-	var connection = knowledge.knowledgeDBConnection;
-	
-	connection.find({"clientID":json.clientID},function(err,res){
-		if(err){
-			console.log("Incorrect Client ID");
-		}
-		else{
-			console.log(res);
-		}
-	});
-}
-
 exports.findKnowledgeDBByClient = findKnowledgeDBByClient;
 
 function removeKnowledgeDBByClient(json){
 	
 	/*The above JSON object must contain the ClientID and question in the format: {"clientID":value, "question":value}*/
-	var connection = knowledge.knowledgeDBConnection;
 	
-	connection.remove({"clientID:":json.clientID, "question":value},function(err,res){
-		if(err){
-			console.log("No such question");
-		}
-		else{
-			console.log("Removed the question & answer of the particular client provided");
-		}
+	if(json.clientID!=NULL){
+	
+	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
+		  if(err) throw err;
+		  else
+			{
+			  db.collection("knowledgeDB", function (err, connection){
+				  connection.remove({"clientID:":json.clientID, "question":value},function(err,res){
+					  if(err){
+						  console.log("No such question");
+					  }
+					  else{
+						  console.log("Removed the question & answer of the particular client provided");
+					  }
+				  });
+			  });
+			}
 	});
+	}
+	else{
+		console.log("Insufficient Data.");
+	}
 }
 
 exports.removeKnowledgeDBByClient = removeKnowledgeDBByClient;
+
+
+function findKnowledgeDBByCategoryandKey(callback,json){
+	/*
+	 * The above JSON object must contain the clientID in the form: {"clientID":value,"questionCategory":value,"keywords":[value]}
+	 */
+	
+	if(json.clientID!=NULL && json.questionCategory!=NULL && json.keywords!=NULL){
+	
+	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
+		  if(err) throw err;
+		  else
+			{
+			  db.collection("knowledgeDB", function (err, connection){
+				  connection.find({"questionCategory":json.questionCategory, "keywords":json.keywords},function(err,res){
+					  if(err){
+						  console.log("Incorrect Client ID");
+					  }
+					  else{
+						  callback(res,err);
+					  }
+				  });
+			  });
+			}
+	});
+	}
+	else{
+		console.log("Insufficient Data.");
+	}
+}
+	
+
+exports.findKnowledgeDBByCategoryandKey = findKnowledgeDBByCategoryandKey;

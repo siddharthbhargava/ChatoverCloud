@@ -1,0 +1,22 @@
+var MongoClient = require('mongodb').MongoClient
+//var mongoclient = new MongoClient(new Server("localhost", 27017), {native_parser: true});
+//var db = mongoclient.db("integration_tests");
+
+function findfromtimepass(callback, json){	
+	var result;
+	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
+		  if(err) throw err;
+		  else
+			{
+			  	db.collection("timepass", function (err, timepass){
+			  		timepass.findOne(json ,function(err,tp){
+			  			//console.log(tp);
+			  			//callback(tp,err);
+			  		})
+			  	})
+			}
+		  
+	});
+	
+}
+exports.findfromtimepass = findfromtimepass;

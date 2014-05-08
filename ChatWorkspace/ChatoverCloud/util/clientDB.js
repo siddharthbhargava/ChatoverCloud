@@ -1,5 +1,4 @@
-
-var client = require('./connectionToDB.js');
+var MongoClient = require('mongodb').MongoClient;
 
 function insertClient(json){
 	
@@ -10,28 +9,34 @@ function insertClient(json){
 	 *  "clientName":value,
 	 *  "email":value,
 	 *  "domain":value}
+	 
 	 */
-
-	if(json.clientID!=NULL && json.password!=NULL && json.clientName!=NULL && json.email!=NULL && json.domain!=NULL){
 	
-	var connection = client.clientDBConnection;
-	
-	connection.insert(json, function(err,res){
-		if(!err){
-			console.log('Insert Operation Successful.');	
-		}
-		else{
-			console.log('Error in Insertion.');
-		}
+	 if(json.clientID!=NULL && json.password!=NULL && json.clientName!=NULL && json.email!=NULL && json.domain!=NULL){
+			
+		 MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
+		  if(err) throw err;
+		  else
+			{	
+			  	db.collection("clientDB", function (err, connection){
+			  		connection.insert(json,function (err,result){
+			  			if(err)
+			  				console.log(err);
+			  			else
+				  			console.log("Successfully Inserted");
+				  	});
+				  });
+			}
+		  
 	});
 	}
-	else{
-		console.log("Incomplete Credentials");
-		}
+	 else{
+		 console.log("Insufficient Data.");
+	 }
 }
 
-
 exports.insertClient = insertClient;
+
 
 function updateClient(json){
 	
@@ -43,26 +48,31 @@ function updateClient(json){
 	 *  "email":value,
 	 *  "domain":value}
 	 */
-
 	if(json.clientID!=NULL && json.password!=NULL){
-	
-	var connection = client.clientDBConnection;
 		
-	connection.update(json, function(err,res){
-		if(!err){
-			console.log('Update Operation Successful.');	
-		}
-		else{
-			console.log('Error in Updating Collection.');
-		}
-	});
+	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
+		if(err) throw err;
+		else
+		{
+				db.collection("clientDB", function (err, connection){
+					connection.update(json,function (err,result){
+						if(err)
+							console.log(err);
+						else
+							console.log("Successfully Updated");
+					});
+				});
+			}
+		});
 	}
 	else{
-		console.log("Incomplete Credentials");
+		console.log("Insufficient Data.");
 	}
 }
-exports.updateClient = updateClient;
 
+exports.updateClient = updateClient;	
+		
+	
 function removeClient(json){
 	
 	/*
@@ -73,35 +83,58 @@ function removeClient(json){
 	 *  "email":value,
 	 *  "domain":value}
 	 */
-
+	
 	if(json.clientID!=NULL && json.password!=NULL && json.clientName!=NULL && json.email!=NULL && json.domain!=NULL){
 	
-	var connection = client.clientDBConnection;
-		
-	connection.remove(json, function(err,res){
-		if(!err){
-			console.log('Remove Operation Successful.');	
-		}
-		else{
-			console.log('Error in Remove Operation.');
-		}
-	});
+	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
+		if(err) throw err;
+		else
+		{
+				db.collection("clientDB", function (err, connection){
+					connection.remove(json,function (err,result){
+						if(err)
+							console.log(err);
+						else
+							console.log("Successfully Removed");
+					});
+				});
+			}
+		});
 	}
 	else{
-		console.log("Remove Operation Unsuccessful.");
+		console.log("Insufficient Data.");
 		}
 }
 
 exports.removetClient = removeClient;
 
-function findAllClients(){
+
+function findAllClients(callback){
 	
 	/*This function will return all the clients. No need tp pass any JSON object*/
 	
-	var connection = client.clientDBConnection;
 	
-	connection.find(function(err,res){
-		console.log(res);
+	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
+		  if(err) throw err;
+		  else
+			{
+			  	db.collection("clientDB", function (err, connection){
+			  		if(err){
+						console.log("No such database exists.");
+					}
+				  else{
+			  		connection.find(function(err,res){
+			  			if(err){
+							console.log("No client exists.");
+						}
+					  else{
+			  			callback(res,err);
+					  }
+					});
+				  }
+				
+			  	});
+			}
 	});
 }
 exports.findAllClients = findAllClients;
@@ -110,37 +143,70 @@ function findClientByID(json){
 	
 	/*The JSON object needs to pass the client ID, to extract all other details.*/
 	
-	var connection = client.clientDBConnection;
+	if(json.clientID!=NULL){
 	
-	connection.find(json.clientID, function(err,res){
-		if(err){
-			console.log("No such client exists.");
-		}
-		else{
-			console.log(res);
-		}
+	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
+		  if(err) throw err;
+		  else
+			{
+			  db.collection("clientDB", function (err, connection){
+				  if(err){
+						console.log("No such database exists.");
+					}
+				  else{
+				  connection.find(json.clientID,function(err,res){
+					  if(err){
+							console.log("No such client exists.");
+						}
+					  else{
+					  
+			  			callback(res,err);
+					  }
+					});
+				  }
+				
+			  	});
+			}
 	});
+	}
+	else{
+		console.log("Insufficient Data.");
+	}
 }
 
 exports.findClientByID = findClientByID;
 
-function validateClientLogin(json){
+function validateClientLogin(callback,json){
 	
-	var connection = client.clientDBConnection;
-	var authenticated = 0;
+	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
+		  if(err) throw err;
+		  else
+			{
+	//var connection = client.clientDBConnection;
+			  var authenticated = 0;
 	
-	connection.find({"clientID":json.clientID, "password": json.password},function(err,res){
-		if(err){
-			console.log("UserID or Password Incorrect");
-		}
-		else{
-			authenticated = 1;
-			console.log("Client Authenticated");
-			return authenticated;
+			  db.collection("clientDB", function (err, connection){
+				  if(err){
+						console.log("No such database exists.");
+					}
+				  else{
+				  connection.find({"clientID":json.clientID, "password": json.password},function(err,res){
+					  if(err){
+							console.log("UserID or Password Incorrect");
+						}
+					  else{
+						  authenticated = 1;
+							console.log("Client Authenticated");
+							callback(authenticated,err);
+						}
+					});
+				
+				}
+			  });
 		}
 	});
 }
-	
+			  	
 exports.validateClientLogin = validateClientLogin;
 
 function changeClientPassword(json){
@@ -155,6 +221,8 @@ function changeClientPassword(json){
 	else{
 		console.log("Not Authorized to change details of client.");
 	}
+	
 }
 
 exports.changeClientPassword = changeClientPassword;
+

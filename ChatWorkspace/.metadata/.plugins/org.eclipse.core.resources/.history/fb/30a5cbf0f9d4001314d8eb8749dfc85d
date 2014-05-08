@@ -1,0 +1,9 @@
+var abc = require('./clientDB.js');
+
+abc.insertClient({"clientID":value,"password":value,"clientName":value,"email":value,"domain":value});
+
+var def = abc.findAllClients();
+
+console.log(def);
+
+console.log("Hello");

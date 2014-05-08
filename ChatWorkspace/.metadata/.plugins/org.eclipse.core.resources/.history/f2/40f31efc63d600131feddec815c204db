@@ -1,0 +1,36 @@
+/**
+ * New node file
+ */
+
+var nodemailer = require("nodemailer");
+
+var transport = nodemailer.createTransport("SMTP", {
+    host: "smtp.gmail.com", // hostname
+    secureConnection: true, // use SSL
+    port: 465, // port for secure SMTP
+    auth: {
+        user: "sjsu.cmpe272@gmail.com",
+        pass: "chittiSaar"
+    }
+});
+
+// setup e-mail data with unicode symbols
+var mailOptions = {
+    from: "Saideepak <saideepak09@gmail.com>", // sender address
+    to: "saideepa09k@gmail.com", // list of receivers
+    subject: "Hi", // Subject line
+    text: "Hello world! Wassup Chitti?!", // plaintext body
+    html: "<b>Hello world</b>" // html body
+}
+
+// send mail with defined transport object
+transport.sendMail(mailOptions, function(error, response){
+    if(error){
+        console.log(error);
+    }else{
+        console.log("Message sent: " + response.message+"     ");
+    }
+
+  
+    transport.close(); // shut down the connection pool, no more messages
+});

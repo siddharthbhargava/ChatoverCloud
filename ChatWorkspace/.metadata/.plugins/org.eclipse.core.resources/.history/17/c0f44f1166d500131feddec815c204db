@@ -1,0 +1,49 @@
+var mongocon= require('./mongotest');
+
+function insertintotimepass(callback, tpdoc)
+{
+	var timepass = mongocon.getTimepass();
+	if(tpdoc!=null)
+		timepass.insert(tpdoc, function(error, results){
+			if(!error) {
+				console.log(results);
+				if(results.length !== 0) {
+					console.log("tpdoc inserted");
+				}
+			} else {
+				console.log(error);
+			}
+			callback(results, error);
+		});
+}
+exports.insertintotimepass = insertintotimepass;
+
+
+function findfromtimepass(callback, tpdoc)
+{
+	var timepass = mongocon.getTimepass();
+	if(tpdoc!=null)
+		timepass.find(tpdoc, function(error, results){
+			if(!error) {
+				console.log(results);
+				if(results.length !== 0) {
+					console.log("tpdoc fetched");
+				}
+			} else {
+				console.log(error);
+			}
+			callback(results, error);
+		});
+}
+exports.findfromtimepass = findfromtimepass;
+
+
+findfromtimepass(function(results, err){
+	if(err) {
+		console.log(err);
+	} else {
+		console.log(results);
+	}
+}, { "gattupallyji" : "haan Kya" });
+
+

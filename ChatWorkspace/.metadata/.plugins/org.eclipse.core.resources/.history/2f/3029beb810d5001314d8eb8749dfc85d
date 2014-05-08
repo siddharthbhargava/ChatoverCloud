@@ -1,0 +1,17 @@
+var assert = require('assert');
+var mongojs = require('mongojs');
+var db = mongojs('chatDB', ['clientDB2']);
+
+function clientDBConnection(json){
+
+	db.createCollection('clientDB2', function(err,collection) {
+	console.log(err);
+	collection.inser({"clientID":json.clientID,"password":json.password,"clientName":json.clientName,"email":json.email,"domain":json.domain},function(err,res){
+		assert(!err);
+		console.log("Success");
+	});
+	});
+}
+
+
+clientDBConnection({"clientID":"TUX&BUCKS","password":"dhiru","clientName":"Raymonds","email":"none","domain":"awesome.com"});
