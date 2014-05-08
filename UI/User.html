@@ -5,6 +5,12 @@ function openWin()
 {
 var myWindow = window.open('chat.html','','toolbar=no,width=500,height=500,location=0'); 
 }
+
+window.onload =function()
+{
+	alert("onload function works");
+}
+
 $(function() {
     $('.required-icon').tooltip({
         placement: 'left',
