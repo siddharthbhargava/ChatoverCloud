@@ -1,3 +1,0 @@
-var abc = require('./clientDB2.js');
-
-abc.clientDBConnection({"clientID":"GATTU"});
