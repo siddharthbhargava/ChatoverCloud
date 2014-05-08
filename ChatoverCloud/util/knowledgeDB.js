@@ -210,7 +210,24 @@ function findKnowledgeDBByCategoryandKey(callback,json){
 						  console.log("Incorrect Client ID");
 					  }
 					  else{
-						  callback(res,err);
+						  
+						  var cat;
+							results.toArray(function(err,docs){
+								if(docs!=null)
+									{
+										cat=docs[0].question;
+										cat = cat.concat(":");
+										cat = cat.concat(docs[0].answer);
+										for(var i=1; i<docs.length;i++)
+											{
+												cat = cat.concat(",");
+												cat = cat.concat(docs[i].question);
+												cat = cat.concat(":");
+												cat = cat.concat(docs[i].category);
+											}
+									}
+								callback(res,err);
+							});
 					  }
 				  });
 			  });

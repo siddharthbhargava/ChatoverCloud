@@ -5,6 +5,9 @@ function insertConversation(json){
 	/*
 	 * The above JSNON object must be of the form:
 	 * {"clientID":value,
+	 * 	"customerName":value,
+	 * 	"customerEmail":value,
+	 * 	"category":value,
 	 * 	"conversationID":value,
 	 *  "timeStamp":value,
 	 *  "clientMessage":value,
@@ -12,7 +15,7 @@ function insertConversation(json){
 	 *  "unreadFlag":value}
 	 */
 
-	 if(json.clientID!=NULL && json.conversationID!=NULL && json.timeStamp!=NULL && json.unreadFlag!=NULL){
+	 if(json.clientID!=NULL && json.customerName!=NULL && json.category!=NULL &&json.customerEmail!=NULL && json.conversationID!=NULL && json.timeStamp!=NULL && json.unreadFlag!=NULL){
 			
 		 MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 		  if(err) throw err;
@@ -30,7 +33,7 @@ function insertConversation(json){
 		 });
 	 } 
 	 else{
-				console.log("Incomplete data.");
+			console.log("Incomplete data.");
 	}
 }
 
@@ -41,6 +44,9 @@ function updateConversation(json){
 	/*
 	 * The above JSNON object must be of the form:
 	 * {"clientID":value,
+	 * 	"customerName":value,
+	 * 	"customerEmail":value,
+	 * 	"category":value,
 	 * 	"conversationID":value,
 	 *  "timeStamp":value,
 	 *  "clientMessage":value,
@@ -48,7 +54,7 @@ function updateConversation(json){
 	 *  "unreadFlag":value}
 	 */
 
-	if(json.clientID!=NULL &&json.conversationID!=NULL && json.timeStamp!=NULL && json.unreadFlag!=NULL){
+	if(json.clientID!=NULL && json.customerName!=NULL && json.category!=NULL &&json.customerEmail!=NULL && json.conversationID!=NULL && json.timeStamp!=NULL && json.unreadFlag!=NULL){
 	
 	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 		if(err) throw err;
@@ -78,6 +84,9 @@ function removeConversation(json){
 	/*
 	 * The above JSNON object must be of the form:
 	 * {"clientID":value,
+	 * 	"customerName":value,
+	 * 	"customerEmail":value,
+	 * 	"category":value,
 	 * 	"conversationID":value,
 	 *  "timeStamp":value,
 	 *  "clientMessage":value,
@@ -85,7 +94,7 @@ function removeConversation(json){
 	 *  "unreadFlag":value}
 	 */
 
-	if(json.clientID!=NULL && json.conversationID!=NULL && json.timeStamp!=NULL && json.unreadFlag!=NULL){
+	if(json.clientID!=NULL && json.customerName!=NULL && json.category!=NULL &&json.customerEmail!=NULL && json.conversationID!=NULL && json.timeStamp!=NULL && json.unreadFlag!=NULL){
 		
 	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 		if(err) throw err;
