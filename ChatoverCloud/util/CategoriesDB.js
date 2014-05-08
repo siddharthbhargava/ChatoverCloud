@@ -8,7 +8,7 @@ function insertCategoriesDB(json){
 	 * 	"category":value}
 	 */
 		
-	if(json.clientID!=NULL && json.category!=NULL){
+	
 		MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 			  if(err) throw err;
 			  else
@@ -27,10 +27,8 @@ function insertCategoriesDB(json){
 			});
 		}
 	
-	else{
-		console.log("Insufficient data.")
-	}
-}
+	
+
 
 exports.insertCategoriesDB = insertCategoriesDB;
 
@@ -112,7 +110,25 @@ function findAllCategoriesDB(callback){
 			  db.collection("CategoriesDB", function (err, connection){
 				  connection.find(function(err, results){
 					  if(!err){
-						  callback(results,err);
+						  
+						  var cat;
+							results.toArray(function(err,docs){
+								if(docs!=null)
+									{
+										//cat2=docs[0].category;
+										cat = docs[0].clientID;
+										cat = cat.concat(":");
+										cat = cat.concat(docs[0].category);
+										for(var i=1; i<docs.length;i++)
+											{
+												cat = cat.concat(",");
+												cat = cat.concat(docs[i].clientID);
+												cat = cat.concat(":");
+												cat = cat.concat(docs[i].category);
+											}
+									}
+								callback(cat);
+							});
 					  }
 					  else{
 						  console.log(err);
@@ -126,7 +142,7 @@ function findAllCategoriesDB(callback){
 
 exports.findAllCategoriesDB = findAllCategoriesDB;
 
-function findCategoriesDBByClient(callback,json){
+function findCategoriesDBByClient(callback,clientID){
 	/*
 	 * The above JSON object must contain the clientID in the form: {"clientID":value}
 	 */
@@ -136,9 +152,22 @@ function findCategoriesDBByClient(callback,json){
 		  else
 			{
 			  db.collection("CategoriesDB", function (err, connection){
-				  connection.find({"clientID":json.clientID},function(err, results){
+				  connection.find({"clientID": clientID},function(err, results){
 					  if(!err){
-						  callback(results,err);
+						  
+						  var cat;
+							results.toArray(function(err,docs){
+								if(docs!=null)
+									{
+										cat=docs[0].category;
+										for(var i=1; i<docs.length;i++)
+											{
+												cat = cat.concat(",");
+												cat = cat.concat(docs[i].category);
+											}
+									}
+								callback(cat,err);
+							});
 					  }
 					  else{
 						  console.log(err);
