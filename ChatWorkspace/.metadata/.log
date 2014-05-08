@@ -1,0 +1,148 @@
+
+!ENTRY com.eclipsesource.jshint.ui 4 0 2014-05-08 03:45:39.782
+!MESSAGE Failed to read jshint configuration for project ChatoverCloud
+!STACK 1
+org.eclipse.core.runtime.CoreException: File not found: /Users/siddharthbhargava/Desktop/sid/SJSU/SJSU academics/272 Ranjan/ChatoverCloud/ChatoverCloud/ChatWorkspace/ChatoverCloud/.jshintrc.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:55)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.openInputStream(LocalFile.java:377)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:797)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:289)
+	at com.eclipsesource.jshint.ui.internal.util.IOUtil.readFileUtf8(IOUtil.java:35)
+	at com.eclipsesource.jshint.ui.internal.builder.ConfigLoader.readConfig(ConfigLoader.java:61)
+	at com.eclipsesource.jshint.ui.internal.builder.ConfigLoader.getProjectConfig(ConfigLoader.java:52)
+	at com.eclipsesource.jshint.ui.internal.builder.ConfigLoader.getConfiguration(ConfigLoader.java:36)
+	at com.eclipsesource.jshint.ui.internal.builder.JSHintBuilderVisitor.createJSHint(JSHintBuilderVisitor.java:93)
+	at com.eclipsesource.jshint.ui.internal.builder.JSHintBuilderVisitor.<init>(JSHintBuilderVisitor.java:55)
+	at com.eclipsesource.jshint.ui.internal.builder.JSHintBuilder.incrementalBuild(JSHintBuilder.java:60)
+	at com.eclipsesource.jshint.ui.internal.builder.JSHintBuilder.build(JSHintBuilder.java:40)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:733)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:206)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:246)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:299)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:302)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:358)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:381)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:143)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:241)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+Caused by: java.io.FileNotFoundException: /Users/siddharthbhargava/Desktop/sid/SJSU/SJSU academics/272 Ranjan/ChatoverCloud/ChatoverCloud/ChatWorkspace/ChatoverCloud/.jshintrc (No such file or directory)
+	at java.io.FileInputStream.open(Native Method)
+	at java.io.FileInputStream.<init>(FileInputStream.java:120)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.openInputStream(LocalFile.java:368)
+	... 22 more
+!SUBENTRY 1 org.eclipse.core.filesystem 4 271 2014-05-08 03:45:39.783
+!MESSAGE File not found: /Users/siddharthbhargava/Desktop/sid/SJSU/SJSU academics/272 Ranjan/ChatoverCloud/ChatoverCloud/ChatWorkspace/ChatoverCloud/.jshintrc.
+!STACK 0
+java.io.FileNotFoundException: /Users/siddharthbhargava/Desktop/sid/SJSU/SJSU academics/272 Ranjan/ChatoverCloud/ChatoverCloud/ChatWorkspace/ChatoverCloud/.jshintrc (No such file or directory)
+	at java.io.FileInputStream.open(Native Method)
+	at java.io.FileInputStream.<init>(FileInputStream.java:120)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.openInputStream(LocalFile.java:368)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:797)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:289)
+	at com.eclipsesource.jshint.ui.internal.util.IOUtil.readFileUtf8(IOUtil.java:35)
+	at com.eclipsesource.jshint.ui.internal.builder.ConfigLoader.readConfig(ConfigLoader.java:61)
+	at com.eclipsesource.jshint.ui.internal.builder.ConfigLoader.getProjectConfig(ConfigLoader.java:52)
+	at com.eclipsesource.jshint.ui.internal.builder.ConfigLoader.getConfiguration(ConfigLoader.java:36)
+	at com.eclipsesource.jshint.ui.internal.builder.JSHintBuilderVisitor.createJSHint(JSHintBuilderVisitor.java:93)
+	at com.eclipsesource.jshint.ui.internal.builder.JSHintBuilderVisitor.<init>(JSHintBuilderVisitor.java:55)
+	at com.eclipsesource.jshint.ui.internal.builder.JSHintBuilder.incrementalBuild(JSHintBuilder.java:60)
+	at com.eclipsesource.jshint.ui.internal.builder.JSHintBuilder.build(JSHintBuilder.java:40)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:733)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:206)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:246)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:299)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:302)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:358)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:381)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:143)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:241)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+
+!ENTRY org.eclipse.core.resources 4 566 2014-05-08 03:45:56.512
+!MESSAGE Could not save master table to file '/Users/siddharthbhargava/Desktop/sid/SJSU/SJSU academics/272 Ranjan/ChatoverCloud/ChatoverCloud/ChatWorkspace/.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources'.
+!STACK 0
+java.io.FileNotFoundException: /Users/siddharthbhargava/Desktop/sid/SJSU/SJSU academics/272 Ranjan/ChatoverCloud/ChatoverCloud/ChatWorkspace/.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources (No such file or directory)
+	at java.io.FileOutputStream.openAppend(Native Method)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:192)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:116)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:45)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:41)
+	at org.eclipse.core.internal.resources.SaveManager.saveMasterTable(SaveManager.java:1229)
+	at org.eclipse.core.internal.resources.SaveManager.saveMasterTable(SaveManager.java:1220)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1197)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1109)
+	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:51)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+
+!ENTRY org.eclipse.core.resources 4 566 2014-05-08 04:14:07.672
+!MESSAGE Could not save master table to file '/Users/siddharthbhargava/Desktop/sid/SJSU/SJSU academics/272 Ranjan/ChatoverCloud/ChatoverCloud/ChatWorkspace/.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources'.
+!STACK 0
+java.io.FileNotFoundException: /Users/siddharthbhargava/Desktop/sid/SJSU/SJSU academics/272 Ranjan/ChatoverCloud/ChatoverCloud/ChatWorkspace/.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources (No such file or directory)
+	at java.io.FileOutputStream.openAppend(Native Method)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:192)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:116)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:45)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:41)
+	at org.eclipse.core.internal.resources.SaveManager.saveMasterTable(SaveManager.java:1229)
+	at org.eclipse.core.internal.resources.SaveManager.saveMasterTable(SaveManager.java:1220)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1197)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1109)
+	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:51)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+
+!ENTRY org.eclipse.core.resources 4 566 2014-05-08 04:14:41.660
+!MESSAGE Could not save master table to file '/Users/siddharthbhargava/Desktop/sid/SJSU/SJSU academics/272 Ranjan/ChatoverCloud/ChatoverCloud/ChatWorkspace/.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources'.
+!STACK 0
+java.io.FileNotFoundException: /Users/siddharthbhargava/Desktop/sid/SJSU/SJSU academics/272 Ranjan/ChatoverCloud/ChatoverCloud/ChatWorkspace/.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources (No such file or directory)
+	at java.io.FileOutputStream.openAppend(Native Method)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:192)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:116)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:45)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:41)
+	at org.eclipse.core.internal.resources.SaveManager.saveMasterTable(SaveManager.java:1229)
+	at org.eclipse.core.internal.resources.SaveManager.saveMasterTable(SaveManager.java:1220)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1197)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1109)
+	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:51)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+
+!ENTRY org.eclipse.core.resources 4 566 2014-05-08 04:15:33.143
+!MESSAGE Could not save master table to file '/Users/siddharthbhargava/Desktop/sid/SJSU/SJSU academics/272 Ranjan/ChatoverCloud/ChatoverCloud/ChatWorkspace/.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources.bak'.
+!STACK 0
+java.io.FileNotFoundException: /Users/siddharthbhargava/Desktop/sid/SJSU/SJSU academics/272 Ranjan/ChatoverCloud/ChatoverCloud/ChatWorkspace/.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources.bak (No such file or directory)
+	at java.io.FileOutputStream.openAppend(Native Method)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:192)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:116)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:45)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:41)
+	at org.eclipse.core.internal.resources.SaveManager.saveMasterTable(SaveManager.java:1229)
+	at org.eclipse.core.internal.resources.SaveManager.cleanMasterTable(SaveManager.java:228)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1138)
+	at org.eclipse.core.internal.resources.Workspace.save(Workspace.java:2376)
+	at org.eclipse.ui.internal.ide.application.IDEWorkbenchAdvisor$5.run(IDEWorkbenchAdvisor.java:508)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:121)
+
+!ENTRY org.eclipse.ui.ide 4 4 2014-05-08 04:15:36.403
+!MESSAGE Problems saving workspace
+
+!ENTRY org.eclipse.ui.ide 4 1 2014-05-08 04:15:36.403
+!MESSAGE Problems occurred while trying to save the state of the workbench.
+!SUBENTRY 1 org.eclipse.core.resources 4 566 2014-05-08 04:15:36.404
+!MESSAGE Could not save master table to file '/Users/siddharthbhargava/Desktop/sid/SJSU/SJSU academics/272 Ranjan/ChatoverCloud/ChatoverCloud/ChatWorkspace/.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources'.
+!STACK 0
+java.io.FileNotFoundException: /Users/siddharthbhargava/Desktop/sid/SJSU/SJSU academics/272 Ranjan/ChatoverCloud/ChatoverCloud/ChatWorkspace/.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources (No such file or directory)
+	at java.io.FileOutputStream.openAppend(Native Method)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:192)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:116)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:45)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:41)
+	at org.eclipse.core.internal.resources.SaveManager.saveMasterTable(SaveManager.java:1229)
+	at org.eclipse.core.internal.resources.SaveManager.saveMasterTable(SaveManager.java:1220)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1197)
+	at org.eclipse.core.internal.resources.Workspace.save(Workspace.java:2376)
+	at org.eclipse.ui.internal.ide.application.IDEWorkbenchAdvisor$5.run(IDEWorkbenchAdvisor.java:508)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:121)
