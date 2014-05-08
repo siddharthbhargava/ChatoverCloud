@@ -159,15 +159,36 @@ function findClientByID(json){
 							console.log("No such client exists.");
 						}
 					  else{
-					  
-			  			callback(res,err);
-					  }
-					});
-				  }
+						  
+						  	cat = docs[0].clientID;
+							cat = cat.concat(":");
+							cat = cat.concat(docs[0].clientName);
+							cat = cat.concat(":");
+							cat = cat.concat(docs[0].clientEmail);
+							cat = cat.concat(":");
+							cat = cat.concat(docs[0].domain);
+						  
+							for(var i=1; i<docs.length;i++)
+							{
+								cat = cat.concat(",");
+								
+								cat = cat.concat(docs[i].clientID);
+								cat = cat.concat(":");
+								cat = cat.concat(docs[i].clientName);
+								cat = cat.concat(":");
+								cat = cat.concat(docs[i].clientEmail);
+								cat = cat.concat(":");
+								cat = cat.concat(docs[i].domain);
+							}
+						}
+					callback(cat,err);
+				});
+							
+			   }
+			});
+		  }
 				
-			  	});
-			}
-	});
+		});
 	}
 	else{
 		console.log("Insufficient Data.");
