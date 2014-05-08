@@ -144,30 +144,7 @@ function findOfflineMessageByClient(callback,json){
 					  console.log("The client has no unread messages");
 				  }
 				  else{
-					  
-					  var cat;
-						results.toArray(function(err,docs){
-							if(docs!=null)
-								{
-									cat=docs[0].timeStamp;
-									cat = cat.concat(":");
-									cat = cat.concat(docs[0].customerEmail);
-									cat = cat.concat(":");
-									cat = cat.concat(docs[0].message);
-	
-									for(var i=1; i<docs.length;i++)
-										{
-											cat = cat.concat(",");
-											
-											cat = cat.concat(docs[i].timeStamp);
-											cat = cat.concat(":");
-											cat = cat.concat(docs[i].customerEmail);
-											cat = cat.concat(":");
-											cat = cat.concat(docs[i].message);
-										}
-								}
-							callback(cat,err);
-						});
+					  callback(res,err);
 				  }
 			  });
 		 });
