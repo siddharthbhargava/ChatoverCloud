@@ -35,7 +35,12 @@ exports.getCategories = function(req, res){
 	console.log("Client ID : " + req.body.clientId);
 	//res.set('Content-Type', 'text/plain');
 	res.statusCode=200;
-	
+	categories.findCategoriesDBByClient(function(result, err){
+		if(err)
+			console.log(err);
+		else
+			res.send("0, Message mil gaya Chill maar");
+	}, req.body.clientId);
 	//res.setHeader("Cache-Control", "no-cache"); // HTTP 1.1
 	//res.setHeader("Pragma", "no-cache"); // HTTP 1.0
 	//res.setDateHeader("Expires", 0); // prevents caching at the proxy
