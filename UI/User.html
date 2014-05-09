@@ -32,10 +32,10 @@ function submitTicket()
 	var frm = document.getElementById('userDetails') || null;
 	if(frm) 
 	{
-  	 	frm.action = '/submitTicket' 
+  	 	frm.action = '/submitTicket' ;
 	}
 	document.getElementById('clientId').value=clientId;
-	alert("Your ticket has been submitted. We are currently processing your ticket and shall respond to you soon.")
+	alert("Your ticket has been submitted. We are currently processing your ticket and shall respond to you soon.");
 	window.close();
 }
 function startChat()
@@ -46,6 +46,8 @@ function startChat()
 }
 function close()
 {
+	alert("in close");
+	self.close();
 	window.close();
 	return false;
 }
@@ -251,9 +253,9 @@ body{overflow:hidden;background-image:url(bg-chat.jpg);background-repeat:no-repe
      <label>
         <span>&nbsp;</span> 
         <input name ="ticket" id = "ticket" type="submit" style="visibility:visible" class="button" value="Submit Ticket" onclick="submitTicket()"/> 
-        <input name ="chat" id="chat" style="visibility:hidden" class="button" value="Chat" onclick="startChat()"/> 
+        <input name ="chat" id="chat" style="visibility:hidden" class="button" value="Chat" onclick="startChat(); return false;"/> 
         <input name ="startchat" id="startchat" type="submit" style="visibility:hidden" class="button" value="Start Chat"/> 
-        <input name ="close" id="close" type="button" class="button" value="Close" onclick="close()"/> 
+        <button name ="close" id="close" type="button" class="button" value="Close" onclick="close(); return false;"/> 
     </label>    
 </form>
        
