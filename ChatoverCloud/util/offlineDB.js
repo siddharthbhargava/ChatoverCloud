@@ -11,7 +11,7 @@ function insertOfflineMessage(json){
 	 *  "message":value}
 	 */
 
-	if(json.clientID!=NULL && json.timeStamp!=NULL && json.customerEmail && json.unreadFlag!=NULL && json.message!=NULL){
+	if(json.clientID && json.timeStamp && json.customerEmail && json.unreadFlag && json.message){
 	
 		MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 			  if(err) throw err;
@@ -47,7 +47,7 @@ function updateOfflineMessages(json){
 	 *  "message":value}
 	 */
 	
-	if(json.clientID!=NULL && json.timeStamp!=NULL && json.customerEmail && json.unreadFlag!=NULL && json.message!=NULL){
+	if(json.clientID && json.timeStamp && json.customerEmail && json.unreadFlag && json.message){
 		
 		MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 			  if(err) throw err;
@@ -82,7 +82,7 @@ function removeOfflineMessages(json){
 	 *  "message":value}
 	 */
 
-	if(json.clientID!=NULL && json.timeStamp!=NULL && json.customerEmail && json.unreadFlag!=NULL && json.message!=NULL){
+	if(json.clientID && json.timeStamp && json.customerEmail && json.unreadFlag && json.message){
 	
 		MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 			  if(err) throw err;
@@ -131,7 +131,7 @@ exports.findAllOfflineMessages = findAllOfflineMessages;
 function findOfflineMessageByClient(callback,json){
 	/*The above JSON object must have the clientID in the manner: {"clientID":value}*/
 	
-	if(json.clientID!=NULL){
+	if(json.clientID){
 	
 	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 		  if(err) throw err;
@@ -147,7 +147,7 @@ function findOfflineMessageByClient(callback,json){
 					  
 					  var cat;
 						results.toArray(function(err,docs){
-							if(docs!=null)
+							if(docs)
 								{
 									cat=docs[0].timeStamp;
 									cat = cat.concat(":");
@@ -183,7 +183,7 @@ exports.findOfflineMessageByClient = findOfflineMessageByClient;
 
 function removeReadOfflineMessagesByClient(json){
 	/*The above JSON object must have the client ID in the manner: {"clientID":value}*/
-	if(json.clientID!=NULL){
+	if(json.clientID){
 
 	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 		  if(err) throw err;
@@ -206,3 +206,30 @@ function removeReadOfflineMessagesByClient(json){
 }
 
 exports.removeReadOfflineMessagesByClient = removeReadOfflineMessagesByClient;
+
+
+function changeUnreadFlag(json){
+	if(json.clientID && json.conversationID && json.unreadFlag){
+		MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
+			  if(err) throw err;
+			  else{
+				  
+				  db.collection("offlineDB", function (err, connection){
+					  
+					  if(!err){	
+						  connection.update({"unreadFlag":"read"});
+					  }
+					  else{
+						  console.log("Error");
+					  }
+				  });
+			}
+		});
+	}
+	else{
+		console.log("Insufficient Data.");
+	}
+}
+
+					  
+exports.changeUnreadFlag = changeUnreadFlag;

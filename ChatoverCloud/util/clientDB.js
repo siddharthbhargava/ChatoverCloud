@@ -12,7 +12,7 @@ function insertClient(json){
 	 
 	 */
 	
-	 if(json.clientID!=NULL && json.password!=NULL && json.clientName!=NULL && json.email!=NULL && json.domain!=NULL){
+	 if(json.clientID && json.password && json.clientName && json.email && json.domain){
 			
 		 MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 		  if(err) throw err;
@@ -48,7 +48,7 @@ function updateClient(json){
 	 *  "email":value,
 	 *  "domain":value}
 	 */
-	if(json.clientID!=NULL && json.password!=NULL){
+	if(json.clientID && json.password){
 		
 	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 		if(err) throw err;
@@ -84,7 +84,7 @@ function removeClient(json){
 	 *  "domain":value}
 	 */
 	
-	if(json.clientID!=NULL && json.password!=NULL && json.clientName!=NULL && json.email!=NULL && json.domain!=NULL){
+	if(json.clientID && json.password && json.clientName && json.email && json.domain){
 	
 	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 		if(err) throw err;
@@ -143,7 +143,7 @@ function findClientByID(json){
 	
 	/*The JSON object needs to pass the client ID, to extract all other details.*/
 	
-	if(json.clientID!=NULL){
+	if(json.clientID){
 	
 	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 		  if(err) throw err;
@@ -160,34 +160,41 @@ function findClientByID(json){
 						}
 					  else{
 						  
-						  	cat = docs[0].clientID;
-							cat = cat.concat(":");
-							cat = cat.concat(docs[0].clientName);
-							cat = cat.concat(":");
-							cat = cat.concat(docs[0].clientEmail);
-							cat = cat.concat(":");
-							cat = cat.concat(docs[0].domain);
+						  var cat;
+							results.toArray(function(err,docs){
+								if(docs)
+								{
+									cat = docs[0].clientID;
+									cat = cat.concat(":");
+									cat = cat.concat(docs[0].clientName);
+									cat = cat.concat(":");
+									cat = cat.concat(docs[0].clientEmail);
+									cat = cat.concat(":");
+									cat = cat.concat(docs[0].domain);
 						  
-							for(var i=1; i<docs.length;i++)
-							{
-								cat = cat.concat(",");
+									for(var i=1; i<docs.length;i++)
+									{
+										
+										cat = cat.concat(",");
 								
-								cat = cat.concat(docs[i].clientID);
-								cat = cat.concat(":");
-								cat = cat.concat(docs[i].clientName);
-								cat = cat.concat(":");
-								cat = cat.concat(docs[i].clientEmail);
-								cat = cat.concat(":");
-								cat = cat.concat(docs[i].domain);
-							}
-						}
-					callback(cat,err);
-				});
+										cat = cat.concat(docs[i].clientID);
+										cat = cat.concat(":");
+										cat = cat.concat(docs[i].clientName);
+										cat = cat.concat(":");
+										cat = cat.concat(docs[i].clientEmail);
+										cat = cat.concat(":");
+										cat = cat.concat(docs[i].domain);
+									}
+								}
+								callback(cat,err);
+							});
 							
-			   }
-			});
-		  }
+					  }
+				  });
+				 }
 				
+			  });
+			}
 		});
 	}
 	else{

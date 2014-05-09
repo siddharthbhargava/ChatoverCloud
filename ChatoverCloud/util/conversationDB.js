@@ -15,7 +15,7 @@ function insertConversation(json){
 	 *  "unreadFlag":value}
 	 */
 
-	 if(json.clientID!=NULL && json.customerName!=NULL && json.category!=NULL &&json.customerEmail!=NULL && json.conversationID!=NULL && json.timeStamp!=NULL && json.unreadFlag!=NULL){
+	 if(json.clientID && json.customerName && json.category &&json.customerEmail && json.conversationID && json.timeStamp && json.unreadFlag){
 			
 		 MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 		  if(err) throw err;
@@ -54,7 +54,7 @@ function updateConversation(json){
 	 *  "unreadFlag":value}
 	 */
 
-	if(json.clientID!=NULL && json.customerName!=NULL && json.category!=NULL &&json.customerEmail!=NULL && json.conversationID!=NULL && json.timeStamp!=NULL && json.unreadFlag!=NULL){
+	if(json.clientID && json.customerName && json.category &&json.customerEmail && json.conversationID && json.timeStamp && json.unreadFlag){
 	
 	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 		if(err) throw err;
@@ -94,7 +94,7 @@ function removeConversation(json){
 	 *  "unreadFlag":value}
 	 */
 
-	if(json.clientID!=NULL && json.customerName!=NULL && json.category!=NULL &&json.customerEmail!=NULL && json.conversationID!=NULL && json.timeStamp!=NULL && json.unreadFlag!=NULL){
+	if(json.clientID && json.customerName && json.category && json.customerEmail && json.conversationID && json.timeStamp && json.unreadFlag){
 		
 	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 		if(err) throw err;
@@ -143,7 +143,7 @@ function findConversationByClient(callback,json){
 	/*
 	 * The above JSON object must contain the clientID in the form: {"clientID":value}
 	 */
-	if(json.clientID!=NULL){
+	if(json.clientID){
 	
 	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 		if(err) throw err;
@@ -157,7 +157,7 @@ function findConversationByClient(callback,json){
 				else{
 					 var cat;
 						results.toArray(function(err,docs){
-							if(docs!=null)
+							if(docs)
 								{
 									cat=docs[0].customerName;
 									cat = cat.concat(":");
@@ -213,7 +213,7 @@ function findConversationByClientandConversationID(callback,json){
 	/*
 	 * The above JSON object must contain the clientID in the form: {"clientID":value,"conversationID":value}
 	 */
-	if(json.clientID!=NULL && json.conversationID!=NULL){
+	if(json.clientID && json.conversationID){
 	
 		MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 		if(err) throw err;
@@ -228,7 +228,7 @@ function findConversationByClientandConversationID(callback,json){
 					
 					 var cat;
 						results.toArray(function(err,docs){
-							if(docs!=null)
+							if(docs)
 								{
 									cat=docs[0].customerName;
 									cat = cat.concat(":");
@@ -282,7 +282,7 @@ function findUnreadMessagesByClient(callback,json){
 	
 	/*The above JSON object should contain the Client ID in the form: {"clientID":value}*/
 	
-	if(json.clientID!=NULL){
+	if(json.clientID){
 	
 		MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 		if(err) throw err;
@@ -294,7 +294,7 @@ function findUnreadMessagesByClient(callback,json){
 						
 						 var cat;
 							results.toArray(function(err,docs){
-								if(docs!=null)
+								if(docs)
 									{
 										cat=docs[0].customerName;
 										cat = cat.concat(":");
@@ -351,7 +351,7 @@ exports.findUnreadMessagesByClient = findUnreadMessagesByClient;
 function removeReadConversationByClient(json){
 	
 	/*The above JSON object should contain the Client ID in the form: {"clientID":value}*/
-	if(json.clientID!=NULL){
+	if(json.clientID){
 	
 		MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 		if(err) throw err;
@@ -378,7 +378,7 @@ exports.removeReadConversationByClient = removeReadConversationByClient;
 
 function removeConversationByID(json){
 	
-	if(json.clientID!=NULL && json.conversationID!=NULL){
+	if(json.clientID && json.conversationID){
 		
 		MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 			if(err) throw err;
@@ -404,3 +404,78 @@ function removeConversationByID(json){
 }
 	
 exports.removeConversationByID = removeConversationByID;
+
+function getConversationsBetweenT1AndT2(t1,t1){
+	/*Pass the begining time and end time as parameter to this function*/
+	
+	if(t1 && t1){
+		MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
+			if(err) throw err;
+			else
+			{
+				db.collection("conversationDB", function (err, connection){
+					if(!err){
+					connection.find({"timeStamp":{$gt:t1},"timeStamp":{$lt:t2}}, function(res,err){
+						
+						if(!err){
+			
+							var cat;
+							results.toArray(function(err,docs){
+								if(docs)
+									{
+										cat=docs[0].customerName;
+										cat = cat.concat(":");
+										cat = cat.concat(docs[0].customerEmail);
+										cat = cat.concat(":");
+										cat = cat.concat(docs[0].category);
+										cat = cat.concat(":");
+										cat = cat.concat(docs[0].conversationID);
+										cat = cat.concat(":");
+										cat = cat.concat(docs[0].timeStamp);
+										cat = cat.concat(":");
+										cat = cat.concat(docs[0].clientMessage);
+										cat = cat.concat(":");
+										cat = cat.concat(docs[0].customerMessage);
+										
+										for(var i=1; i<docs.length;i++)
+											{
+												cat = cat.concat(",");
+												
+												cat = cat.concat(docs[i].customerName);
+												cat = cat.concat(":");
+												cat = cat.concat(docs[i].customerEmail);
+												cat = cat.concat(":");
+												cat = cat.concat(docs[i].category);
+												cat = cat.concat(":");
+												cat = cat.concat(docs[i].conversationID);
+												cat = cat.concat(":");
+												cat = cat.concat(docs[i].timeStamp);
+												cat = cat.concat(":");
+												cat = cat.concat(docs[i].clientMessage);
+												cat = cat.concat(":");
+												cat = cat.concat(docs[i].customerMessage);
+											}
+										}
+									callback(cat,err);
+								});
+							}
+							else{
+								console.log(err);
+							}
+						}
+					);
+				}
+				else{
+					console.log(err);
+				}
+					
+				});
+			}
+		});
+	}
+	else{
+		console.log("Insufficient Data.");
+	}
+}
+
+exports.getConversationsBetweenT1AndT2 = getConversationsBetweenT1AndT2;

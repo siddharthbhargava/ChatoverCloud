@@ -11,7 +11,7 @@ function insertKnowledgeDBMessage(json){
 	 * 	"answer":value
 	 */
 	
-	if(json.clientID!=NULL && json.keywords!=NULL && json.questionCategory!=NULL && json.question!=NULL && json.answer!=NULL){
+	if(json.clientID && json.keywords && json.questionCategory && json.question && json.answer){
 		
 		MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 			  if(err) throw err;
@@ -49,7 +49,7 @@ function updateKnowledgeDBMessages(json){
 	 * 	"answer":value
 	 */
 	
-	if(json.clientID!=NULL && json.keywords!=NULL && json.questionCategory!=NULL && json.question!=NULL && json.answer!=NULL){
+	if(json.clientID && json.keywords && json.questionCategory && json.question && json.answer){
 	
 		MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 			  if(err) throw err;
@@ -85,7 +85,7 @@ function removeKnowledgeDBMessages(json){
 	 * 	"question":value,
 	 * 	"answer":value
 	 */
-	if(json.clientID!=NULL && json.keywords!=NULL && json.questionCategory!=NULL && json.question!=NULL && json.answer!=NULL){
+	if(json.clientID && json.keywords && json.questionCategory && json.question && json.answer){
 	
 		MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 			  if(err) throw err;
@@ -151,7 +151,7 @@ function findKnowledgeDBByClient(callback,json){
 						  
 						  var cat;
 							results.toArray(function(err,docs){
-								if(docs!=null)
+								if(docs)
 									{
 										cat=docs[0].questionCategory;
 										cat = cat.concat(":");
@@ -192,14 +192,14 @@ function removeKnowledgeDBByClient(json){
 	
 	/*The above JSON object must contain the ClientID and question in the format: {"clientID":value, "question":value}*/
 	
-	if(json.clientID!=NULL){
+	if(json.clientID){
 	
 	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 		  if(err) throw err;
 		  else
 			{
 			  db.collection("knowledgeDB", function (err, connection){
-				  connection.remove({"clientID:":json.clientID, "question":value},function(err,res){
+				  connection.remove({"clientID:":json.clientID, "question":json.question},function(err,res){
 					  if(err){
 						  console.log("No such question");
 					  }
@@ -224,41 +224,42 @@ function findKnowledgeDBByCategoryandKey(callback,json){
 	 * The above JSON object must contain the clientID in the form: {"clientID":value,"questionCategory":value,"keywords":[value]}
 	 */
 	
-	if(json.clientID!=NULL && json.questionCategory!=NULL && json.keywords!=NULL){
-	
-	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
-		  if(err) throw err;
-		  else
+	if(json.clientID && json.questionCategory && json.keywords){
+		MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
+			if(err)
+			  throw err;
+			else
 			{
-			  db.collection("knowledgeDB", function (err, connection){
-				  connection.find({"questionCategory":json.questionCategory, "keywords":json.keywords},function(err,res){
-					  if(err){
-						  console.log("Incorrect Client ID");
-					  }
-					  else{
-						  
-						  var cat;
-							results.toArray(function(err,docs){
-								if(docs!=null)
+				db.collection("knowledgeDB", function (err, connection){
+					connection.find({"questionCategory":json.questionCategory, "keywords":json.keywords},function(err,res){
+						if(err){
+							console.log("Incorrect Client ID");
+						}
+						
+						else{
+							
+							var cat;
+							res.toArray(function(err,docs){
+								if(docs){
+									cat=docs[0].question;
+									cat = cat.concat(":");
+									cat = cat.concat(docs[0].answer);
+									for(var i=1; i<docs.length;i++)
 									{
-										cat=docs[0].question;
+										cat = cat.concat(",");
+										cat = cat.concat(docs[i].question);
 										cat = cat.concat(":");
-										cat = cat.concat(docs[0].answer);
-										for(var i=1; i<docs.length;i++)
-											{
-												cat = cat.concat(",");
-												cat = cat.concat(docs[i].question);
-												cat = cat.concat(":");
-												cat = cat.concat(docs[i].category);
-											}
+										cat = cat.concat(docs[i].category);
 									}
+									
+								}
 								callback(res,err);
 							});
-					  }
-				  });
-			  });
+						}
+					});
+				});
 			}
-	});
+		});
 	}
 	else{
 		console.log("Insufficient Data.");

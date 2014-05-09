@@ -8,6 +8,7 @@ function insertCategoriesDB(json){
 	 * 	"category":value}
 	 */
 		
+	if(json.clientID && json.category){
 	
 		MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 			  if(err) throw err;
@@ -26,6 +27,10 @@ function insertCategoriesDB(json){
 				}
 			});
 		}
+	else{
+		console.log("error!!!");
+	}
+}
 	
 	
 
@@ -40,7 +45,7 @@ function updateCategoriesDB(json){
 	 * 	"category":value}
 	 */
 	
-	if(json.clientID!=NULL && json.Category!=NULL){
+	if(json.clientID && json.category){
 		MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 			  if(err) throw err;
 			  else
@@ -75,7 +80,7 @@ function removeCategoriesDB(json){
 	 * 	"category":value}
 	 */
 	
-	if(json.clientID!=NULL && json.Category!=NULL){
+	if(json.clientID && json.Category){
 		MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 			  if(err) throw err;
 			  else
@@ -113,7 +118,7 @@ function findAllCategoriesDB(callback){
 						  
 						  var cat;
 							results.toArray(function(err,docs){
-								if(docs!=null)
+								if(docs)
 									{
 										//cat2=docs[0].category;
 										cat = docs[0].clientID;
@@ -147,6 +152,7 @@ function findCategoriesDBByClient(callback,clientID){
 	 * The above JSON object must contain the clientID in the form: {"clientID":value}
 	 */
 	
+	if(clientID){
 	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 		  if(err) throw err;
 		  else
@@ -157,7 +163,7 @@ function findCategoriesDBByClient(callback,clientID){
 						  
 						  var cat;
 							results.toArray(function(err,docs){
-								if(docs!=null)
+								if(docs)
 									{
 										cat=docs[0].category;
 										for(var i=1; i<docs.length;i++)
@@ -176,6 +182,10 @@ function findCategoriesDBByClient(callback,clientID){
 			  });
 			}
 	});
+	}
+	else{
+		console.log("Incomplete Data.");
+	}
 }
 
 exports.findCategoriesDBByClient = findCategoriesDBByClient;
