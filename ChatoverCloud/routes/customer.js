@@ -1,6 +1,9 @@
-var categories= require("../util/CategoriesDB")
-var clientFlag  =   require("../util/clientDB")
-
+var categories = require("../util/CategoriesDB")
+var client = require("../util/clientDB")
+var conversation = require('../util/conversationDB');
+var knowledge = require('../util/knowledgeDB');
+var offline = require('../util/offlineDB');
+var conversationID;
 /**
  * New node file
  */
@@ -59,18 +62,20 @@ exports.getCategories = function(req, res){
 //function replaceAll (find, replace, str) {
 //	return str.replace(new RegExp(find,'g'),replace);
 //}
-exports.clientOnline = function(req,res)
+
+
+function clientOnlineFlag(callback,req,res)
 {
 	alert("inside client status");
-	if(!req.body.hasOwnProperty('clientID')) {
-		console.log("Request does not have Client status");
+	if(!req.body.hasOwnProperty('clientId')) {
+		console.log("Request does not have ClientID");
 		res.statusCode = 400;
 		return res.send('1, Error 400: Post syntax incorrect.');
 	}
 	//console.log("Client Status : " + getclientFlag);
 	
 	res.statusCode=200;
-	clientFlag.getClientFlag(function(result, err){
+	client.getClientFlag(function(result, err){
 		
 		if(err)
 			console.log(err);
@@ -85,10 +90,84 @@ exports.clientOnline = function(req,res)
 			console.log("support online");
 			}
 			
-			results.send(clientFlag);
+			callback(clientFlag,err);
 		}
 	}, req.body.clientID);
 	
 };
 
+exports.clientOnlineFlag = clientOnlineFlag;
+
+function insertLiveMessageGetConvoID(req,res)
+{
+	//alert("inside customer message");
+	if(!req.clientId) {
+		console.log("Request does not have ClientID");
+		res.statusCode = 400;
+		return res.send("Error.");
+	}
+	else{
+		conversation.insertConversationInitialReq(req,function(res,err){
+			if(err)
+				console.log("Error.");
+			else
+				conversationID = res;
+				//write operator response in callback
+		});
+	}
+}
+
+
+exports.insertLiveMessageGetConvoID = insertLiveMessageGetConvoID;
+
+function insertLiveMessage(req,res){
+	//alert("inside customer message");
+	if(!req.clientId) {
+		console.log("Request does not have ClientID");
+		res.statusCode = 400;
+		return res.send("Error.");
+	}
+	else{
+		//req = req.concat("conversationID:");
+		req.conversationID = conversationID;
+		conversation.insertConversationRegular(req);
+	}
+}
+
+exports.insertLiveMessage = insertLiveMessage;
+
+function insertOfflineMessage(req,res){
+	if(!req.clientId){
+		res.statusCode = 400;
+		console.log("Request does not have ClientID");
+		return res.send("Error.");
+	}
+	else{
+		offline.insertOfflineMessage(req);
+		//write code using res to send response from admin console.
+	}
+}
+
+exports.insertOfflineMessage = insertOfflineMessage;
+
+function readFromKnowledgeBase(req,res){
+	if(!req.clientId){
+		res.statusCode = 400;
+		console.log("Request does not have ClientID");
+		return res.send("Error.");
+	}
+	else{
+		knowledge.findKnowledgeDBByClient(req,function(results,err){
+			if(!err){
+				res.statusCode = 200;
+				res.send(results);
+			}
+			else{
+				console.log("No answer in knowledgeDB.");
+			}
+		});
+	}
+}
+
+exports.readFromKnowledgeBase = readFromKnowledgeBase;
 

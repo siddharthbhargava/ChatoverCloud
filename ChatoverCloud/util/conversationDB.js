@@ -1,6 +1,6 @@
 var MongoClient = require('mongodb').MongoClient;
 
-function insertConversationInitialReq(callback,json){
+function insertConversationInitialReq(json,callback){
 	
 	/*
 	 * The above JSNON object must be of the form:
@@ -14,12 +14,12 @@ function insertConversationInitialReq(callback,json){
 	 *  "unreadFlag":value}
 	 */
 
-	 if(json.clientID && json.customerName && json.category &&json.customerEmail && json.timeStamp){
+	// if(json.clientId && json.customerName && json.category &&json.customerEmail && json.timeStamp){
 		
 		 //Auto Generating conversationID
 		 
-		 json.conversationID = (json.clientID).concat((json.timeStamp));
-		 callback(json.conversationID,err);
+		 json.conversationID = (json.clientId) + (json.timeStamp);
+		 //callback(json.conversationID,err);
 		 
 		 MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 		  if(err) throw err;
@@ -37,10 +37,10 @@ function insertConversationInitialReq(callback,json){
 			}
 		 });
 	 } 
-	 else{
-			console.log("Incomplete data.");
-	}
-}
+	// else{
+		//	console.log("Incomplete data.");
+	//}
+
 
 exports.insertConversationInitialReq = insertConversationInitialReq;
 
@@ -58,7 +58,7 @@ function insertConversationRegular(json){
 	 *  "unreadFlag":value}
 	 */
 
-	 if(json.clientID && json.customerName && json.category &&json.customerEmail && json.timeStamp){
+	 if(json.clientId && json.customerName && json.category &&json.customerEmail && json.timeStamp){
 		 
 		 MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 		  if(err) throw err;
@@ -193,7 +193,7 @@ function findConversationByClient(callback,json){
 		else
 		{
 			db.collection("conversationDB", function (err, connection){
-			connection.find({"clientID":json.clientID},function(err,res){
+			connection.find({"clientID":json.clientId},function(err,res){
 				if(err){
 					console.log("Incorrect Client ID");
 				}

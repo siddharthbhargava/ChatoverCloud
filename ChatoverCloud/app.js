@@ -40,8 +40,18 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
+
 app.post('/categories', customer.getCategories);
+app.post('/checkClientStatus', customer.clientOnlineFlag);
 app.post('/customerrequest', customer.processrequest);
+app.post('/initialRequest', customer.insertLiveMessageGetConvoID);
+app.post('/recordMessage', customer.insertLiveMessage);
+app.post('/operatorOffline', customer.insertOfflineMessage);
+app.post('/knowledgeBase', customer.readFromKnowledgeBase);
+
+
+
+
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
