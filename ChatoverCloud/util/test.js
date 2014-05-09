@@ -87,7 +87,6 @@ conversation.insertConversation({"clientID":"gattu","customerName":"pitts","cust
 conversation.insertConversation({"clientID":"gattu","customerName":"madras cafe","customerEmail":"baa@hotmail.com","category":"la","conversationID":"1004","timeStamp":"01:13","message":"Como EsTas?"});
 conversation.insertConversation({"clientID":"gattu","customerName":"Andhra Bhavan","customerEmail":"duude@awesome.com","category":"ind","conversationID":"1005","timeStamp":"01:14","message":"Adios"});
 */
-=======
 //conversation.insertConversationInitialReq({"clientId":"abcdefgh","customerName":"tully","customerEmail":"tp1@gmail.com","category":"sf","timeStamp":"01:10","message":"Hi"},function(res,err){
 //	if(!err)
 //		console.log(res);
@@ -97,7 +96,7 @@ conversation.insertConversation({"clientID":"gattu","customerName":"Andhra Bhava
 //conversation.insertConversation({"clientID":"gattu","customerName":"madras cafe","customerEmail":"baa@hotmail.com","category":"la","conversationID":"1004","timeStamp":"01:13","message":"Como EsTas?"});
 //conversation.insertConversation({"clientID":"gattu","customerName":"Andhra Bhavan","customerEmail":"duude@awesome.com","category":"ind","conversationID":"1005","timeStamp":"01:14","message":"Adios"});
 
->>>>>>> FETCH_HEAD
+
 
 /*
  * The above JSON object must be of the form:
