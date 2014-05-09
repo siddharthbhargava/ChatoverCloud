@@ -76,42 +76,39 @@ client.insertClient({"clientID":"gattu","password":"dodge","clientName":"Navya G
 
 //Conversations Data
 
-conversation.insertConversation({"clientID":"gattu","customerName":"tully","customerEmail":"value","category":"value","conversationID":"value","timeStamp":"value","message":"value"});
-conversation.insertConversation({"clientID":"gattu","customerName":"starbucks","customerEmail":"value1","category":"value1","conversationID":"value1","timeStamp":"value1","message":"value1"});
-conversation.insertConversation({"clientID":"gattu","customerName":"pitts","customerEmail":"value2","category":"value2","conversationID":"value2","timeStamp":"value2","message":"value2"});
-conversation.insertConversation({"clientID":"gattu","customerName":"madras cafe","customerEmail":"value3","category":"value3","conversationID":"value3","timeStamp":"value3","message":"value3"});
-conversation.insertConversation({"clientID":"gattu","customerName":"Andhra Bhavan","customerEmail":"value4","category":"value4","conversationID":"value4","timeStamp":"value4","message":"value4"});
+conversation.insertConversation({"clientID":"gattu","customerName":"tully","customerEmail":"tp1@gmail.com","category":"sf","conversationID":"1001","timeStamp":"01:10","message":"Hi"});
+conversation.insertConversation({"clientID":"gattu","customerName":"starbucks","customerEmail":"hahaha@yahoo.com","category":"sj","conversationID":"1002","timeStamp":"01:11","message":"Hello"});
+conversation.insertConversation({"clientID":"gattu","customerName":"pitts","customerEmail":"wtf@lmao.inc","category":"ny","conversationID":"1003","timeStamp":"01:12","message":"Wassup?"});
+conversation.insertConversation({"clientID":"gattu","customerName":"madras cafe","customerEmail":"baa@hotmail.com","category":"la","conversationID":"1004","timeStamp":"01:13","message":"Como EsTas?"});
+conversation.insertConversation({"clientID":"gattu","customerName":"Andhra Bhavan","customerEmail":"duude@awesome.com","category":"ind","conversationID":"1005","timeStamp":"01:14","message":"Adios"});
 
 
 /*
-test.insertCategoriesDB({"clientID":"muffi","category":"malbro red"});
-test.insertCategoriesDB({"clientID":"muffi","category":"malbro lights"});
-test.insertCategoriesDB({"clientID":"muffi","category":"benson & hedges premium"});
-test.insertCategoriesDB({"clientID":"muffi","category":"benson & hedges luxury"});
-test.insertCategoriesDB({"clientID":"muffi","category":"L&M Reds"});
+ * The above JSON object must be of the form:
+ * {"clientID":value,
+ * 	"keywords":["value1","value2"...],
+ *  "questionCategory":value,
+ * 	"question":value,
+ * 	"answer":value
+ */
 
-test.insertCategoriesDB({"clientID":"dhiru","category":"cotton"});
-test.insertCategoriesDB({"clientID":"dhiru","category":"silk"});
-test.insertCategoriesDB({"clientID":"dhiru","category":"Egyptian Premium Blended Cotton"});
-test.insertCategoriesDB({"clientID":"dhiru","category":"t-Shirts"});
-test.insertCategoriesDB({"clientID":"dhiru","category":"Cuban Cigars"});
+//KnowledgeDB Data
 
-test.insertCategoriesDB({"clientID":"sai","category":"Vizag"});
-test.insertCategoriesDB({"clientID":"sai","category":"Madras"});
-test.insertCategoriesDB({"clientID":"sai","category":"Bharuch"});
-test.insertCategoriesDB({"clientID":"sai","category":"Mumbai"});
-test.insertCategoriesDB({"clientID":"sai","category":"San Jose"});
+knowledge.insertKnowledgeDBMessage({"clientID":"gattu","keywords":"haan kya","questionCategory":"timepass","question":"what?","answer":"haan!"});
+knowledge.insertKnowledgeDBMessage({"clientID":"gattu","keywords":"kya be","questionCategory":"timepass","question":"hello?","answer":"haaaan!"});
 
+/*
+ * The above JSNON object must be of the form:
+ * {"clientID":value,
+ * 	"timeStamp":value,
+ *  "customerEmail":value,
+ *  "unreadFlag":value,
+ *  "message":value}
+ */
 
-
-
-//test.insertCategoriesDB({"clientID":"sai","category":"Seventeen Mile Drive"});
-test.insertCategoriesDB({"category":"Carmel By The Sea"});
-
-test.findAllCategoriesDB(function(res,err){
-	if(!err){
-		console.log(res);
-	}
-})
-
-*/
+offline.insertOfflineMessage({"clientID":"gattu","timeStamp":"02:00","customerEmail":"tp1@gmail.com","unreadFlag":"0","message":"bro? this aint working!"});
+offline.insertOfflineMessage({"clientID":"gattu","timeStamp":"02:01","customerEmail":"tp2@gmail.com","unreadFlag":"0","message":"WTF is wrong with my brain?!"});
+offline.insertOfflineMessage({"clientID":"gattu","timeStamp":"02:02","customerEmail":"tp3@gmail.com","unreadFlag":"0","message":"Hey? How you doin?!"});
+offline.insertOfflineMessage({"clientID":"gattu","timeStamp":"02:03","customerEmail":"tp4@gmail.com","unreadFlag":"0","message":"ah Hoi!"});
+offline.insertOfflineMessage({"clientID":"gattu","timeStamp":"02:04","customerEmail":"tp5@gmail.com","unreadFlag":"0","message":"So what are we talking about tonight?"});
+offline.insertOfflineMessage({"clientID":"gattu","timeStamp":"02:05","customerEmail":"tp6@gmail.com","unreadFlag":"0","message":"How much is the fare to Mars?"});
