@@ -53,14 +53,14 @@ test.insertCategoriesDB({"clientID":"sai","category":"San Jose"});
  
  */
 //Clients Mock Data
-
+/*
 client.insertClient({"clientID":"chitti","password":"nissan","clientName":"Sir Siddhartha Bhargava","email":"chitti@God.com","domain":"www.GODRULES.com","clientFlag":"offline" });
 client.insertClient({"clientID":"muffi","password":"honda","clientName":"Muffadal Daginawala","email":"baa@bigDADY.com","domain":"www.desiBABA.com","clientFlag":"offline"});
 client.insertClient({"clientID":"dhiru","password":"jeep","clientName":"Divyanshu Abhichandani","email":"proprietor@TuxAndBucks.com","domain":"www.TuxAndBucks.com","clientFlag":"offline"});
 client.insertClient({"clientID":"sai","password":"chevrolet","clientName":"Saideepak Budaraju","email":"chaprasi@ghanta.com","domain":"www.ghanta.com","clientFlag":"offline"});
 client.insertClient({"clientID":"gattu","password":"dodge","clientName":"Navya Gattupalli","email":"CEO@GlobalNetworks.org","domain":"www.GlobalNetworks.org","clientFlag":"offline"});
 
-
+*/
 
 /*
  * The above JSNON object must be of the form:
@@ -93,10 +93,10 @@ conversation.insertConversation({"clientID":"gattu","customerName":"Andhra Bhava
  */
 
 //KnowledgeDB Data
-
+/*
 knowledge.insertKnowledgeDBMessage({"clientID":"gattu","keywords":"haan kya","questionCategory":"timepass","question":"what?","answer":"haan!"});
 knowledge.insertKnowledgeDBMessage({"clientID":"gattu","keywords":"kya be","questionCategory":"timepass","question":"hello?","answer":"haaaan!"});
-
+*/
 /*
  * The above JSNON object must be of the form:
  * {"clientID":value,
@@ -105,10 +105,22 @@ knowledge.insertKnowledgeDBMessage({"clientID":"gattu","keywords":"kya be","ques
  *  "unreadFlag":value,
  *  "message":value}
  */
-
+/*
 offline.insertOfflineMessage({"clientID":"gattu","timeStamp":"02:00","customerEmail":"tp1@gmail.com","unreadFlag":"0","message":"bro? this aint working!"});
 offline.insertOfflineMessage({"clientID":"gattu","timeStamp":"02:01","customerEmail":"tp2@gmail.com","unreadFlag":"0","message":"WTF is wrong with my brain?!"});
 offline.insertOfflineMessage({"clientID":"gattu","timeStamp":"02:02","customerEmail":"tp3@gmail.com","unreadFlag":"0","message":"Hey? How you doin?!"});
 offline.insertOfflineMessage({"clientID":"gattu","timeStamp":"02:03","customerEmail":"tp4@gmail.com","unreadFlag":"0","message":"ah Hoi!"});
 offline.insertOfflineMessage({"clientID":"gattu","timeStamp":"02:04","customerEmail":"tp5@gmail.com","unreadFlag":"0","message":"So what are we talking about tonight?"});
 offline.insertOfflineMessage({"clientID":"gattu","timeStamp":"02:05","customerEmail":"tp6@gmail.com","unreadFlag":"0","message":"How much is the fare to Mars?"});
+*/
+
+
+
+/*
+conversation.findConversationByClient(function(res,err){
+	if(!err)
+		console.log(res);
+	else
+		console.log(err);
+},"gattu");
+*/
