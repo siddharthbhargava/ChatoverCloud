@@ -1,4 +1,4 @@
-var categories= require('./util/CategoriesDB.js')
+var categories= require('../util/CategoriesDB.js')
 
 /**
  * New node file
@@ -40,8 +40,7 @@ exports.getCategories = function(req, res){
 			console.log(err);
 		else
 			{
-			console.log(result);
-			var cat= result.split(",");
+			var cat= result.replace(/\,/g,":");
 			console.log(cat);
 			res.send("0," + cat);
 			}
