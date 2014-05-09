@@ -1,14 +1,53 @@
 <html>
 <head>
 <script>
+var clientId="gattu";
 function openWin()
 {
 var myWindow = window.open('chat.html','','toolbar=no,width=500,height=500,location=0'); 
 }
 
+//Make a Request Object
+function initRequest() 
+{
+	if (window.XMLHttpRequest) 
+	{
+		return new XMLHttpRequest();
+	} 
+	else 
+	{
+		if (window.ActiveXObject) 
+		{
+			isIE = true;
+			return new ActiveXObject("Microsoft.XMLHTTP");
+		}
+	}
+
+}
+//Send Request Function
+function callCloudAjax(url, params, process) 
+{
+alert("test success1");
+	if(process!=null)
+	{
+		alert("test success");
+		req = initRequest();
+		req.onreadystatechange = process;
+		req.open("POST",url,true);
+		req.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		req.send(params);
+	}
+}
+
+function trim(x) {
+    return x.replace(/^\s+|\s+$/gm,'');
+}
+
 window.onload =function()
 {
-	alert("onload function works");
+	alert(clientId);
+	var params = "clientId="+clientId;
+	callCloudAjax("http://localhost:3000/categories",params,processRequest);
 }
 
 $(function() {

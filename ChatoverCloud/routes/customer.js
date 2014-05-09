@@ -1,4 +1,4 @@
-var categories= require('./util/CategoriesDB.js')
+var categories= require("../util/CategoriesDB")
 
 /**
  * New node file
@@ -40,10 +40,11 @@ exports.getCategories = function(req, res){
 			console.log(err);
 		else
 			{
-			console.log(result);
-			var cat= result.split(",");
+			var cat= result.replace(/\,/g,":");
 			console.log(cat);
-			res.send("0," + cat);
+			var categories= "0," + cat;
+			console.log(categories);
+			res.send(categories);
 			}
 	}, req.body.clientId);
 	//res.setHeader("Cache-Control", "no-cache"); // HTTP 1.1
@@ -53,3 +54,7 @@ exports.getCategories = function(req, res){
 	//res.setHeader("Cache-Control", "no-store");
 	//res.end();
 };
+
+//function replaceAll (find, replace, str) {
+//	return str.replace(new RegExp(find,'g'),replace);
+//}
