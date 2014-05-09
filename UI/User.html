@@ -2,8 +2,8 @@
 <head>
 <script>
 
-var clientId="dhiru";
-
+var clientId="gattu";
+var supportStatus="offline";
 window.onload =function()
 {
 alert(clientId);
@@ -11,6 +11,44 @@ var params = "clientId="+clientId;
 callCloudAjax("http://ec2-54-193-76-231.us-west-1.compute.amazonaws.com:3000/categories",params,processRequest);
 }
 
+function chatorTicket(status)
+{
+	if(status=="online")
+	{
+		supportStatus=status;
+		document.getElementById('ticket').style.visibility="hidden";
+		document.getElementById('chat').style.visibility="visible";
+	}
+	else if(status=="offline")
+	{
+		supportStatus=status;
+		document.getElementById('ticket').style.visibility="visible";
+		document.getElementById('chat').style.visibility="hidden";
+	}
+}
+
+function submitTicket()
+{
+	var frm = document.getElementById('userDetails') || null;
+	if(frm) 
+	{
+  	 	frm.action = '/submitTicket' 
+	}
+	document.getElementById('clientId').value=clientId;
+	alert("Your ticket has been submitted. We are currently processing your ticket and shall respond to you soon.")
+	window.close();
+}
+function startChat()
+{
+	alert("make ajax request to query DB");
+	document.getElementById('chat').style.visibility="hidden";
+	document.getElementById('startchat').style.visibility="visible";
+}
+function close()
+{
+	window.close();
+	return false;
+}
 function initRequest() 
 {
 	if (window.XMLHttpRequest) 
@@ -60,6 +98,8 @@ function processRequest()
 					}
 					else
 					{
+						alert("Support Status: " + results_array[2]);
+						chatorTicket(results_array[2])
 						var catoptions = results_array[1].split(":");
 						var catdrop = document.getElementById("category");
 						for(var i=0;i<catoptions.length;i++)
@@ -186,13 +226,14 @@ body{overflow:hidden;background-image:url(bg-chat.jpg);background-repeat:no-repe
 <img src="header.png" border="0" title="" alt="Welcome To Chat Over Cloud" style="position:absolute;left:50px;top:0px;">
 <br>
 <br>
-<form action="" method="post" class="basic-grey">
-
+<form name="userDetails" id="userDetails" action="/initialRequest" method="post" class="basic-grey">
+	
+		<input id="clientId" type="text" name="clientId" style="visibility:hidden" />
     <label>
         <span>Your Name :</span>
         <input id="name" type="text" name="name" placeholder="Your Full Name" />
     </label>
-    
+    	
     <label>
         <span>Your Email :</span>
         <input id="email" type="email" name="email" placeholder="Valid Email Address" />
@@ -209,7 +250,10 @@ body{overflow:hidden;background-image:url(bg-chat.jpg);background-repeat:no-repe
     </label>    
      <label>
         <span>&nbsp;</span> 
-        <input type="button" class="button" value="Send" onclick="openWin()"/> 
+        <input name ="ticket" id = "ticket" type="submit" style="visibility:visible" class="button" value="Submit Ticket" onclick="submitTicket()"/> 
+        <input name ="chat" id="chat" style="visibility:hidden" class="button" value="Chat" onclick="startChat()"/> 
+        <input name ="startchat" id="startchat" type="submit" style="visibility:hidden" class="button" value="Start Chat"/> 
+        <input name ="close" id="close" type="button" class="button" value="Close" onclick="close()"/> 
     </label>    
 </form>
        

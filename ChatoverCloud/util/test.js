@@ -53,14 +53,14 @@ test.insertCategoriesDB({"clientID":"sai","category":"San Jose"});
  
  */
 //Clients Mock Data
-/*
+
 client.insertClient({"clientID":"chitti","password":"nissan","clientName":"Sir Siddhartha Bhargava","email":"chitti@God.com","domain":"www.GODRULES.com","clientFlag":"offline" });
 client.insertClient({"clientID":"muffi","password":"honda","clientName":"Muffadal Daginawala","email":"baa@bigDADY.com","domain":"www.desiBABA.com","clientFlag":"offline"});
 client.insertClient({"clientID":"dhiru","password":"jeep","clientName":"Divyanshu Abhichandani","email":"proprietor@TuxAndBucks.com","domain":"www.TuxAndBucks.com","clientFlag":"offline"});
 client.insertClient({"clientID":"sai","password":"chevrolet","clientName":"Saideepak Budaraju","email":"chaprasi@ghanta.com","domain":"www.ghanta.com","clientFlag":"offline"});
-client.insertClient({"clientID":"gattu","password":"dodge","clientName":"Navya Gattupalli","email":"CEO@GlobalNetworks.org","domain":"www.GlobalNetworks.org","clientFlag":"offline"});
+client.insertClient({"clientID":"gattu","password":"dodge","clientName":"Navya Gattupalli","email":"CEO@GlobalNetworks.org","domain":"www.GlobalNetworks.org","clientFlag":"online"});
 
-*/
+
 
 /*
  * The above JSNON object must be of the form:
@@ -76,11 +76,11 @@ client.insertClient({"clientID":"gattu","password":"dodge","clientName":"Navya G
 
 //Conversations Data
 
-conversation.insertConversationInitialReq({"clientId":"abcdefgh","customerName":"tully","customerEmail":"tp1@gmail.com","category":"sf","timeStamp":"01:10","message":"Hi"},function(res,err){
-	if(!err)
-		console.log(res);
-});
-conversation.insertConversationRegular({"clientId":"abcdefgh","customerName":"starbucks","customerEmail":"hahaha@yahoo.com","category":"sj","timeStamp":"01:11","message":"Hello"});
+//conversation.insertConversationInitialReq({"clientId":"abcdefgh","customerName":"tully","customerEmail":"tp1@gmail.com","category":"sf","timeStamp":"01:10","message":"Hi"},function(res,err){
+//	if(!err)
+//		console.log(res);
+//});
+//conversation.insertConversationRegular({"clientId":"abcdefgh","customerName":"starbucks","customerEmail":"hahaha@yahoo.com","category":"sj","timeStamp":"01:11","message":"Hello"});
 //conversation.insertConversation({"clientID":"gattu","customerName":"pitts","customerEmail":"wtf@lmao.inc","category":"ny","conversationID":"1003","timeStamp":"01:12","message":"Wassup?"});
 //conversation.insertConversation({"clientID":"gattu","customerName":"madras cafe","customerEmail":"baa@hotmail.com","category":"la","conversationID":"1004","timeStamp":"01:13","message":"Como EsTas?"});
 //conversation.insertConversation({"clientID":"gattu","customerName":"Andhra Bhavan","customerEmail":"duude@awesome.com","category":"ind","conversationID":"1005","timeStamp":"01:14","message":"Adios"});
