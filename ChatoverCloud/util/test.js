@@ -1,6 +1,6 @@
 var test = require('./CategoriesDB.js');
 
-test.insertCategoriesDB({"clientID":"chitti","category":"nissan"});
+/*test.insertCategoriesDB({"clientID":"chitti","category":"nissan"});
 test.insertCategoriesDB({"clientID":"chitti","category":"honda"});
 test.insertCategoriesDB({"clientID":"chitti","category":"jeep"});
 test.insertCategoriesDB({"clientID":"chitti","category":"chevrolet"});
@@ -29,3 +29,14 @@ test.insertCategoriesDB({"clientID":"sai","category":"Madras"});
 test.insertCategoriesDB({"clientID":"sai","category":"Bharuch"});
 test.insertCategoriesDB({"clientID":"sai","category":"Mumbai"});
 test.insertCategoriesDB({"clientID":"sai","category":"San Jose"});
+
+*/
+
+//test.insertCategoriesDB({"clientID":"sai","category":"Seventeen Mile Drive"});
+test.insertCategoriesDB({"category":"Carmel By The Sea"});
+
+test.findAllCategoriesDB(function(res,err){
+	if(!err){
+		console.log(res);
+	}
+})

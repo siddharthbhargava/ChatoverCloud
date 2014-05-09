@@ -8,11 +8,12 @@ function insertClient(json){
 	 * 	"password":value,
 	 *  "clientName":value,
 	 *  "email":value,
-	 *  "domain":value}
+	 *  "domain":value,
+	 *  "clientFlag":value}
 	 
 	 */
 	
-	 if(json.clientID!=NULL && json.password!=NULL && json.clientName!=NULL && json.email!=NULL && json.domain!=NULL){
+	 if(json.clientID && json.password && json.clientName && json.email && json.domain){
 			
 		 MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 		  if(err) throw err;
@@ -48,7 +49,7 @@ function updateClient(json){
 	 *  "email":value,
 	 *  "domain":value}
 	 */
-	if(json.clientID!=NULL && json.password!=NULL){
+	if(json.clientID && json.password){
 		
 	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 		if(err) throw err;
@@ -84,7 +85,7 @@ function removeClient(json){
 	 *  "domain":value}
 	 */
 	
-	if(json.clientID!=NULL && json.password!=NULL && json.clientName!=NULL && json.email!=NULL && json.domain!=NULL){
+	if(json.clientID && json.password && json.clientName && json.email && json.domain){
 	
 	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 		if(err) throw err;
@@ -143,7 +144,7 @@ function findClientByID(json){
 	
 	/*The JSON object needs to pass the client ID, to extract all other details.*/
 	
-	if(json.clientID!=NULL){
+	if(json.clientID){
 	
 	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 		  if(err) throw err;
@@ -160,34 +161,41 @@ function findClientByID(json){
 						}
 					  else{
 						  
-						  	cat = docs[0].clientID;
-							cat = cat.concat(":");
-							cat = cat.concat(docs[0].clientName);
-							cat = cat.concat(":");
-							cat = cat.concat(docs[0].clientEmail);
-							cat = cat.concat(":");
-							cat = cat.concat(docs[0].domain);
+						  var cat;
+							res.toArray(function(err,docs){
+								if(docs)
+								{
+									cat = docs[0].clientID;
+									cat = cat.concat(":");
+									cat = cat.concat(docs[0].clientName);
+									cat = cat.concat(":");
+									cat = cat.concat(docs[0].clientEmail);
+									cat = cat.concat(":");
+									cat = cat.concat(docs[0].domain);
 						  
-							for(var i=1; i<docs.length;i++)
-							{
-								cat = cat.concat(",");
+									for(var i=1; i<docs.length;i++)
+									{
+										
+										cat = cat.concat(",");
 								
-								cat = cat.concat(docs[i].clientID);
-								cat = cat.concat(":");
-								cat = cat.concat(docs[i].clientName);
-								cat = cat.concat(":");
-								cat = cat.concat(docs[i].clientEmail);
-								cat = cat.concat(":");
-								cat = cat.concat(docs[i].domain);
-							}
-						}
-					callback(cat,err);
-				});
+										cat = cat.concat(docs[i].clientID);
+										cat = cat.concat(":");
+										cat = cat.concat(docs[i].clientName);
+										cat = cat.concat(":");
+										cat = cat.concat(docs[i].clientEmail);
+										cat = cat.concat(":");
+										cat = cat.concat(docs[i].domain);
+									}
+								}
+								callback(cat,err);
+							});
 							
-			   }
-			});
-		  }
+					  }
+				  });
+				 }
 				
+			  });
+			}
 		});
 	}
 	else{
@@ -247,3 +255,81 @@ function changeClientPassword(json){
 
 exports.changeClientPassword = changeClientPassword;
 
+
+function setClientFlag(json,callback){
+
+//The json object must have clientID and clientFlag {"clientID":value,"clientFlag":value}
+
+	if(json.clientID && json.clientFlag){
+	
+	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
+		  if(err) throw err;
+		  else
+			{
+			  db.collection("clientDB", function (err, connection){
+				  if(err){
+						console.log("No such database exists.");
+					}
+				  else{
+				  connection.update({"clientID":clientID,"clientFlag":json.clientFlag},function(res,err){
+					  if(err){
+							console.log("No such client exists.");
+						}
+					  else{
+					  	   console.log("ERROR!");
+						  }
+					});
+				}
+			});
+		}
+	});
+	}
+	else{
+	console.log("Insufficient Data.");
+	}
+	
+}
+
+exports.setClientFlag = setClientFlag;
+
+function getClientFlag(clientID,callback){
+
+
+//The json object must have clientID {"clientID":value}
+
+	if(json.clientID){
+	
+	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
+		  if(err) throw err;
+		  else
+			{
+			  db.collection("clientDB", function (err, connection){
+				  if(err){
+						console.log("No such database exists.");
+					}
+				  else{
+				  connection.find({"clientID":clientID},function(res,err){
+					  if(err){
+							console.log("No such client exists.");
+						}
+					  else{
+						  var cat;
+							res.toArray(function(err,docs){
+								if(docs)
+								{
+									cat = docs[0].clientFlag;
+									callback(cat,err);
+					  			}
+					  		});
+					  	}
+					});
+				}
+			});
+		}
+	});
+	else{
+	console.log("Insufficient Data.");
+	}
+}
+
+exports.getClientFlag = getClientFlag;
