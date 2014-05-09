@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-var categories= require('../util/CategoriesDB.js')
-=======
 var categories= require("../util/CategoriesDB")
->>>>>>> FETCH_HEAD
 
 /**
  * New node file
