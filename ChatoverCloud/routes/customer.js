@@ -1,4 +1,5 @@
 var categories= require("../util/CategoriesDB")
+var clientFlag  =   require("../util/clientDB")
 
 /**
  * New node file
@@ -58,3 +59,36 @@ exports.getCategories = function(req, res){
 //function replaceAll (find, replace, str) {
 //	return str.replace(new RegExp(find,'g'),replace);
 //}
+exports.clientOnline = function(req,res)
+{
+	alert("inside client status");
+	if(!req.body.hasOwnProperty('clientID')) {
+		console.log("Request does not have Client status");
+		res.statusCode = 400;
+		return res.send('1, Error 400: Post syntax incorrect.');
+	}
+	//console.log("Client Status : " + getclientFlag);
+	
+	res.statusCode=200;
+	clientFlag.getClientFlag(function(result, err){
+		
+		if(err)
+			console.log(err);
+		else
+			{
+			if(results=="offline")
+			{
+			console.log("support offline");
+			}
+			else if(results=="online")
+			{
+			console.log("support online");
+			}
+			
+			results.send(clientFlag);
+		}
+	}, req.body.clientID);
+	
+};
+
+
