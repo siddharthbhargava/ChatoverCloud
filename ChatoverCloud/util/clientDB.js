@@ -271,7 +271,7 @@ function setClientFlag(json,callback){
 						console.log("No such database exists.");
 					}
 				  else{
-				  connection.update({"clientID":clientID,"clientFlag":json.clientFlag},function(res,err){
+				  connection.update({"clientID":json.clientID,"clientFlag":json.clientFlag},function(res,err){
 					  if(err){
 							console.log("No such client exists.");
 						}
@@ -297,7 +297,7 @@ function getClientFlag(clientID,callback){
 
 //The json object must have clientID {"clientID":value}
 
-	if(json.clientID){
+	if(clientID){
 	
 	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 		  if(err) throw err;
@@ -327,6 +327,7 @@ function getClientFlag(clientID,callback){
 			});
 		}
 	});
+	}
 	else{
 	console.log("Insufficient Data.");
 	}

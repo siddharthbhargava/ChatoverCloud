@@ -10,12 +10,11 @@ function insertConversation(json){
 	 * 	"category":value,
 	 * 	"conversationID":value,
 	 *  "timeStamp":value,
-	 *  "clientMessage":value,
-	 *  "customerMessage":value,
+	 *  "message":value,
 	 *  "unreadFlag":value}
 	 */
 
-	 if(json.clientID && json.customerName && json.category &&json.customerEmail && json.conversationID && json.timeStamp && json.unreadFlag){
+	 if(json.clientID && json.customerName && json.category &&json.customerEmail && json.timeStamp){
 			
 		 MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 		  if(err) throw err;
@@ -40,7 +39,6 @@ function insertConversation(json){
 exports.insertConversation = insertConversation;
 
 function updateConversation(json){
-
 	/*
 	 * The above JSNON object must be of the form:
 	 * {"clientID":value,
@@ -49,12 +47,11 @@ function updateConversation(json){
 	 * 	"category":value,
 	 * 	"conversationID":value,
 	 *  "timeStamp":value,
-	 *  "clientMessage":value,
-	 *  "customerMessage":value,
+	 *  "message":value,
 	 *  "unreadFlag":value}
 	 */
 
-	if(json.clientID && json.customerName && json.category &&json.customerEmail && json.conversationID && json.timeStamp && json.unreadFlag){
+	if(json.clientID && json.customerName && json.category &&json.customerEmail && json.conversationID && json.timeStamp){
 	
 	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 		if(err) throw err;
@@ -89,12 +86,11 @@ function removeConversation(json){
 	 * 	"category":value,
 	 * 	"conversationID":value,
 	 *  "timeStamp":value,
-	 *  "clientMessage":value,
-	 *  "customerMessage":value,
+	 *  "message":value,
 	 *  "unreadFlag":value}
 	 */
 
-	if(json.clientID && json.customerName && json.category && json.customerEmail && json.conversationID && json.timeStamp && json.unreadFlag){
+	if(json.clientID && json.customerName && json.category && json.customerEmail && json.conversationID && json.timeStamp){
 		
 	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 		if(err) throw err;
