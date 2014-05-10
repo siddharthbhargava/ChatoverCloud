@@ -54,11 +54,11 @@ test.insertCategoriesDB({"clientID":"sai","category":"San Jose"});
  */
 //Clients Mock Data
 
-client.insertClient({"clientID":"chitti","password":"nissan","clientName":"Sir Siddhartha Bhargava","email":"chitti@God.com","domain":"www.GODRULES.com","clientFlag":"offline" });
-client.insertClient({"clientID":"muffi","password":"honda","clientName":"Muffadal Daginawala","email":"baa@bigDADY.com","domain":"www.desiBABA.com","clientFlag":"offline"});
-client.insertClient({"clientID":"dhiru","password":"jeep","clientName":"Divyanshu Abhichandani","email":"proprietor@TuxAndBucks.com","domain":"www.TuxAndBucks.com","clientFlag":"offline"});
-client.insertClient({"clientID":"sai","password":"chevrolet","clientName":"Saideepak Budaraju","email":"chaprasi@ghanta.com","domain":"www.ghanta.com","clientFlag":"offline"});
-client.insertClient({"clientID":"gattu","password":"dodge","clientName":"Navya Gattupalli","email":"CEO@GlobalNetworks.org","domain":"www.GlobalNetworks.org","clientFlag":"online"});
+client.insertClient({"clientId":"chitti","password":"nissan","clientName":"Sir Siddhartha Bhargava","email":"chitti@God.com","domain":"www.GODRULES.com","clientFlag":"offline" });
+client.insertClient({"clientId":"muffi","password":"honda","clientName":"Muffadal Daginawala","email":"baa@bigDADY.com","domain":"www.desiBABA.com","clientFlag":"offline"});
+client.insertClient({"clientId":"dhiru","password":"jeep","clientName":"Divyanshu Abhichandani","email":"proprietor@TuxAndBucks.com","domain":"www.TuxAndBucks.com","clientFlag":"offline"});
+client.insertClient({"clientId":"sai","password":"chevrolet","clientName":"Saideepak Budaraju","email":"chaprasi@ghanta.com","domain":"www.ghanta.com","clientFlag":"offline"});
+client.insertClient({"clientId":"gattu","password":"dodge","clientName":"Navya Gattupalli","email":"CEO@GlobalNetworks.org","domain":"www.GlobalNetworks.org","clientFlag":"online"});
 
 
 <<<<<<< HEAD
@@ -121,12 +121,12 @@ knowledge.insertKnowledgeDBMessage({"clientID":"gattu","keywords":"kya be","ques
  *  "message":value}
  */
 /*
-offline.insertOfflineMessage({"clientID":"gattu","timeStamp":"02:00","customerEmail":"tp1@gmail.com","unreadFlag":"0","message":"bro? this aint working!"});
-offline.insertOfflineMessage({"clientID":"gattu","timeStamp":"02:01","customerEmail":"tp2@gmail.com","unreadFlag":"0","message":"WTF is wrong with my brain?!"});
-offline.insertOfflineMessage({"clientID":"gattu","timeStamp":"02:02","customerEmail":"tp3@gmail.com","unreadFlag":"0","message":"Hey? How you doin?!"});
-offline.insertOfflineMessage({"clientID":"gattu","timeStamp":"02:03","customerEmail":"tp4@gmail.com","unreadFlag":"0","message":"ah Hoi!"});
-offline.insertOfflineMessage({"clientID":"gattu","timeStamp":"02:04","customerEmail":"tp5@gmail.com","unreadFlag":"0","message":"So what are we talking about tonight?"});
-offline.insertOfflineMessage({"clientID":"gattu","timeStamp":"02:05","customerEmail":"tp6@gmail.com","unreadFlag":"0","message":"How much is the fare to Mars?"});
+offline.insertOfflineMessage({"clientId":"gattu","timeStamp":"02:00","customerEmail":"tp1@gmail.com","unreadFlag":"0","message":"bro? this aint working!"});
+offline.insertOfflineMessage({"clientId":"gattu","timeStamp":"02:01","customerEmail":"tp2@gmail.com","unreadFlag":"0","message":"WTF is wrong with my brain?!"});
+offline.insertOfflineMessage({"clientId":"gattu","timeStamp":"02:02","customerEmail":"tp3@gmail.com","unreadFlag":"0","message":"Hey? How you doin?!"});
+offline.insertOfflineMessage({"clientId":"gattu","timeStamp":"02:03","customerEmail":"tp4@gmail.com","unreadFlag":"0","message":"ah Hoi!"});
+offline.insertOfflineMessage({"clientId":"gattu","timeStamp":"02:04","customerEmail":"tp5@gmail.com","unreadFlag":"0","message":"So what are we talking about tonight?"});
+offline.insertOfflineMessage({"clientId":"gattu","timeStamp":"02:05","customerEmail":"tp6@gmail.com","unreadFlag":"0","message":"How much is the fare to Mars?"});
 */
 
 

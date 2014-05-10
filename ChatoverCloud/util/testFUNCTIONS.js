@@ -51,7 +51,7 @@ client.getClientFlag(function(err,res){
  * 
 */
 
-var json = [];
+/*var json = [];
 json.clientId="10010";
 json.password="trial";
 
@@ -63,9 +63,13 @@ client.validateClientLogin(function(err,res){
 		console.log(res);
 	}
 },json);
+*/
 
-
-
+client.insertClient({"clientId":"chitti","password":"nissan","clientName":"Sir Siddhartha Bhargava","email":"chitti@God.com","domain":"www.GODRULES.com","clientFlag":"offline" });
+client.insertClient({"clientId":"muffi","password":"honda","clientName":"Muffadal Daginawala","email":"baa@bigDADY.com","domain":"www.desiBABA.com","clientFlag":"offline"});
+client.insertClient({"clientId":"dhiru","password":"jeep","clientName":"Divyanshu Abhichandani","email":"proprietor@TuxAndBucks.com","domain":"www.TuxAndBucks.com","clientFlag":"offline"});
+client.insertClient({"clientId":"sai","password":"chevrolet","clientName":"Saideepak Budaraju","email":"chaprasi@ghanta.com","domain":"www.ghanta.com","clientFlag":"offline"});
+client.insertClient({"clientId":"gattu","password":"dodge","clientName":"Navya Gattupalli","email":"CEO@GlobalNetworks.org","domain":"www.GlobalNetworks.org","clientFlag":"online"});
 
 /*
 clientId="10010";

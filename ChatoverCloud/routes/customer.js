@@ -45,7 +45,7 @@ exports.getCategories = function(req, res){
 		else
 		{
 			var status="offline"
-				client.getClientFlag(function(result, err){
+				client.getClientFlag(function(err, result){
 					if(err)
 						console.log("Error is : " + err);
 					else
