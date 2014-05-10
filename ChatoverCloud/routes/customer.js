@@ -146,6 +146,7 @@ exports.readFromKnowledgeBase = readFromKnowledgeBase;
 
 
 exports.submitTicket = function(req, res){
+	console.log("Handling submit Ticket Request");
 
 	if(!req.body.hasOwnProperty('clientId') || !req.body.hasOwnProperty('name') || !req.body.hasOwnProperty('message')|| !req.body.hasOwnProperty('email')|| !req.body.hasOwnProperty('category')) 
 	{
@@ -154,16 +155,20 @@ exports.submitTicket = function(req, res){
 		return res.send('1, Error 400: Post syntax incorrect.');
 	}
 	else {
-		console.log("name : " + req.body.hasProperty('name'));
-		console.log("email : " + req.body.hasProperty('email'));
-		console.log("message : " + req.body.hasProperty('message'));
-		console.log("category : " + req.body.hasProperty('category'));
-		console.log("clientId : " + req.body.hasProperty('clientId'));
-
+		console.log("name : " + req.body.hasOwnProperty('name'));
+		console.log("email : " + req.body.hasOwnProperty('email'));
+		console.log("message : " + req.body.hasOwnProperty('message'));
+		console.log("category : " + req.body.hasOwnProperty('category'));
+		console.log("clientId : " + req.body.hasOwnProperty('clientId'));
+		var json=[];
+		json.clientId="req.body.hasOwnProperty('clientId')";
+		json.name="req.body.hasOwnProperty('name')";
+		json.email="req.body.hasOwnProperty('email')";
+		json.category="req.body.hasOwnProperty('category')";
 		res.statusCode=200;
 
 
-		Offline.insertOfflineMessage({"clientID":req.body.hasProperty('clientId'),"name":"req.body.hasProperty('name')","email":"req.body.hasProperty('email')","message":"req.body.hasProperty('message')", "category":"req.body.hasProperty('category')"});	
+		offline.insertOfflineMessage({"clientId":"req.body.hasOwnProperty('clientId')","customerEmail":"req.body.hasOwnProperty('email')","unreadFlag":"0","message":"req.body.hasOwnProperty('message')", "category":"req.body.hasOwnProperty('category')"});	
 	}
 };
 
@@ -171,6 +176,7 @@ exports.submitTicket = function(req, res){
 
 
 	exports.initialRequest = function(req, res){
+		console.log("handling initial request");
 
 		if(!req.body.hasOwnProperty('clientId') || !req.body.hasOwnProperty('name') || !req.body.hasOwnProperty('message')|| !req.body.hasOwnProperty('email')|| !req.body.hasOwnProperty('category')) 
 		{
@@ -179,17 +185,51 @@ exports.submitTicket = function(req, res){
 			return res.send('1, Error 400: Post syntax incorrect.');
 		}
 		else {
-			console.log("name : " + req.body.hasProperty('name'));
-			console.log("email : " + req.body.hasProperty('email'));
-			console.log("message : " + req.body.hasProperty('message'));
-			console.log("category : " + req.body.hasProperty('category'));
-			console.log("clientId : " + req.body.hasProperty('clientId'));
+			console.log("name : " + req.body.hasOwnProperty('name'));
+			var json=[];
+			json.clientId="req.body.hasOwnProperty('clientId')";
+			json.name="req.body.hasOwnProperty('name')";
+			json.email="req.body.hasOwnProperty('email')";
+			json.category="req.body.hasOwnProperty('category')";
+			
+			
+			console.log("email : " + req.body.hasOwnProperty('email'));
+			console.log("message : " + req.body.hasOwnProperty('message'));
+			console.log("category : " + req.body.hasOwnProperty('category'));
+			console.log("clientId : " + req.body.hasOwnProperty('clientId'));
 
 			res.statusCode=200;
 
-			conversation.insertConversation({"clientID":"req.body.hasProperty('clientId')","customerName":"req.body.hasProperty('name')","customerEmail":"req.body.hasProperty('email')","category":"req.body.hasProperty('category')","message":"req.body.hasProperty('message')"});
+			conversation.insertConversation({"clientId":"req.body.hasOwnProperty('clientId')","customerName":"req.body.hasOwnProperty('name')","customerEmail":"req.body.hasOwnProperty('email')","category":"req.body.hasOwnProperty('category')","message":"req.body.hasOwnProperty('message')"});
+		
 		}
 	};
-
+	
+	
+	
+//	exports.readFromKnowledgeBase = function(req, res){
+//
+//		if(!req.body.hasOwnProperty('clientId') || !req.body.hasOwnProperty('name') || !req.body.hasOwnProperty('message')|| !req.body.hasOwnProperty('email')|| !req.body.hasOwnProperty('category')) 
+//		{
+//			console.log("Request does not have a field which is req");
+//			res.statusCode = 400;
+//			return res.send('1, Error 400: Post syntax incorrect.');
+//		}
+//		else {
+//			console.log("name : " + req.body.hasOwnProperty('name'));
+//			console.log("email : " + req.body.hasOwnProperty('email'));
+//			console.log("message : " + req.body.hasOwnProperty('message'));
+//			console.log("category : " + req.body.hasOwnProperty('category'));
+//			console.log("clientId : " + req.body.hasOwnProperty('clientId'));
+//
+//			res.statusCode=200;
+//			
+//			
+//			/*ajax request to search in knowledge base*/
+//			
+//
+//			
+//		}
+//	};
 
 

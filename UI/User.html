@@ -32,7 +32,8 @@ function startChat()
 	alert("make ajax request to query DB");
 	document.getElementById('sc').style.visibility="visible";
 	document.getElementById('chat').style.visibility="hidden";
-	document.getElementById("userDetails").action="/initialRequest";
+	
+	document.getElementById("userDetails").action="http://localhost:3000/initialRequest";
 }
 
 
@@ -230,7 +231,7 @@ body{overflow:hidden;background-image:url(bg-chat.jpg);background-repeat:no-repe
 <img src="header.png" border="0" title="" alt="Welcome To Chat Over Cloud" style="position:absolute;left:50px;top:0px;">
 <br>
 <br>
-<form name="userDetails" id="userDetails" action="/submitTicket" method="post" class="basic-grey">
+<form name="userDetails" id="userDetails" action="http://localhost:3000/submitTicket" method="post" class="basic-grey">
 	
 		<input id="clientId" type="text" name="clientId" style="visibility:hidden" />
     <label>
