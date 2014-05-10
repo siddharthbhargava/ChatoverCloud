@@ -323,11 +323,7 @@ function setClientFlag(json){
 
 exports.setClientFlag = setClientFlag;
 
-<<<<<<< HEAD
 function getClientFlag(callback,clientId){
-=======
-function getClientFlag(callback,clientID){
->>>>>>> FETCH_HEAD
 
 
 //	The json object must have clientID {"clientID":value}
@@ -343,7 +339,6 @@ function getClientFlag(callback,clientID){
 					if(err){
 						console.log("No such database exists.");
 					}
-<<<<<<< HEAD
 					else{
 						connection.find({"clientId":clientId},function(err,res){
 							if(err){
@@ -365,28 +360,6 @@ function getClientFlag(callback,clientID){
 				});
 			}
 		});
-=======
-				  else{
-				  connection.find({"clientID":clientID},function(err,res){
-					  if(err){
-							console.log("No such client exists.");
-						}
-					  else{
-						  var cat;
-							res.toArray(function(err,docs){
-								if(docs)
-								{
-									cat = docs[0].clientFlag;
-					  			}
-								callback(cat,err);
-					  		});
-					  	}
-					});
-				}
-			});
-		}
-	});
->>>>>>> FETCH_HEAD
 	}
 	else{
 		console.log("Insufficient Data.");

@@ -49,6 +49,12 @@ client.getClientFlag(function(err,res){
 
 /*
  * 
+*/
+
+var json = [];
+json.clientId="10010";
+json.password="trial";
+
 client.validateClientLogin(function(err,res){
 	if(err){
 		//console.log(err);
@@ -56,10 +62,28 @@ client.validateClientLogin(function(err,res){
 	else{
 		console.log(res);
 	}
-},{"clientId":"10010","password":"trial"});
+},json);
 
 
- */
+
+
+/*
+clientId="10010";
+password="trial";
+
+client.validateClientLogin(function(err,res){
+	if(err){
+		//console.log(err);
+	}
+	else{
+		console.log(res);
+	}
+},clientId,password);
+*/
+
+
+
+
 
 
 /*
@@ -104,3 +128,4 @@ conversation.findConversationByClient(function(err,res){
 		console.log(err);
 },"gattu");
 */
+//{"clientId":"10010","password":"trial"}
