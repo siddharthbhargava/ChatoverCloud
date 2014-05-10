@@ -40,6 +40,7 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
+//app.post('/adminvalidate', admin.adminvalidate)
 
 app.post('/categories', customer.getCategories);
 //app.post('/checkClientStatus', customer.clientOnlineFlag);
