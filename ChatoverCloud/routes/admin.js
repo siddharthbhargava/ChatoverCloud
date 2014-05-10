@@ -16,6 +16,7 @@
 			if(results==1){
 			req.session.clientId = req.body.clientId;
 			res.render('../views/chat.html', { title: 'Chat Over Cloud' });
+			console.log("success");
 			
 			}
 			else if(results==0)
