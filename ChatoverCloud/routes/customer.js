@@ -142,3 +142,67 @@ function readFromKnowledgeBase(req,res){
 
 exports.readFromKnowledgeBase = readFromKnowledgeBase;
 
+
+
+
+exports.submitTicket = function(req, res){
+	
+	if(!req.body.hasOwnProperty('clientId') || !req.body.hasOwnProperty('name') || !req.body.hasOwnProperty('message')|| !req.body.hasOwnProperty('email')|| !req.body.hasOwnProperty('category')) 
+	{
+		console.log("Request does not have a field which is req");
+		res.statusCode = 400;
+		return res.send('1, Error 400: Post syntax incorrect.');
+	}
+	else {
+	console.log("name : " + req.body.hasProperty('name'));
+	console.log("email : " + req.body.hasProperty('email'));
+	console.log("message : " + req.body.hasProperty('message'));
+	console.log("category : " + req.body.hasProperty('category'));
+	console.log("clientId : " + req.body.hasProperty('clientId'));
+	
+	res.statusCode=200;
+	
+	
+	Offline.insertOfflineMessage({"clientID":req.body.hasProperty('clientId'),"name":"req.body.hasProperty('name')","email":"req.body.hasProperty('email')"","message":"req.body.hasProperty('message')"", "category":"req.body.hasProperty('category')""});	
+}
+
+
+	
+	
+	exports.initialRequest = function(req, res){
+		
+		if(!req.body.hasOwnProperty('clientId') || !req.body.hasOwnProperty('name') || !req.body.hasOwnProperty('message')|| !req.body.hasOwnProperty('email')|| !req.body.hasOwnProperty('category')) 
+		{
+			console.log("Request does not have a field which is req");
+			res.statusCode = 400;
+			return res.send('1, Error 400: Post syntax incorrect.');
+		}
+		else {
+		console.log("name : " + req.body.hasProperty('name'));
+		console.log("email : " + req.body.hasProperty('email'));
+		console.log("message : " + req.body.hasProperty('message'));
+		console.log("category : " + req.body.hasProperty('category'));
+		console.log("clientId : " + req.body.hasProperty('clientId'));
+		
+		res.statusCode=200;
+		
+		conversation.insertConversation({"clientID":"req.body.hasProperty('clientId')","customerName":"req.body.hasProperty('name')","customerEmail":"req.body.hasProperty('email')","category":"req.body.hasProperty('category')","message":"req.body.hasProperty('message')"});
+		}
+		
+		
+		client.getConversationID(function(result, err){
+
+			if(err)
+				{console.log("Error is : " + err);}
+			else
+			{
+				
+				ConversationID=result;
+			}
+			res.render('./views/chat.html', conversationID);
+		
+		}
+		
+		
+	
+	

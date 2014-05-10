@@ -2,7 +2,7 @@
 <head>
 <script>
 
-var clientId="gattu";
+var clientId="dhiru";
 var supportStatus="offline";
 window.onload =function()
 {
@@ -32,10 +32,10 @@ function submitTicket()
 	var frm = document.getElementById('userDetails') || null;
 	if(frm) 
 	{
-  	 	frm.action = '/submitTicket' ;
+  	 	//frm.action = '/submitTicket' ;
 	}
 	document.getElementById('clientId').value=clientId;
-	alert("Your ticket has been submitted. We are currently processing your ticket and shall respond to you soon.");
+	//alert("Your ticket has been submitted. We are currently processing your ticket and shall respond to you soon.");
 	window.close();
 }
 function startChat()
@@ -46,9 +46,9 @@ function startChat()
 }
 function close()
 {
-	alert("in close");
+	//alert("in close");
 	self.close();
-	window.close();
+	window.close('User.html');
 	return false;
 }
 function initRequest() 
