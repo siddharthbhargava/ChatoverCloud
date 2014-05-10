@@ -42,9 +42,9 @@ app.get('/', routes.index);
 app.post('/categories', customer.getCategories);
 //app.post('/checkClientStatus', customer.clientOnlineFlag);
 app.post('/customerrequest', customer.processrequest);
-//app.post('/initialRequest', customer.insertLiveMessageGetConvoID);
+app.post('/initialRequest', customer.initialRequest);
 //app.post('/recordMessage', customer.insertLiveMessage);
-//app.post('/operatorOffline', customer.insertOfflineMessage);
+app.post('/submitTicket', customer.submitTicket);
 //app.post('/knowledgeBase', customer.readFromKnowledgeBase);
 
 
