@@ -2,7 +2,7 @@
 <head>
 <script>
 
-var clientId="dhiru";
+var clientId="gattu";
 var supportStatus="offline";
 window.onload =function()
 {
@@ -27,36 +27,12 @@ function chatorTicket(status)
 	}
 }
 
-
-function submitTicket()
-{
-	var frm = document.getElementById('userDetails') || null;
-	if(frm) 
-	{
-  	 	//frm.action = '/submitTicket' ;
-	}
-	document.getElementById('clientId').value=clientId;
-	//alert("Your ticket has been submitted. We are currently processing your ticket and shall respond to you soon.");
-	window.close();
-}
-
 function startChat()
 {
 	alert("make ajax request to query DB");
 	document.getElementById('sc').style.visibility="visible";
 	document.getElementById('chat').style.visibility="hidden";
-<<<<<<< HEAD
 	document.getElementById("userDetails").action="/initialRequest";
-=======
-	document.getElementById('startchat').style.visibility="visible";
-}
-function close()
-{
-	//alert("in close");
-	self.close();
-	window.close('User.html');
-	return false;
-
 }
 
 
@@ -93,7 +69,7 @@ function callCloudAjax(url, params, process)
 
 function callCloudAjaxSync(url, params, process) 
 {
-	if(process!=null)
+	if(process!= null)
 	{
 		
 		req = initRequest();
