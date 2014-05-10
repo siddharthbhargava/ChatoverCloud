@@ -7,8 +7,8 @@
 		return res.send('Error 400: Post syntax incorrect.');
 	}
 	var json = [];
-	json.clientId= "10010"; //req.body.clientId;
-	json.password= "trial";// req.body.password;
+	json.clientId= req.body.name;
+	json.password= req.body.password;
 	client.validateClientLogin(function(err,results){
 		if(err){
 			throw err;
