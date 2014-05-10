@@ -78,20 +78,9 @@ client.insertClient({"clientID":"gattu","password":"dodge","clientName":"Navya G
  *  "unreadFlag":value}
  */
 
-<<<<<<< HEAD
-//Conversations Data
-/*
-conversation.insertConversationInitialReq({"clientId":"abcdefgh","customerName":"tully","customerEmail":"tp1@gmail.com","category":"sf","timeStamp":"01:10","message":"Hi"},function(res,err){
-	if(!err)
-		console.log(res);
-});
-conversation.insertConversationRegular({"clientId":"abcdefgh","customerName":"starbucks","customerEmail":"hahaha@yahoo.com","category":"sj","timeStamp":"01:11","message":"Hello"});
-*/
-
-=======
 /*Conversations Data
 
-<<<<<<< HEAD
+
 conversation.insertConversation({"clientID":"gattu","customerName":"tully","customerEmail":"tp1@gmail.com","category":"sf","conversationID":"1001","timeStamp":"01:10","message":"Hi"});
 conversation.insertConversation({"clientID":"gattu","customerName":"starbucks","customerEmail":"hahaha@yahoo.com","category":"sj","conversationID":"1002","timeStamp":"01:11","message":"Hello"});
 conversation.insertConversation({"clientID":"gattu","customerName":"pitts","customerEmail":"wtf@lmao.inc","category":"ny","conversationID":"1003","timeStamp":"01:12","message":"Wassup?"});
@@ -103,7 +92,6 @@ conversation.insertConversation({"clientID":"gattu","customerName":"Andhra Bhava
 //		console.log(res);
 //});
 //conversation.insertConversationRegular({"clientId":"abcdefgh","customerName":"starbucks","customerEmail":"hahaha@yahoo.com","category":"sj","timeStamp":"01:11","message":"Hello"});
->>>>>>> FETCH_HEAD
 //conversation.insertConversation({"clientID":"gattu","customerName":"pitts","customerEmail":"wtf@lmao.inc","category":"ny","conversationID":"1003","timeStamp":"01:12","message":"Wassup?"});
 //conversation.insertConversation({"clientID":"gattu","customerName":"madras cafe","customerEmail":"baa@hotmail.com","category":"la","conversationID":"1004","timeStamp":"01:13","message":"Como EsTas?"});
 //conversation.insertConversation({"clientID":"gattu","customerName":"Andhra Bhavan","customerEmail":"duude@awesome.com","category":"ind","conversationID":"1005","timeStamp":"01:14","message":"Adios"});
@@ -142,16 +130,12 @@ offline.insertOfflineMessage({"clientID":"gattu","timeStamp":"02:05","customerEm
 */
 
 
-
+/*
 
 conversation.findConversationByClient(function(res,err){
 	if(!err)
 		console.log(res);
 	else
 		console.log(err);
-<<<<<<< HEAD
-},"gattu");
-=======
 },"abcdefgh");
 */
->>>>>>> FETCH_HEAD
