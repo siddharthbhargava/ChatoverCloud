@@ -4,7 +4,7 @@ function insertOfflineMessage(json){
 	
 	/*
 	 * The above JSNON object must be of the form:
-	 * {"clientID":value,
+	 * {"clientId":value,
 	 * 	"customerName":
 	 * 	"timeStamp":value,
 	 *  "customerEmail":value,
@@ -25,7 +25,7 @@ function insertOfflineMessage(json){
 			  else
 				{
 				  db.collection("offlineDB", function (err, connection){
-				  		connection.insert(json,function (err,result){
+				  		connection.insert({"clientId":json.clientId,"customerName":json.customerName,"questionCategory":json.questionCategory,"timeStamp":json.timeStamp,"message":json.message,"unreadFlag":json.unreadFlag},function (err,result){
 				  			if(err)
 				  				console.log(err);
 				  			else

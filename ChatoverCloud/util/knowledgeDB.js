@@ -19,7 +19,7 @@ function insertKnowledgeDBMessage(json){
 				{
 				  db.collection("knowledgeDB", function (err, connection){
 					  
-					  connection.insert(json, function(err,res){
+					  connection.insert({"clientId":json.clientId,"keywords":[json]}, function(err,res){
 						  if(!err){
 							  console.log('Insert Operation Successful.');	
 						  }

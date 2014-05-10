@@ -30,7 +30,7 @@ function insertConversationInitialReq(json,callback){
 		  else
 			{
 			 	  db.collection("conversationDB", function (err, connection){
-				  		connection.insert(json,function (err,result){
+				  		connection.insert({"clientId":json.clientId,"customerName":json.customerName,"customerEmail":json.customerEmail,"category":json.category,"conversationID":json.conversationID,"timeStamp":json.timeStamp,"message":json.message},function (err,result){
 				  			if(err)
 				  				console.log(err);
 				  			else
@@ -75,7 +75,7 @@ function insertConversationRegular(json){
 		  else
 			{
 			 	  db.collection("conversationDB", function (err, connection){
-				  		connection.insert(json,function (err,result){
+				  		connection.insert({"clientId":json.clientId,"customerName":json.customerName,"customerEmail":json.customerEmail,"category":json.category,"conversationID":json.conversationID,"timeStamp":json.timeStamp,"message":json.message},function (err,result){
 				  			if(err)
 				  				console.log(err);
 				  			else

@@ -20,7 +20,7 @@ function insertClient(json){
 			else
 			{	
 				db.collection("clientDB", function (err, connection){
-					connection.insert(json,function (err,result){
+					connection.insert({"clientId":json.clientId,"password":json.password,"clientName":json.clientName,"email":json.email,"domain":json.domain,"clientFlag":json.clientFlag},function (err,result){
 						if(err)
 							console.log(err);
 						else

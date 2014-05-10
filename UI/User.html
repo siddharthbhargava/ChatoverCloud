@@ -13,6 +13,7 @@ callCloudAjax("http://localhost:3000/categories",params,processRequest);
 
 function chatorTicket(status)
 {
+	document.getElementById('clientId').value=clientId;
 	if(status=="online")
 	{
 		supportStatus=status;

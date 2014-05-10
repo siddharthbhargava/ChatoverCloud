@@ -67,7 +67,7 @@ client.validateClientLogin(function(err,res){
 */
 
 
-/*
+/* OFFLINE Database Schema
  * The above JSNON object must be of the form:
  * {"clientID":value,
  * 	"customerName":
@@ -78,7 +78,15 @@ client.validateClientLogin(function(err,res){
  *  "message":value}
  */
 
-//offline.insertOfflineMessage({"clientId":"10012","customerName":"Saideepak","questionCategory":"TimepassCategory","customerEmail":"saideepak@gmail.com","message":"hello","unreadFlag":"unread"});
+var json = [];
+json.clientId="10012";
+json.customerName="Saideepak";
+json.questionCategory="TimepassCategory";
+json.customerEmail="saideepak@gmail.com";
+json.message="hello";
+json.unreadFlag="unread";
+
+offline.insertOfflineMessage(json/*{"clientId":"10015","customerName":"Saideepak","questionCategory":"TimepassCategory","customerEmail":"saideepak@gmail.com","message":"hello","unreadFlag":"unread"}*/);
 /*offline.findOfflineMessageByClient(function(err,res){
 	if(err)
 		console.log("Error.");
@@ -147,5 +155,8 @@ conversation.findConversationByClient(function(err,res){
 },"gattu");
 */
 //{"clientId":"10010","password":"trial"}
+
+// CATAGORIES Database All working. Check Test.js
+
 
 
