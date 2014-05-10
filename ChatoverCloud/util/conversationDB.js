@@ -2,6 +2,8 @@ var MongoClient = require('mongodb').MongoClient;
 
 function insertConversationInitialReq(json,callback){
 	
+	//Save conversationId in the Database.
+	
 	/*
 	 * The above JSNON object must be of the form:
 	 * {"clientID":value,
@@ -10,8 +12,7 @@ function insertConversationInitialReq(json,callback){
 	 * 	"category":value,
 	 * 	"conversationID":value,
 	 *  "timeStamp":value,
-	 *  "message":value,
-	 *  "unreadFlag":value}
+	 *  "message":value}
 	 */
 
 	// if(json.clientId && json.customerName && json.category &&json.customerEmail && json.timeStamp){
@@ -19,7 +20,6 @@ function insertConversationInitialReq(json,callback){
 		 //Auto Generating conversationID
 		 
 		 json.conversationID = (json.clientId) + (json.timeStamp);
-		 //callback(json.conversationID,err);
 		 
 		 MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 		  if(err) throw err;
@@ -31,7 +31,8 @@ function insertConversationInitialReq(json,callback){
 				  				console.log(err);
 				  			else
 					  			console.log("Successfully Inserted");
-				  			    callback(json.conversationID,err);
+				  				//connection.update({"conversationID":{$in:[]},"clientId":json.clientId},{"conversationID":json.conversationID})
+				  			    callback(err,json.conversationID);
 					});
 				});
 			}
@@ -181,25 +182,25 @@ function findAllConversations(callback){
 
 exports.findAllConversations = findAllConversations;
 
-function findConversationByClient(callback,json){
+function findConversationByClient(callback,clientId){
 	
 	/*
 	 * The above JSON object must contain the clientID in the form: {"clientID":value}
 	 */
-	if(json.clientID){
+	if(clientId){
 	
 	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 		if(err) throw err;
 		else
 		{
 			db.collection("conversationDB", function (err, connection){
-			connection.find({"clientID":json.clientId},function(err,res){
+			connection.find({"clientID":clientId},function(err,res){
 				if(err){
 					console.log("Incorrect Client ID");
 				}
 				else{
 					 var cat;
-						results.toArray(function(err,docs){
+						res.toArray(function(err,docs){
 							if(docs)
 								{
 									cat=docs[0].customerName;
@@ -235,7 +236,7 @@ function findConversationByClient(callback,json){
 											cat = cat.concat(docs[i].customerMessage);
 										}
 								}
-							callback(cat,err);
+							callback(err,cat);
 						});
 					
 				}
@@ -256,7 +257,7 @@ function findConversationByClientandConversationID(callback,json){
 	/*
 	 * The above JSON object must contain the clientID in the form: {"clientID":value,"conversationID":value}
 	 */
-	if(json.clientID && json.conversationID){
+	if(json.clientId && json.conversationID){
 	
 		MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 		if(err) throw err;
@@ -306,7 +307,7 @@ function findConversationByClientandConversationID(callback,json){
 											cat = cat.concat(docs[i].customerMessage);
 										}
 								}
-							callback(cat,err);
+							callback(err,cat);
 						});
 				}
 			});
