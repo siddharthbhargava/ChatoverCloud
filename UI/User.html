@@ -8,7 +8,7 @@ window.onload =function()
 {
 alert(clientId);
 var params = "clientId="+clientId;
-callCloudAjax("http://ec2-54-193-76-231.us-west-1.compute.amazonaws.com:3000/categories",params,processRequest);
+callCloudAjax("http://localhost:3000/categories",params,processRequest);
 }
 
 function chatorTicket(status)
@@ -27,30 +27,16 @@ function chatorTicket(status)
 	}
 }
 
-function submitTicket()
-{
-	var frm = document.getElementById('userDetails') || null;
-	if(frm) 
-	{
-  	 	frm.action = '/submitTicket' ;
-	}
-	document.getElementById('clientId').value=clientId;
-	alert("Your ticket has been submitted. We are currently processing your ticket and shall respond to you soon.");
-	window.close();
-}
 function startChat()
 {
 	alert("make ajax request to query DB");
+	document.getElementById('sc').style.visibility="visible";
 	document.getElementById('chat').style.visibility="hidden";
-	document.getElementById('startchat').style.visibility="visible";
+	document.getElementById("userDetails").action="/initialRequest";
 }
-function close()
-{
-	alert("in close");
-	self.close();
-	window.close();
-	return false;
-}
+
+
+
 function initRequest() 
 {
 	if (window.XMLHttpRequest) 
@@ -76,6 +62,19 @@ function callCloudAjax(url, params, process)
 		req = initRequest();
 		req.onreadystatechange = process;
 		req.open("POST",url,true);
+		req.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		req.send(params);
+	}
+}
+
+function callCloudAjaxSync(url, params, process) 
+{
+	if(process!=null)
+	{
+		
+		req = initRequest();
+		req.onreadystatechange = process;
+		req.open("POST",url,false);
 		req.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 		req.send(params);
 	}
@@ -130,7 +129,10 @@ function processRequest()
 		}
 	}
 } 
-
+function closeWindow()
+{
+	window.close();
+}
 
 
 function openWin()
@@ -228,7 +230,7 @@ body{overflow:hidden;background-image:url(bg-chat.jpg);background-repeat:no-repe
 <img src="header.png" border="0" title="" alt="Welcome To Chat Over Cloud" style="position:absolute;left:50px;top:0px;">
 <br>
 <br>
-<form name="userDetails" id="userDetails" action="/initialRequest" method="post" class="basic-grey">
+<form name="userDetails" id="userDetails" action="/submitTicket" method="post" class="basic-grey">
 	
 		<input id="clientId" type="text" name="clientId" style="visibility:hidden" />
     <label>
@@ -252,10 +254,11 @@ body{overflow:hidden;background-image:url(bg-chat.jpg);background-repeat:no-repe
     </label>    
      <label>
         <span>&nbsp;</span> 
-        <input name ="ticket" id = "ticket" type="submit" style="visibility:visible" class="button" value="Submit Ticket" onclick="submitTicket()"/> 
-        <input name ="chat" id="chat" style="visibility:hidden" class="button" value="Chat" onclick="startChat(); return false;"/> 
-        <input name ="startchat" id="startchat" type="submit" style="visibility:hidden" class="button" value="Start Chat"/> 
-        <button name ="close" id="close" type="button" class="button" value="Close" onclick="close(); return false;"/> 
+        <button name ="sc" id="sc" class="button" type="submit" style="visibility:hidden" value="sc">Start Chat</button>
+        <button name ="chat" id="chat" type="button" style="visibility:hidden" class="button" value="Chat" onclick="startChat(); return false;">Chat</button> 
+        <button name ="close" id="close" type="button" class="button" value="close" onclick="closeWindow()">Close</button>
+        <button name ="ticket" id = "ticket" type="submit" style="visibility:visible" class="button" value="Submit Ticket" >Submit Ticket</button> 
+
     </label>    
 </form>
        
