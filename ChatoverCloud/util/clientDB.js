@@ -4,7 +4,7 @@ function insertClient(json){
 
 	/*
 	 * The above JSON object passed as a parameter must be of the form:
-	 * {"clientID":value,
+	 * {"clientId":value,
 	 * 	"password":value,
 	 *  "clientName":value,
 	 *  "email":value,
@@ -43,7 +43,7 @@ function updateClient(json){
 
 	/*
 	 * The above JSON object passed as a parameter must be of the form:
-	 * {"clientID":value,
+	 * {"clientId":value,
 	 * 	"password":value,
 	 *  "clientName":value,
 	 *  "email":value,
@@ -81,7 +81,7 @@ function removeClient(json){
 
 	/*
 	 * The above JSON object passed as a parameter must be of the form:
-	 * {"clientID":value,
+	 * {"clientId":value,
 	 * 	"password":value,
 	 *  "clientName":value,
 	 *  "email":value,
@@ -181,7 +181,7 @@ function findClientByID(callback,clientId){
 
 											cat = cat.concat(",");
 
-											cat = cat.concat(docs[i].clientID);
+											cat = cat.concat(docs[i].clientId);
 											cat = cat.concat(":");
 											cat = cat.concat(docs[i].clientName);
 											cat = cat.concat(":");
@@ -291,7 +291,7 @@ exports.changeClientPassword = changeClientPassword;
 
 function setClientFlag(json){
 
-//	The json object must have clientID and clientFlag {"clientID":value,"clientFlag":value}
+//	The json object must have clientId and clientFlag {"clientId":value,"clientFlag":value}
 
 	if(json.clientId){
 
@@ -326,7 +326,7 @@ exports.setClientFlag = setClientFlag;
 function getClientFlag(callback,clientId){
 
 
-//	The json object must have clientID {"clientID":value}
+//	The json object must have clientId {"clientId":value}
 
 	if(clientId){
 

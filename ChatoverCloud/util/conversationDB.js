@@ -18,8 +18,12 @@ function insertConversationInitialReq(json,callback){
 	// if(json.clientId && json.customerName && json.category &&json.customerEmail && json.timeStamp){
 		
 		 //Auto Generating conversationID
-		 
 		 json.conversationID = (json.clientId) + (json.timeStamp);
+		 
+		 var d = new Date();
+		 var timeStamp = d.getTime()
+		 //"time in Milliseconds since midnight jan 1st 1970: "+timeStamp);
+		 json.timeStamp = timeStamp;
 		 
 		 MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 		  if(err) throw err;
@@ -59,6 +63,11 @@ function insertConversationRegular(json){
 	 *  "unreadFlag":value}
 	 */
 
+	 var d = new Date();
+	 var timeStamp = d.getTime()
+	 //"time in Milliseconds since midnight jan 1st 1970: "+timeStamp);
+	 json.timeStamp = timeStamp;
+	 
 	 if(json.clientId && json.customerName && json.category &&json.customerEmail && json.timeStamp){
 		 
 		 MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
@@ -99,6 +108,11 @@ function updateConversation(json){
 	 *  "unreadFlag":value}
 	 */
 
+	var d = new Date();
+	var timeStamp = d.getTime()
+	//"time in Milliseconds since midnight jan 1st 1970: "+timeStamp);
+	json.timeStamp = timeStamp;
+	
 	if(json.clientID && json.customerName && json.category &&json.customerEmail && json.conversationID && json.timeStamp){
 	
 	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {

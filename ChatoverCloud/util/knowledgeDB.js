@@ -4,14 +4,14 @@ function insertKnowledgeDBMessage(json){
 	
 	/*
 	 * The above JSON object must be of the form:
-	 * {"clientID":value,
+	 * {"clientId":value,
 	 * 	"keywords":["value1","value2"...],
 	 *  "questionCategory":value,
 	 * 	"question":value,
 	 * 	"answer":value
 	 */
 	
-	if(json.clientID && json.keywords && json.questionCategory && json.question && json.answer){
+	if(json.clientId && json.keywords && json.questionCategory && json.question && json.answer){
 		
 		MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 			  if(err) throw err;
@@ -42,14 +42,14 @@ function updateKnowledgeDBMessages(json){
 	
 	/*
 	 * The above JSON object must be of the form:
-	 * {"clientID":value,
+	 * {"clientId":value,
 	 * 	"keywords":["value1","value2"...],
 	 *  "questionCategory":value,
 	 * 	"question":value,
 	 * 	"answer":value
 	 */
 	
-	if(json.clientID && json.keywords && json.questionCategory && json.question && json.answer){
+	if(json.clientId && json.keywords && json.questionCategory && json.question && json.answer){
 	
 		MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 			  if(err) throw err;
@@ -85,7 +85,7 @@ function removeKnowledgeDBMessages(json){
 	 * 	"question":value,
 	 * 	"answer":value
 	 */
-	if(json.clientID && json.keywords && json.questionCategory && json.question && json.answer){
+	if(json.clientId && json.keywords && json.questionCategory && json.question && json.answer){
 	
 		MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 			  if(err) throw err;
@@ -136,16 +136,16 @@ function findKnowledgeDBByClient(callback,json){
 	/*
 	 * The above JSON object must contain the clientID in the form: {"clientID":value}
 	 */
-	if(json.clientID){
+	if(json.clientId){
 	
 	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 		  if(err) throw err;
 		  else
 			{
 			  db.collection("knowledgeDB", function (err, connection){
-				  connection.find({"clientID":json.clientID},function(err,res){
+				  connection.find({"clientId":json.clientId},function(err,res){
 					  if(err){
-						  console.log("Incorrect Client ID");
+						  console.log("Incorrect Client Id");
 					  }
 					  else{
 						  
@@ -192,14 +192,14 @@ function removeKnowledgeDBByClient(json){
 	
 	/*The above JSON object must contain the ClientID and question in the format: {"clientID":value, "question":value}*/
 	
-	if(json.clientID){
+	if(json.clientId){
 	
 	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 		  if(err) throw err;
 		  else
 			{
 			  db.collection("knowledgeDB", function (err, connection){
-				  connection.remove({"clientID:":json.clientID, "question":json.question},function(err,res){
+				  connection.remove({"clientId:":json.clientId, "question":json.question},function(err,res){
 					  if(err){
 						  console.log("No such question");
 					  }
@@ -224,16 +224,16 @@ function findKnowledgeDBByCategoryandKey(callback,json){
 	 * The above JSON object must contain the clientID in the form: {"clientID":value,"questionCategory":value,"keywords":[value]}
 	 */
 	
-	if(json.clientID && json.questionCategory && json.keywords){
+	if(json.clientId && json.questionCategory && json.keywords){
 		MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 			if(err)
 			  throw err;
 			else
 			{
 				db.collection("knowledgeDB", function (err, connection){
-					connection.find({"questionCategory":json.questionCategory, "keywords":json.keywords},function(err,res){
+					connection.find({"clientId":json.clientId,"questionCategory":json.questionCategory, "keywords":json.keywords},function(err,res){
 						if(err){
-							console.log("Incorrect Client ID");
+							console.log("Incorrect Client Id");
 						}
 						
 						else{
