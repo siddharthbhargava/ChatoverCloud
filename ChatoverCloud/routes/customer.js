@@ -131,6 +131,7 @@ exports.initialRequest = function(req, res){
 		res.statusCode=200;
 		conversation.insertConversationInitialReq(json,function(err,res){
 			conversationID=res;
+		console.log("conversationID : " + conversationId + " Result: " + res);
 
 		});
 
