@@ -118,7 +118,7 @@ function findAllCategoriesDB(callback){
 						  
 						  var cat;
 							results.toArray(function(err,docs){
-								if(docs)
+								if(!docs.length==0)
 									{
 										//cat2=docs[0].category;
 										cat = docs[0].clientID;
@@ -163,7 +163,7 @@ function findCategoriesDBByClient(callback,clientID){
 						  
 						  var cat;
 							results.toArray(function(err,docs){
-								if(docs)
+								if(!docs.length==0)
 									{
 										cat=docs[0].category;
 										for(var i=1; i<docs.length;i++)

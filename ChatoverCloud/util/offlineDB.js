@@ -158,7 +158,7 @@ function findOfflineMessageByClient(callback,clientId){
 					  
 					  var cat;
 						res.toArray(function(err,docs){
-							if(docs)
+							if(!docs.length==0)
 								{
 									cat=docs[0].timeStamp;
 									cat = cat + ":";
@@ -209,7 +209,7 @@ function removeReadOfflineMessagesByClient(json){
 		  else
 			{
 			  db.collection("offlineDB", function (err, connection){
-				  connection.remove({"clientId:":json.clientId, "unreadFlag":{$in:[0]}},function(err,res){
+				  connection.remove({"clientId:":json.clientId, "unreadFlag":{$in:[0,"unread","0"]}},function(err,res){
 					  if(err)
 						  console.log("Error removing documents");
 					  else
@@ -233,9 +233,10 @@ function changeUnreadFlag(json){
 			  if(err) throw err;
 			  else{
 				  
-				  db.collection("offlineDB", function (err, connection){					  
+				  db.collection("offlineDB", function (err, connection){
+					  
 					  if(!err){	
-						  connection.update({"unreadFlag":"unread"},{"unreadFlag":"read"});
+						  connection.update({"clientId":json.clientId},{$set:{"unreadFlag":"read}"}},{ multi: true });
 					  }
 					  else{
 						  console.log("Error");

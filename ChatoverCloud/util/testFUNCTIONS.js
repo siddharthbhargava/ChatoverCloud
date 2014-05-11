@@ -77,7 +77,7 @@ client.validateClientLogin(function(err,res){
  *  "questionCategory":value,
  *  "message":value}
  */
-/*
+
 var json = [];
 json.clientId="10012";
 json.customerName="Saideepak";
@@ -86,7 +86,7 @@ json.customerEmail="saideepak@gmail.com";
 json.message="hello";
 json.unreadFlag="unread";
 
-offline.insertOfflineMessage(json/*{"clientId":"10015","customerName":"Saideepak","questionCategory":"TimepassCategory","customerEmail":"saideepak@gmail.com","message":"hello","unreadFlag":"unread"}*/
+offline.insertOfflineMessage(json/*{"clientId":"10015","customerName":"Saideepak","questionCategory":"TimepassCategory","customerEmail":"saideepak@gmail.com","message":"hello","unreadFlag":"unread"}*/);
 /*offline.findOfflineMessageByClient(function(err,res){
 	if(err)
 		console.log("Error.");
@@ -127,13 +127,13 @@ client.validateClientLogin(function(err,res){
 
 
 //Conversations Data
-
+/*
 conversation.insertConversationInitialReq({"clientId":"12345","customerName":"tully","customerEmail":"tp1@gmail.com","category":"sf","timeStamp":"01:10","message":"Hi"},function(res,err){
 	if(!err)
 		console.log(res);
 });
-
-conversation.insertConversationRegular({"clientId":"abcdefgh","customerName":"starbucks","customerEmail":"hahaha@yahoo.com","category":"sj","timeStamp":"01:11","message":"Hello"});
+*/
+//conversation.insertConversationRegular({"clientId":"abcdefgh","customerName":"starbucks","customerEmail":"hahaha@yahoo.com","category":"sj","timeStamp":"01:11","message":"Hello"});
 
 
 /*

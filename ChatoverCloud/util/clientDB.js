@@ -13,14 +13,14 @@ function insertClient(json){
 
 	 */
 
-	if(json.clientId && json.password && json.clientName && json.email && json.domain){
+	if(json.clientId && json.password && json.clientName && json.clientEmail && json.domain){
 
 		MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 			if(err) throw err;
 			else
 			{	
 				db.collection("clientDB", function (err, connection){
-					connection.insert({"clientId":json.clientId,"password":json.password,"clientName":json.clientName,"email":json.email,"domain":json.domain,"clientFlag":json.clientFlag},function (err,result){
+					connection.insert({"clientId":json.clientId,"password":json.password,"clientName":json.clientName,"clientEmail":json.clientEmail,"domain":json.domain,"clientFlag":json.clientFlag},function (err,result){
 						if(err)
 							console.log(err);
 						else
@@ -166,13 +166,15 @@ function findClientByID(callback,clientId){
 
 								var cat;
 								res.toArray(function(err,docs){
-									if(docs)
+									if(!docs.length==0)
 									{
 										cat = docs[0].clientId;
 										cat = cat.concat(":");
 										cat = cat.concat(docs[0].clientName);
 										cat = cat.concat(":");
 										cat = cat.concat(docs[0].clientEmail);
+										cat = cat.concat(":");
+										cat = cat.concat("ClientFlag " + docs[0].clientFlag);
 										cat = cat.concat(":");
 										cat = cat.concat(docs[0].domain);
 
@@ -186,6 +188,8 @@ function findClientByID(callback,clientId){
 											cat = cat.concat(docs[i].clientName);
 											cat = cat.concat(":");
 											cat = cat.concat(docs[i].clientEmail);
+											cat = cat.concat(":");
+											cat = cat.concat("ClientFlag " + docs[0].clientFlag);
 											cat = cat.concat(":");
 											cat = cat.concat(docs[i].domain);
 										}
@@ -304,7 +308,7 @@ function setClientFlag(json){
 						console.log("No such database exists.");
 					}
 					else{
-						connection.update({"clientFlag":"offline"},{"clientId":json.clientId,"clientFlag":json.clientFlag},function(err,res){
+						connection.update({"clientId":json.clientId},{$set:{"clientFlag":"online"}},function(err,res){
 							if(err){
 								console.log("No such client exists.");
 							}

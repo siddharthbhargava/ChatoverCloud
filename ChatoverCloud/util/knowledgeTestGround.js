@@ -1,3 +1,9 @@
+
+/**
+ * New node file
+ */
+
+
 var MongoClient = require('mongodb').MongoClient;
 
 function insertKnowledgeDBMessage(json){
@@ -10,6 +16,7 @@ function insertKnowledgeDBMessage(json){
 	 * 	"question":value,
 	 * 	"answer":value
 	 */
+
 	
 	if(json.clientId && json.keywords && json.questionCategory && json.question && json.answer){
 		
@@ -19,7 +26,7 @@ function insertKnowledgeDBMessage(json){
 				{
 				  db.collection("knowledgeDB", function (err, connection){
 					  
-					  connection.insert({"clientId":json.clientId,"question":json.question,"answer":json.answer,"questionCategory":json.questionCategory,"keywords":[json]}, function(err,res){
+					  connection.insert({"clientId":json.clientId,"keywords":json.keywords}, function(err,res){
 						  if(!err){
 							  console.log('Insert Operation Successful.');	
 						  }
@@ -151,7 +158,7 @@ function findKnowledgeDBByClient(callback,json){
 						  
 						  var cat;
 							results.toArray(function(err,docs){
-								if(!docs.length==0)
+								if(docs)
 									{
 										cat=docs[0].questionCategory;
 										cat = cat.concat(":");
@@ -219,23 +226,19 @@ function removeKnowledgeDBByClient(json){
 exports.removeKnowledgeDBByClient = removeKnowledgeDBByClient;
 
 
-function findKnowledgeDBByCategoryAndKey(callback,json){
+function findKnowledgeDBByCategoryandKey(callback,json){
 	/*
 	 * The above JSON object must contain the clientID in the form: {"clientID":value,"questionCategory":value,"keywords":[value]}
 	 */
 	
 	if(json.clientId && json.questionCategory && json.keywords){
 		MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
-			if(err){
+			if(err)
 			  throw err;
-			 }
 			else
 			{
 				db.collection("knowledgeDB", function (err, connection){
-					var queryResults;
-					console.log((json.keywords).length);
-					for(var i = 0; i < (json.keywords).length; i++){
-					connection.find({"clientId":json.clientId,"questionCategory":json.questionCategory, "keywords":json.keywords[i]},function(err,res){
+					connection.find({"clientId":json.clientId,"questionCategory":json.questionCategory, "keywords":{$in:[json.keywords]}},function(err,res){
 						if(err){
 							console.log("Incorrect Client Id");
 						}
@@ -244,7 +247,7 @@ function findKnowledgeDBByCategoryAndKey(callback,json){
 							
 							var cat;
 							res.toArray(function(err,docs){
-								if(!docs.length==0){
+								if(!docs.length===0){
 									cat=docs[0].question;
 									cat = cat.concat(":");
 									cat = cat.concat(docs[0].answer);
@@ -255,18 +258,15 @@ function findKnowledgeDBByCategoryAndKey(callback,json){
 										cat = cat.concat(":");
 										cat = cat.concat(docs[i].category);
 									}
-									console.log(cat);
 									
 								}
-								queryResults = queryResults + (cat);
+								callback(err,cat);
 							});
 						}
 					});
-				}
-				callback(err,queryResults);	
-			});
-		}
-	});
+				});
+			}
+		});
 	}
 	else{
 		console.log("Insufficient Data.");
@@ -274,17 +274,13 @@ function findKnowledgeDBByCategoryAndKey(callback,json){
 }
 	
 
-exports.findKnowledgeDBByCategoryAndKey = findKnowledgeDBByCategoryAndKey;
+exports.findKnowledgeDBByCategoryandKey = findKnowledgeDBByCategoryandKey;
 
-//insertKnowledgeDBMessage({"clientId":10010,"questionCategory":"test","keywords":["type1","type2","type3"],"question":"what?","answer":"Like This"});
-
-findKnowledgeDBByCategoryAndKey(function(err,res){
-	if(err)
-		console.log("Error");
-	else{
+//insertKnowledgeDBMessage({"clientId":"101","questionCategory":"testing","question":"how is it supposed to be used?","keywords":["test","verify","usage"],"answer":"Like This."});
+/*
+findKnowledgeDBByCategoryandKey(function(err,res){
+	if(!err)
 		console.log(res);
-	}
-		
-},{"clientId":10010,"questionCategory":"test","keywords":["type1","type2"]});
+},{"clientId":"101","questionCategory":"testing","keywords":["test"]});
 
-
+*/
