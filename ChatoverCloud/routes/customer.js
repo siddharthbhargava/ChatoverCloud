@@ -172,14 +172,39 @@ exports.knowledgeBase = function(req, res){
 
 //	/*ajax request to search in knowledge base*/
 
-
-
-
-
-
-
 };
 
+exports.custPollReq = function(req, res){
+
+	if(!req.body.hasOwnProperty('clientId') ||  !req.body.hasOwnProperty('conversationId')|| !req.body.hasOwnProperty('lastReq')) 
+	{		
+		console.log("all the fields are required");
+
+		res.statusCode = 400;
+		return res.send('1, Error 400: Post syntax incorrect.');
+	}
+	else {
+
+		var json=[];
+		json.clientId=req.body.clientId;
+		json.conversationID=req.body.conversationId;
+		json.timeStamp=req.body.lastReq;
+
+		var list=req.body.message.split(" ");
+		json.keywords=list;
+		console.log("clientId : " + req.body.clientId);
+		console.log("category : " + req.body.category);
+		console.log("message : " + req.body.message);
+
+		res.statusCode=200;
+		
+		res.send("0, Query matched Information from Knowledge Base.");
+
+	}
+
+//	/*ajax request to search in knowledge base*/
+
+};
 
 
 

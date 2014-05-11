@@ -66,6 +66,7 @@ margin:0px;
 var req;
 var clientId;
 var conversationId;
+var lastReq;
 function addText(abcd) {
 
   olist = document.getElementById('list');
@@ -79,6 +80,12 @@ function addText(abcd) {
   
 } 
 
+function getTimeStamp()
+{
+	var d=new Date();
+	var timestamp = d.getTime();
+	return timestamp;
+}
 function addResponse(resp) {
 
   olist = document.getElementById('list');
@@ -94,12 +101,16 @@ window.onload =function()
 {
 	clientId="<%=clientId%>";
 	conversationId="<%=conv%>";
+	lastReq=getTimeStamp();
+	alert(lastReq);
 	pollRequest();
 }
 
 function pollRequest()
 {
-	setInterval(function(){alert('Hello')},5000);
+	params="clientId="+clientId+"&conversationId="+conversationId+"&lastReq="+lastReq;
+	setInterval(callCloudAjax("http://localhost:3000/custPollReq",params,processPollResp);
+  ,5000);
 }
 
 function initRequest() 
@@ -163,7 +174,42 @@ function processRequest()
 		}
 	}
 } 
-
+function processPollResp() 
+{
+	if (req.readyState == 4) 
+	{
+		if (req.status == 200) 
+		{
+			results = req.responseText;
+			if (results != null) 
+			{
+				var results_array = results.split(",");
+				var value = trim(results);
+				if ((value != "") && (value.length != 0)) 
+				{
+					if (results_array[0] == "1") 
+					{
+						alert(results_array[1]);
+					}
+					else
+					{
+						var pollresp = results_array[1].split(";");
+						lastReq=pollresp[0];
+						for(var i=1;i<pollresp.length;i++)
+						{
+							addResponse(results_array[i]);
+						}
+					} 
+				}
+			}
+		} 
+		else 
+		{	
+       		alert("Problems communicating with Cloud server");
+       		return false;
+		}
+	}
+} 
 function trim(x) {
     return x.replace(/^\s+|\s+$/gm,'');
 }

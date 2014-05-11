@@ -47,6 +47,7 @@ app.post('/initialRequest', customer.initialRequest);
 //app.post('/recordMessage', customer.insertLiveMessage);
 app.post('/submitTicket', customer.submitTicket);
 app.post('/knowledgeBase', customer.knowledgeBase);
+app.post('/custPollReq', customer.custPollReq);
 
 
 
