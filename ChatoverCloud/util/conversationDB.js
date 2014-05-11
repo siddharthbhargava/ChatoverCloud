@@ -29,17 +29,17 @@ function insertConversationInitialReq(json,callback){
 	 
 	 
 	 MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
-	  if(err) throw err;
-	  else
+	if(err) throw err;
+	else
 	{
-	   db.collection("conversationDB", function (err, connection){
-	  connection.insert({"clientId":json.clientId,"customerName":json.customerName,"customerEmail":json.customerEmail,"category":json.category,"conversationID":json.conversationID,"timeStamp":json.timeStamp,"message":json.message},function (err,result){
-	  if(err)
-	  console.log(err);
-	  else
-	  console.log("Successfully Inserted");
-	  //connection.update({"conversationID":{$in:[]},"clientId":json.clientId},{"conversationID":json.conversationID})
-	      callback(err,json.conversationID);
+		db.collection("conversationDB", function (err, connection){
+		connection.insert({"clientId":json.clientId,"customerName":json.customerName,"customerEmail":json.customerEmail,"category":json.category,"conversationID":json.conversationID,"timeStamp":json.timeStamp,"message":json.message},function (err,result){
+		if(err)
+			console.log(err);
+		else
+			console.log("Successfully Inserted");
+		//connection.update({"conversationID":{$in:[]},"clientId":json.clientId},{"conversationID":json.conversationID})
+		callback(err,json.conversationID);
 	});
 	});
 	}

@@ -131,11 +131,11 @@ exports.initialRequest = function(req, res){
 		res.statusCode=200;
 		conversation.insertConversationInitialReq(json,function(err,res){
 			conversationID=res;
-		console.log("conversationID : " + conversationID + " Result: " + res);
+		//console.log("conversationID : " + conversationID + " Result: " + res);
 
 		});
-
-		res.render('conversation',{clientId:req.body.clientId, conv:conversationID});
+		console.log(conversationID);
+		res.render('conversation',{clientId:req.body.clientId,conv:conversationID});
 
 
 
