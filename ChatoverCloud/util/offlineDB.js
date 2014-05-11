@@ -233,10 +233,9 @@ function changeUnreadFlag(json){
 			  if(err) throw err;
 			  else{
 				  
-				  db.collection("offlineDB", function (err, connection){
-					  
+				  db.collection("offlineDB", function (err, connection){					  
 					  if(!err){	
-						  connection.update({"unreadFlag":"read"});
+						  connection.update({"unreadFlag":"unread"},{"unreadFlag":"read"});
 					  }
 					  else{
 						  console.log("Error");

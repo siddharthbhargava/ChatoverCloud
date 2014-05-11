@@ -3,7 +3,6 @@ var client = require("../util/clientDB")
 var conversation = require('../util/conversationDB');
 var knowledge = require('../util/knowledgeDB');
 var offline = require('../util/offlineDB');
-var conversationID;
 /**
  * New node file
  */
@@ -190,6 +189,7 @@ exports.submitTicket = function(req, res){
 			return res.send('1, Error 400: Post syntax incorrect.');
 		}
 		else {
+			var conversationID;
 			console.log("name : " + req.body.hasOwnProperty('name'));
 			var json=[];
 			json.clientId=req.body.clientId;
@@ -209,8 +209,8 @@ exports.submitTicket = function(req, res){
 
 			conversation.insertConversationInitialReq(json,function(err,res){
 				conversationID=res;
-				res.render('../views/chat.ejs');
 			});
+			res.render('conversation',conversationID);
 			
 			
 			

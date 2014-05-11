@@ -56,7 +56,7 @@ width:180px;
 padding:1px;
 margin:0px;
 }
-    
+    body{overflow:hidden;background-image:url(bg-chat.jpg);background-repeat:no-repeat;}
 </style>
 
 <title>chat app </title>
@@ -73,7 +73,7 @@ function addText(abcd) {
   ocontent.appendChild(op);
   olist.scrollTop = olist.scrollHeight;
   params="message="+document.frmOne.tb1.value;
-  callCloudAjax("http://ec2-54-193-76-231.us-west-1.compute.amazonaws.com:3000/customerrequest",params,processRequest);
+  callCloudAjax("http://localhost:3000/customerrequest",params,processRequest);
   
 } 
 
