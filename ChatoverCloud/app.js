@@ -46,7 +46,7 @@ app.post('/customerrequest', customer.processrequest);
 app.post('/initialRequest', customer.initialRequest);
 //app.post('/recordMessage', customer.insertLiveMessage);
 app.post('/submitTicket', customer.submitTicket);
-//app.post('/knowledgeBase', customer.readFromKnowledgeBase);
+app.post('/knowledgeBase', customer.knowledgeBase);
 
 
 
