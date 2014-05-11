@@ -347,7 +347,7 @@ function findUnreadMessagesByClient(callback,json){
 		else
 		{
 			db.collection("conversationDB", function (err, connection){
-				connection.find({"clientID:":json.clientID, "unreadFlag":{$in:[1]}},function(err,res){
+				connection.find({"clientId:":json.clientId, "unreadFlag":{$in:[1]}},function(err,res){
 					if(!err){
 						
 						 var cat;

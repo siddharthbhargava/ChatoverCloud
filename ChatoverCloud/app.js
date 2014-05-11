@@ -46,9 +46,9 @@ app.post('/customerrequest', customer.processrequest);
 app.post('/initialRequest', customer.initialRequest);
 //app.post('/recordMessage', customer.insertLiveMessage);
 app.post('/submitTicket', customer.submitTicket);
-//app.post('/knowledgeBase', customer.readFromKnowledgeBase);
-
-
+app.post('/knowledgeBase', customer.knowledgeBase);
+app.post('/insertkb',admin.insertkb);
+app.get('/retrieveTickets',admin.retrieveTickets);
 
 
 http.createServer(app).listen(app.get('port'), function(){

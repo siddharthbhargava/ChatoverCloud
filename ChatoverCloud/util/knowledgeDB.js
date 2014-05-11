@@ -1,43 +1,40 @@
 var MongoClient = require('mongodb').MongoClient;
 
 function insertKnowledgeDBMessage(json){
-	
+
 	/*
 	 * The above JSON object must be of the form:
 	 * {"clientId":value,
-	 * 	"keywords":["value1","value2"...],
-	 *  "questionCategory":value,
-	 * 	"question":value,
-	 * 	"answer":value
+	 * "keywords":["value1","value2"...],
+	 *  "questionCategory":value,
+	 * "question":value,
+	 * "answer":value
 	 */
-	
+
 	if(json.clientId && json.keywords && json.questionCategory && json.question && json.answer){
-		
-		MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
-			  if(err) throw err;
-			  else
-				{
-				  db.collection("knowledgeDB", function (err, connection){
-					  
-					  connection.insert({"clientId":json.clientId,"keywords":[json]}, function(err,res){
-						  if(!err){
-							  console.log('Insert Operation Successful.');	
-						  }
-						  else{
-							  console.log('Error in Insertion.');
-						  }
-					  });
-				  });
-				}
-		});
-	}
-		else{
-			console.log("Insufficient data.")
-		}
+
+	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {if(err) throw err;
+else
+	{
+db.collection("knowledgeDB", function (err, connection){
+	connection.insert({"clientId":json.clientId,"question":json.question,"answer":json.answer,"questionCategory":json.questionCategory,"keywords":[json]}, function(err,res){
+if(!err){
+console.log('Insert Operation Successful.');
 }
+else{
+	console.log('Error in Insertion.');
+}
+});
+	});
+	}
+	});
+	}
+	else{
+	console.log("Insufficient data.")
+	}
+	}
 
-exports.insertKnowledgeDBMessage = insertKnowledgeDBMessage;
-
+	exports.insertKnowledgeDBMessage = insertKnowledgeDBMessage;
 function updateKnowledgeDBMessages(json){
 	
 	/*
