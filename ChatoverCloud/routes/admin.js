@@ -2,7 +2,7 @@
 
    var client = require('../util/clientDB');
    var knowledge = require('../util/knowledgeDB');
-   var conversation=require('../util/conversationDB');
+   var offline=require('../util/conversationDB');
    var conversation=require('../util/offlineDB');
    
    

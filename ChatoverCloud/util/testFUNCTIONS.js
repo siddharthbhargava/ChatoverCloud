@@ -159,13 +159,14 @@ conversation.findConversationByClient(function(err,res){
 
 // CATAGORIES Database All working. Check Test.js
 
-/*
+
+
 conversation.getConversationsBetweenT1AndT2(function(err,res){
 	if(!err)
 		console.log(res);
-},{"t1":1399799896452});
+},{"t1":1399799896452,"clientId":"GATTU",});
 
-*/
+
 
 //var d = new Date();
 //var timeStamp = d.getTime()

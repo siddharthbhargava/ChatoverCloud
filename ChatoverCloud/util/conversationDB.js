@@ -518,7 +518,7 @@ function getConversationsGreaterThanT1(callback,json){
 			{
 				db.collection("conversationDB", function (err, connection){
 					if(!err){
-					connection.find({"timeStamp":{$gt:json.t1}}, function(err,res){
+					connection.find({"timeStamp":{$gt:json.t1},"clientId":json.clientId,"conversationID":json.conversationID}, function(err,res){
 						
 						if(!err){
 			

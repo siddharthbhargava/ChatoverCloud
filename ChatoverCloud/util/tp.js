@@ -28,8 +28,8 @@ console.log(Time.at(seconds).strftime("%H:%M:%S"));
 		 
 */		 
 
-
-/*conversation.insertConversationInitialReq({"clientId":"GATTU","customerName":"tully","customerEmail":"tp1@gmail.com","category":"sf","message":"Hi"},function(err,res){
+/*
+conversation.insertConversationInitialReq({"clientId":"NGattuPALLY","customerName":"tully","customerEmail":"tp1@gmail.com","category":"sf","message":"Hi"},function(err,res){
 	if(!err)
 		console.log(res);
 	else
@@ -37,11 +37,12 @@ console.log(Time.at(seconds).strftime("%H:%M:%S"));
 });
 
 */
-//conversation.insertConversationClient({"customerName":"tully","conversationID":"GATTU1399800362835","customerEmail":"tp1@gmail.com","category":"sf","message":"Hi"});
+
+//conversation.insertConversationClient({"customerName":"NGattuPALLY","conversationID":"NavyaGattuPALLY1399806476705","customerEmail":"tp1@gmail.com","category":"sf","message":"Hi"});
 
 conversation.getConversationsGreaterThanT1(function(err,res){
 	if(!err){
 		res
 		console.log(res);
 	}
-},{"t1":1399799896452,"clientId":"GATTU"});
+},{"t1":1399806672177,"clientId":"GATTU"});
