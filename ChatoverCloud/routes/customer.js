@@ -134,7 +134,7 @@ exports.initialRequest = function(req, res){
 		//console.log("conversationID : " + conversationID + " Result: " + res);
 
 		});
-		console.log(conversationID);
+		console.log("Conversation Id : " + conversationID);
 		res.render('conversation',{clientId:req.body.clientId,conv:conversationID});
 
 
