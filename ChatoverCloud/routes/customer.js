@@ -188,23 +188,36 @@ exports.custPollReq = function(req, res){
 		var json=[];
 		json.clientId=req.body.clientId;
 		json.conversationID=req.body.conversationId;
-		json.timeStamp=req.body.lastReq;
+		json.t1=req.body.lastReq;
 
-		var list=req.body.message.split(" ");
-		json.keywords=list;
 		console.log("clientId : " + req.body.clientId);
-		console.log("category : " + req.body.category);
-		console.log("message : " + req.body.message);
-
-		res.statusCode=200;
+		console.log("conversationID : " + req.body.conversationId);
+		console.log("timeStamp : " + req.body.lastReq);
 		
-		res.send("0, Query matched Information from Knowledge Base.");
+		//sayHello();
+		conversation.getConversationsGreaterThanT1(function(err,result){
+			console.log("inside get conversation t1");
+			if(err)
+				console.log(err);
+			else
+				{
+					res.statusCode=200;
+					console.log("Poll Response :" + result);
+					res.send("0," + result);
 
+				}
+		},json);
+		
 	}
 
 //	/*ajax request to search in knowledge base*/
 
 };
+
+function sayHello()
+{
+	console.log("Hello Poll");
+}
 
 
 

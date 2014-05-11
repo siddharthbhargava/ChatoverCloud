@@ -75,5 +75,26 @@
     	});
    }
  }
+ exports.replyEmails = function (req, res) {
+    	console.log("inside retrieve tickets");
+    	if(!req.body.hasOwnProperty('clientEmail')||!req.body.hasOwnProperty('message')) {
+    		res.statusCode = 400;
+    		return res.send('Error 400: Post syntax incorrect.');
+    	}
+    	else {
+    	var json = [];
+    	json.email = req.body.hasOwnProperty('clientEmail');
+    	json.subject = "Thank you for reaching us";
+    	json.text = "your response";
+    	email.emailTo(json,function(err,res){
+    		if(!err){
+    			console.log("email sent.");
+    		}
+    		else{
+    			console.log("Error");
+    		}
+    	});
+   }
+ }
     
 

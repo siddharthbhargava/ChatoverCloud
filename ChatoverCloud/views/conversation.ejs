@@ -100,7 +100,9 @@ function addResponse(resp) {
 window.onload =function()
 {
 	clientId="<%=clientId%>";
+	alert("ClientID :" + clientId);
 	conversationId="<%=conv%>";
+	alert("Conversation ID :" + conversationId);
 	lastReq=getTimeStamp();
 	alert(lastReq);
 	pollRequest();
@@ -108,9 +110,11 @@ window.onload =function()
 
 function pollRequest()
 {
+	setInterval(function makepollRequest()
+{
 	params="clientId="+clientId+"&conversationId="+conversationId+"&lastReq="+lastReq;
-	setInterval(callCloudAjax("http://localhost:3000/custPollReq",params,processPollResp);
-  ,5000);
+	callCloudAjax("http://localhost:3000/custPollReq",params,processPollResp);
+},8000);
 }
 
 function initRequest() 
@@ -134,7 +138,6 @@ function callCloudAjax(url, params, process)
 {
 	if(process!=null)
 	{
-		
 		req = initRequest();
 		req.onreadystatechange = process;
 		req.open("POST",url,true);
@@ -233,7 +236,8 @@ function trim(x) {
   <p class="systemuser">Please wait and one of our operators will be with you shortly.</p>
   </div>
 </div>
-<div><input id = "tb1" type="text"  value="" class="myclass" name = "textBox1"/></div><div><input type="button" class="button" value="Send" onclick="addText(this)" /></div>
+<div><input id = "tb1" type="text"  value="" class="myclass" name = "textBox1"/></div>
+<button type="button" class="button" value="Send" onclick="addText(this)">Send</button>
 </form>
 </body>
 
