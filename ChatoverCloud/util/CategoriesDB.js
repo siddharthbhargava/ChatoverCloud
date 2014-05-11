@@ -15,7 +15,7 @@ function insertCategoriesDB(json){
 			  else
 				{
 				  db.collection("CategoriesDB", function (err, connection){
-					  connection.insert(json, function(err,res){
+					  connection.insert({"clientId":json.clientId,"category":json.category}, function(err,res){
 						  if(!err){
 							  console.log('Insert Operation Successful.');	
 						  }

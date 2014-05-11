@@ -18,15 +18,19 @@ function insertConversationInitialReq(json,callback){
 	// if(json.clientId && json.customerName && json.category &&json.customerEmail && json.timeStamp){
 		
 		 //Auto Generating conversationID
-		 
 		 json.conversationID = (json.clientId) + (json.timeStamp);
+		 
+		 var d = new Date();
+		 var timeStamp = d.getTime()
+		 //"time in Milliseconds since midnight jan 1st 1970: "+timeStamp);
+		 json.timeStamp = timeStamp;
 		 
 		 MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 		  if(err) throw err;
 		  else
 			{
 			 	  db.collection("conversationDB", function (err, connection){
-				  		connection.insert(json,function (err,result){
+				  		connection.insert({"clientId":json.clientId,"customerName":json.customerName,"customerEmail":json.customerEmail,"category":json.category,"conversationID":json.conversationID,"timeStamp":json.timeStamp,"message":json.message},function (err,result){
 				  			if(err)
 				  				console.log(err);
 				  			else
@@ -59,6 +63,11 @@ function insertConversationRegular(json){
 	 *  "unreadFlag":value}
 	 */
 
+	 var d = new Date();
+	 var timeStamp = d.getTime()
+	 //"time in Milliseconds since midnight jan 1st 1970: "+timeStamp);
+	 json.timeStamp = timeStamp;
+	 
 	 if(json.clientId && json.customerName && json.category &&json.customerEmail && json.timeStamp){
 		 
 		 MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
@@ -66,7 +75,7 @@ function insertConversationRegular(json){
 		  else
 			{
 			 	  db.collection("conversationDB", function (err, connection){
-				  		connection.insert(json,function (err,result){
+				  		connection.insert({"clientId":json.clientId,"customerName":json.customerName,"customerEmail":json.customerEmail,"category":json.category,"conversationID":json.conversationID,"timeStamp":json.timeStamp,"message":json.message},function (err,result){
 				  			if(err)
 				  				console.log(err);
 				  			else
@@ -99,6 +108,11 @@ function updateConversation(json){
 	 *  "unreadFlag":value}
 	 */
 
+	var d = new Date();
+	var timeStamp = d.getTime()
+	//"time in Milliseconds since midnight jan 1st 1970: "+timeStamp);
+	json.timeStamp = timeStamp;
+	
 	if(json.clientID && json.customerName && json.category &&json.customerEmail && json.conversationID && json.timeStamp){
 	
 	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {

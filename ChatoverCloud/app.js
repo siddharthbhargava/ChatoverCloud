@@ -5,6 +5,7 @@ var path = require('path');
 var ejs = require("ejs");
 var app = express();
 var customer = require("./routes/customer");
+var admin = require("./routes/admin");
 
 
 var allowCrossDomain = function(req, res, next) {
@@ -37,7 +38,7 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
-//app.post('/adminvalidate', admin.adminvalidate)
+app.post('/adminvalidate', admin.adminvalidate)
 
 app.post('/categories', customer.getCategories);
 //app.post('/checkClientStatus', customer.clientOnlineFlag);

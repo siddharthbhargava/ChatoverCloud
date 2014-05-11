@@ -155,20 +155,25 @@ exports.submitTicket = function(req, res){
 		return res.send('1, Error 400: Post syntax incorrect.');
 	}
 	else {
-		console.log("name : " + req.body.hasOwnProperty('name'));
-		console.log("email : " + req.body.hasOwnProperty('email'));
-		console.log("message : " + req.body.hasOwnProperty('message'));
-		console.log("category : " + req.body.hasOwnProperty('category'));
-		console.log("clientId : " + req.body.hasOwnProperty('clientId'));
+		
 		var json=[];
-		json.clientId="req.body.hasOwnProperty('clientId')";
-		json.name="req.body.hasOwnProperty('name')";
-		json.email="req.body.hasOwnProperty('email')";
-		json.category="req.body.hasOwnProperty('category')";
-		res.statusCode=200;
+		json.clientId=req.body.clientId;
+		json.customerName=req.body.name;
+		json.customerEmail=req.body.email;
+		json.questionCategory=req.body.category;
+		json.unreadFlag="unread";
+			json.message=req.body.message;
+		
+		
+		
+		console.log("clientId: " +json.clientId);
+		console.log("name : " + json.customerName);
+		console.log("email : " + json.customerEmail);
+		console.log("category : " + json.questionCategory);
+		console.log("message : " + json.message);
 
 
-		offline.insertOfflineMessage({"clientId":"req.body.hasOwnProperty('clientId')","customerEmail":"req.body.hasOwnProperty('email')","unreadFlag":"0","message":"req.body.hasOwnProperty('message')", "category":"req.body.hasOwnProperty('category')"});	
+		offline.insertOfflineMessage(json);	
 	}
 };
 
@@ -187,20 +192,28 @@ exports.submitTicket = function(req, res){
 		else {
 			console.log("name : " + req.body.hasOwnProperty('name'));
 			var json=[];
-			json.clientId="req.body.hasOwnProperty('clientId')";
-			json.name="req.body.hasOwnProperty('name')";
-			json.email="req.body.hasOwnProperty('email')";
-			json.category="req.body.hasOwnProperty('category')";
+			json.clientId=req.body.clientId;
+			json.customerName=req.body.name;
+			json.customerEmail=req.body.email;
+			json.category=req.body.category;
+			json.message=req.body.message;
 			
 			
-			console.log("email : " + req.body.hasOwnProperty('email'));
-			console.log("message : " + req.body.hasOwnProperty('message'));
-			console.log("category : " + req.body.hasOwnProperty('category'));
-			console.log("clientId : " + req.body.hasOwnProperty('clientId'));
+			console.log("email : " +json.clientId);
+			console.log("message : " + json.customerName);
+			console.log("category : " + json.customerEmail);
+			console.log("clientId : " + json.category);
+			console.log("message  :"+json.message);
 
 			res.statusCode=200;
 
-			conversation.insertConversation({"clientId":"req.body.hasOwnProperty('clientId')","customerName":"req.body.hasOwnProperty('name')","customerEmail":"req.body.hasOwnProperty('email')","category":"req.body.hasOwnProperty('category')","message":"req.body.hasOwnProperty('message')"});
+			conversation.insertConversationInitialReq(json,function(err,res){
+				conversationID=res;
+				res.render('../views/chat.ejs');
+			});
+			
+			
+			
 		
 		}
 	};

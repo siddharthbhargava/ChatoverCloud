@@ -4,21 +4,28 @@ function insertOfflineMessage(json){
 	
 	/*
 	 * The above JSNON object must be of the form:
-	 * {"clientID":value,
+	 * {"clientId":value,
+	 * 	"customerName":
 	 * 	"timeStamp":value,
 	 *  "customerEmail":value,
 	 *  "unreadFlag":value,
+	 *  "questionCategory":value,
 	 *  "message":value}
 	 */
 
-	if(json.clientID && json.timeStamp && json.customerEmail && json.unreadFlag && json.message){
+	var d = new Date();
+	var timeStamp = d.getTime()
+	//"time in Milliseconds since midnight jan 1st 1970: "+timeStamp);
+	json.timeStamp = timeStamp;
+	
+	if(json.clientId && json.customerName && json.questionCategory && json.timeStamp && json.customerEmail && json.message){
 	
 		MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 			  if(err) throw err;
 			  else
 				{
 				  db.collection("offlineDB", function (err, connection){
-				  		connection.insert(json,function (err,result){
+				  		connection.insert({"clientId":json.clientId,"customerName":json.customerName,"questionCategory":json.questionCategory,"timeStamp":json.timeStamp,"message":json.message,"unreadFlag":json.unreadFlag},function (err,result){
 				  			if(err)
 				  				console.log(err);
 				  			else
@@ -41,13 +48,15 @@ function updateOfflineMessages(json){
 	/*
 	 * The above JSNON object must be of the form:
 	 * {"clientID":value,
+	 * 	"customerName":
 	 * 	"timeStamp":value,
 	 *  "customerEmail":value,
 	 *  "unreadFlag":value,
+	 *  "questionCategory":value,
 	 *  "message":value}
 	 */
 	
-	if(json.clientID && json.timeStamp && json.customerEmail && json.unreadFlag && json.message){
+	if(json.clientId && json.timeStamp && json.customerEmail && json.unreadFlag && json.message){
 		
 		MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 			  if(err) throw err;
@@ -76,13 +85,15 @@ function removeOfflineMessages(json){
 	/*
 	 * The above JSNON object must be of the form:
 	 * {"clientID":value,
+	 * 	"customerName":
 	 * 	"timeStamp":value,
 	 *  "customerEmail":value,
 	 *  "unreadFlag":value,
+	 *  "questionCategory":value,
 	 *  "message":value}
 	 */
 
-	if(json.clientID && json.timeStamp && json.customerEmail && json.unreadFlag && json.message){
+	if(json.clientId && json.timeStamp && json.customerEmail && json.unreadFlag && json.message){
 	
 		MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 			  if(err) throw err;
@@ -128,10 +139,10 @@ function findAllOfflineMessages(callback){
 
 exports.findAllOfflineMessages = findAllOfflineMessages;
 
-function findOfflineMessageByClient(callback,json){
+function findOfflineMessageByClient(callback,clientId){
 	/*The above JSON object must have the clientID in the manner: {"clientID":value}*/
 	
-	if(json.clientID){
+	if(clientId){
 	
 	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 		  if(err) throw err;
@@ -139,19 +150,23 @@ function findOfflineMessageByClient(callback,json){
 			{
 			  db.collection("offlineDB", function (err, connection){
 				  
-			  connection.find({"clientID":json.clientID},function(err,res){
+			  connection.find({"clientId":clientId,"unreadFlag":"unread"},function(err,res){
 				  if(err){
 					  console.log("The client has no unread messages");
 				  }
 				  else{
 					  
 					  var cat;
-						results.toArray(function(err,docs){
+						res.toArray(function(err,docs){
 							if(docs)
 								{
 									cat=docs[0].timeStamp;
+									cat = cat + ":";
+									cat = cat.concat(docs[0].customerName);
 									cat = cat.concat(":");
 									cat = cat.concat(docs[0].customerEmail);
+									cat = cat.concat(":");
+									cat = cat.concat(docs[0].questionCategory);
 									cat = cat.concat(":");
 									cat = cat.concat(docs[0].message);
 	
@@ -161,12 +176,16 @@ function findOfflineMessageByClient(callback,json){
 											
 											cat = cat.concat(docs[i].timeStamp);
 											cat = cat.concat(":");
+											cat = cat.concat(docs[i].customerName);
+											cat = cat.concat(":");
 											cat = cat.concat(docs[i].customerEmail);
+											cat = cat.concat(":");
+											cat = cat.concat(docs[i].questionCategory);
 											cat = cat.concat(":");
 											cat = cat.concat(docs[i].message);
 										}
 								}
-							callback(cat,err);
+							callback(err,cat);
 						});
 				  }
 			  });
@@ -183,14 +202,14 @@ exports.findOfflineMessageByClient = findOfflineMessageByClient;
 
 function removeReadOfflineMessagesByClient(json){
 	/*The above JSON object must have the client ID in the manner: {"clientID":value}*/
-	if(json.clientID){
+	if(json.clientId){
 
 	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 		  if(err) throw err;
 		  else
 			{
 			  db.collection("offlineDB", function (err, connection){
-				  connection.remove({"clientID:":json.clientID, "unreadFlag":{$in:[0]}},function(err,res){
+				  connection.remove({"clientId:":json.clientId, "unreadFlag":{$in:[0]}},function(err,res){
 					  if(err)
 						  console.log("Error removing documents");
 					  else
@@ -209,7 +228,7 @@ exports.removeReadOfflineMessagesByClient = removeReadOfflineMessagesByClient;
 
 
 function changeUnreadFlag(json){
-	if(json.clientID && json.conversationID && json.unreadFlag){
+	if(json.clientId && json.conversationID && json.unreadFlag){
 		MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 			  if(err) throw err;
 			  else{

@@ -61,11 +61,6 @@ client.insertClient({"clientId":"sai","password":"chevrolet","clientName":"Saide
 client.insertClient({"clientId":"gattu","password":"dodge","clientName":"Navya Gattupalli","email":"CEO@GlobalNetworks.org","domain":"www.GlobalNetworks.org","clientFlag":"online"});
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> FETCH_HEAD
-
 /*
  * The above JSNON object must be of the form:
  * {"clientID":value,
@@ -78,20 +73,27 @@ client.insertClient({"clientId":"gattu","password":"dodge","clientName":"Navya G
  *  "unreadFlag":value}
  */
 
-/*Conversations Data
-
+//Conversations Data
+/*
+conversation.insertConversationInitialReq({"clientId":"abcdefgh","customerName":"tully","customerEmail":"tp1@gmail.com","category":"sf","timeStamp":"01:10","message":"Hi"},function(res,err){
+	if(!err)
+		console.log(res);
+});
+conversation.insertConversationRegular({"clientId":"abcdefgh","customerName":"starbucks","customerEmail":"hahaha@yahoo.com","category":"sj","timeStamp":"01:11","message":"Hello"});
+*/
 
 conversation.insertConversation({"clientID":"gattu","customerName":"tully","customerEmail":"tp1@gmail.com","category":"sf","conversationID":"1001","timeStamp":"01:10","message":"Hi"});
 conversation.insertConversation({"clientID":"gattu","customerName":"starbucks","customerEmail":"hahaha@yahoo.com","category":"sj","conversationID":"1002","timeStamp":"01:11","message":"Hello"});
 conversation.insertConversation({"clientID":"gattu","customerName":"pitts","customerEmail":"wtf@lmao.inc","category":"ny","conversationID":"1003","timeStamp":"01:12","message":"Wassup?"});
 conversation.insertConversation({"clientID":"gattu","customerName":"madras cafe","customerEmail":"baa@hotmail.com","category":"la","conversationID":"1004","timeStamp":"01:13","message":"Como EsTas?"});
 conversation.insertConversation({"clientID":"gattu","customerName":"Andhra Bhavan","customerEmail":"duude@awesome.com","category":"ind","conversationID":"1005","timeStamp":"01:14","message":"Adios"});
-*/
+
 //conversation.insertConversationInitialReq({"clientId":"abcdefgh","customerName":"tully","customerEmail":"tp1@gmail.com","category":"sf","timeStamp":"01:10","message":"Hi"},function(res,err){
 //	if(!err)
 //		console.log(res);
 //});
 //conversation.insertConversationRegular({"clientId":"abcdefgh","customerName":"starbucks","customerEmail":"hahaha@yahoo.com","category":"sj","timeStamp":"01:11","message":"Hello"});
+
 //conversation.insertConversation({"clientID":"gattu","customerName":"pitts","customerEmail":"wtf@lmao.inc","category":"ny","conversationID":"1003","timeStamp":"01:12","message":"Wassup?"});
 //conversation.insertConversation({"clientID":"gattu","customerName":"madras cafe","customerEmail":"baa@hotmail.com","category":"la","conversationID":"1004","timeStamp":"01:13","message":"Como EsTas?"});
 //conversation.insertConversation({"clientID":"gattu","customerName":"Andhra Bhavan","customerEmail":"duude@awesome.com","category":"ind","conversationID":"1005","timeStamp":"01:14","message":"Adios"});
@@ -121,21 +123,24 @@ knowledge.insertKnowledgeDBMessage({"clientID":"gattu","keywords":"kya be","ques
  *  "message":value}
  */
 /*
-offline.insertOfflineMessage({"clientId":"gattu","timeStamp":"02:00","customerEmail":"tp1@gmail.com","unreadFlag":"0","message":"bro? this aint working!"});
-offline.insertOfflineMessage({"clientId":"gattu","timeStamp":"02:01","customerEmail":"tp2@gmail.com","unreadFlag":"0","message":"WTF is wrong with my brain?!"});
-offline.insertOfflineMessage({"clientId":"gattu","timeStamp":"02:02","customerEmail":"tp3@gmail.com","unreadFlag":"0","message":"Hey? How you doin?!"});
-offline.insertOfflineMessage({"clientId":"gattu","timeStamp":"02:03","customerEmail":"tp4@gmail.com","unreadFlag":"0","message":"ah Hoi!"});
-offline.insertOfflineMessage({"clientId":"gattu","timeStamp":"02:04","customerEmail":"tp5@gmail.com","unreadFlag":"0","message":"So what are we talking about tonight?"});
-offline.insertOfflineMessage({"clientId":"gattu","timeStamp":"02:05","customerEmail":"tp6@gmail.com","unreadFlag":"0","message":"How much is the fare to Mars?"});
+offline.insertOfflineMessage({"clientID":"gattu","timeStamp":"02:00","customerEmail":"tp1@gmail.com","unreadFlag":"0","message":"bro? this aint working!"});
+offline.insertOfflineMessage({"clientID":"gattu","timeStamp":"02:01","customerEmail":"tp2@gmail.com","unreadFlag":"0","message":"WTF is wrong with my brain?!"});
+offline.insertOfflineMessage({"clientID":"gattu","timeStamp":"02:02","customerEmail":"tp3@gmail.com","unreadFlag":"0","message":"Hey? How you doin?!"});
+offline.insertOfflineMessage({"clientID":"gattu","timeStamp":"02:03","customerEmail":"tp4@gmail.com","unreadFlag":"0","message":"ah Hoi!"});
+offline.insertOfflineMessage({"clientID":"gattu","timeStamp":"02:04","customerEmail":"tp5@gmail.com","unreadFlag":"0","message":"So what are we talking about tonight?"});
+offline.insertOfflineMessage({"clientID":"gattu","timeStamp":"02:05","customerEmail":"tp6@gmail.com","unreadFlag":"0","message":"How much is the fare to Mars?"});
 */
 
 
-/*
+
 
 conversation.findConversationByClient(function(res,err){
 	if(!err)
 		console.log(res);
 	else
 		console.log(err);
-},"abcdefgh");
-*/
+
+},"gattu");
+
+
+
