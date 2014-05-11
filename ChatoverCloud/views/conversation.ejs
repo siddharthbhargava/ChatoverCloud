@@ -94,9 +94,12 @@ window.onload =function()
 {
 	clientId="<%=clientId%>";
 	conversationId="<%=conv%>";
-	alert(clientId);
-	alert(conversationId);
-	alert("here");
+	pollRequest();
+}
+
+function pollRequest()
+{
+	setInterval(function(){alert('Hello')},5000);
 }
 
 function initRequest() 

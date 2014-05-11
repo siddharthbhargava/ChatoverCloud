@@ -104,7 +104,7 @@ exports.submitTicket = function(req, res){
 
 exports.initialRequest = function(req, res){
 	console.log("handling initial request");
-
+	
 	if(!req.body.hasOwnProperty('clientId') || !req.body.hasOwnProperty('name') || !req.body.hasOwnProperty('message')|| !req.body.hasOwnProperty('email')|| !req.body.hasOwnProperty('category')) 
 	{
 		console.log("all fields required!!");
@@ -112,7 +112,6 @@ exports.initialRequest = function(req, res){
 		return res.send('1, Error 400: Post syntax incorrect.');
 	}
 	else {
-		var conversationID;
 		console.log("name : " + req.body.hasOwnProperty('name'));
 		var json=[];
 		json.clientId=req.body.clientId;
@@ -129,13 +128,11 @@ exports.initialRequest = function(req, res){
 		console.log("message  :"+json.message);
 
 		res.statusCode=200;
-		conversation.insertConversationInitialReq(json,function(err,res){
-			conversationID=res;
-		//console.log("conversationID : " + conversationID + " Result: " + res);
+		conversation.insertConversationInitialReq(json,function(err,result){
+		res.render('conversation',{clientId:req.body.clientId,conv:result});
 
 		});
-		console.log("Conversation Id : " + conversationID);
-		res.render('conversation',{clientId:req.body.clientId,conv:conversationID});
+		
 
 
 
