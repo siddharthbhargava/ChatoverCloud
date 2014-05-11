@@ -3,7 +3,7 @@
  */
 var conversation = require('./conversationDB.js');
 /*
-conversation.insertConversationInitialReq({"clientId":"Sid","customerName":"tully","customerEmail":"tp1@gmail.com","category":"sf","message":"Hi"},function(err,res){
+conversation.insertConversationInitialReq({"clientId":"Siddharth","customerName":"tully","customerEmail":"tp1@gmail.com","category":"sf","message":"Hi"},function(err,res){
 	if(!err)
 		console.log(res);
 	else
@@ -11,12 +11,19 @@ conversation.insertConversationInitialReq({"clientId":"Sid","customerName":"tull
 });
 */
 
+var json = [];
+json.clientId = "Sid";
+json.conversationID ="Siddharth1399813464304";
+json.t1 = 1399813464304;
 
-//conversation.insertConversationCustomer({"clientId":"Sid","customerName":"NGattuPALLY","conversationID":"Sid1399806924081","customerEmail":"tp1@gmail.com","category":"sf","message":"Hi"});
 
+
+//conversation.insertConversationCustomer({"clientId":"Sid","customerName":"NGattuPALLY","conversationID":"Siddharth1399813464304","customerEmail":"tp1@gmail.com","category":"sf","message":"Hello"});
+
+ 
 conversation.getConversationsGreaterThanT1(function(err,res){
 	if(!err){
-		res
-		console.log(res);
+		console.log("Response :" + res);
 	}
-},{"t1":1399806924081,"clientId":"Sid","conversationID":"Sid1399806924081"});
+},json);
+
