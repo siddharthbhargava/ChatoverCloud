@@ -226,11 +226,12 @@ exports.submitTicket = function(req, res){
 		if(!req.body.hasOwnProperty('clientId') || !req.body.hasOwnProperty('name') || !req.body.hasOwnProperty('message')|| !req.body.hasOwnProperty('email')|| !req.body.hasOwnProperty('category')) 
 		{		
 			console.log("all the fields are required");
-		}
+		
 			res.statusCode = 400;
 			return res.send('1, Error 400: Post syntax incorrect.');
 		}
 	else {
+		
 		var json=[];
 		json.clientId=req.body.clientId;
 		
@@ -238,17 +239,13 @@ exports.submitTicket = function(req, res){
 		
 		var list=req.body.message.split(" ");
 		json.message=list;
-		
-		
-		
-
 			console.log("message : " + req.body.hasOwnProperty('message'));
 			console.log("category : " + req.body.hasOwnProperty('category'));
 			console.log("clientId : " + req.body.hasOwnProperty('clientId'));
 
 			res.statusCode=200;
 			
-			
+	}
 		
 //			/*ajax request to search in knowledge base*/
 			
@@ -256,8 +253,7 @@ exports.submitTicket = function(req, res){
 			
 
 			
-		}
-	
+		
 	
 };
 
