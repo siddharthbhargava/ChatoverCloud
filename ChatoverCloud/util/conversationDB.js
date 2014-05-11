@@ -1,53 +1,56 @@
 var MongoClient = require('mongodb').MongoClient;
 
 function insertConversationInitialReq(json,callback){
-	
+
 	//Save conversationId in the Database.
-	
+
 	/*
 	 * The above JSNON object must be of the form:
 	 * {"clientID":value,
-	 * 	"customerName":value,
-	 * 	"customerEmail":value,
-	 * 	"category":value,
-	 * 	"conversationID":value,
-	 *  "timeStamp":value,
-	 *  "message":value}
+	 * "customerName":value,
+	 * "customerEmail":value,
+	 * "category":value,
+	 * "conversationID":value,
+	 *  "timeStamp":value,
+	 *  "message":value}
 	 */
 
 	// if(json.clientId && json.customerName && json.category &&json.customerEmail && json.timeStamp){
-		
-		 //Auto Generating conversationID
-		 json.conversationID = (json.clientId) + (json.timeStamp);
-		 
-		 var d = new Date();
-		 var timeStamp = d.getTime()
-		 //"time in Milliseconds since midnight jan 1st 1970: "+timeStamp);
-		 json.timeStamp = timeStamp;
-		 
-		 MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
-		  if(err) throw err;
-		  else
-			{
-			 	  db.collection("conversationDB", function (err, connection){
-				  		connection.insert({"clientId":json.clientId,"customerName":json.customerName,"customerEmail":json.customerEmail,"category":json.category,"conversationID":json.conversationID,"timeStamp":json.timeStamp,"message":json.message},function (err,result){
-				  			if(err)
-				  				console.log(err);
-				  			else
-					  			console.log("Successfully Inserted");
-				  				//connection.update({"conversationID":{$in:[]},"clientId":json.clientId},{"conversationID":json.conversationID})
-				  			    callback(err,json.conversationID);
-					});
-				});
-			}
-		 });
+
+	var d = new Date();
+	 var timeStamp = d.getTime()
+	 //"time in Milliseconds since midnight jan 1st 1970: "+timeStamp);
+	 json.timeStamp = timeStamp;
+
+	 //Auto Generating conversationID
+	 json.conversationID = (json.clientId) + (json.timeStamp);
+	 console.log(json.conversationID);
+	 console.log("HERE");
+	 
+	 
+	 MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
+	  if(err) throw err;
+	  else
+	{
+	   db.collection("conversationDB", function (err, connection){
+	  connection.insert({"clientId":json.clientId,"customerName":json.customerName,"customerEmail":json.customerEmail,"category":json.category,"conversationID":json.conversationID,"timeStamp":json.timeStamp,"message":json.message},function (err,result){
+	  if(err)
+	  console.log(err);
+	  else
+	  console.log("Successfully Inserted");
+	  //connection.update({"conversationID":{$in:[]},"clientId":json.clientId},{"conversationID":json.conversationID})
+	      callback(err,json.conversationID);
+	});
+	});
+	}
+	 });
 	 } 
 	// else{
-		//	console.log("Incomplete data.");
+	//console.log("Incomplete data.");
 	//}
 
 
-exports.insertConversationInitialReq = insertConversationInitialReq;
+	exports.insertConversationInitialReq = insertConversationInitialReq;
 
 function insertConversationCustomer(json){
 	
