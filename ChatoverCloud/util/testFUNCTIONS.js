@@ -33,7 +33,7 @@ client.findClientByID(function(err,res){
 	}
 },"10001");
 
-
+*/
 //client.setClientFlag({"clientId":"10005","clientFlag":"online"});
 
 
@@ -44,7 +44,7 @@ client.getClientFlag(function(err,res){
 	else{
 		console.log(res);
 	}
-},"10001");
+},"10005");
 
 
 /*
@@ -86,8 +86,7 @@ json.customerEmail="saideepak@gmail.com";
 json.message="hello";
 json.unreadFlag="unread";
 
-offline.insertOfflineMessage(json*/
-/*{"clientId":"10015","customerName":"Saideepak","questionCategory":"TimepassCategory","customerEmail":"saideepak@gmail.com","message":"hello","unreadFlag":"unread"}*/
+offline.insertOfflineMessage(json/*{"clientId":"10015","customerName":"Saideepak","questionCategory":"TimepassCategory","customerEmail":"saideepak@gmail.com","message":"hello","unreadFlag":"unread"}*/
 /*offline.findOfflineMessageByClient(function(err,res){
 	if(err)
 		console.log("Error.");
@@ -128,11 +127,12 @@ client.validateClientLogin(function(err,res){
 
 
 //Conversations Data
-
-conversation.insertConversationInitialReq({"clientId":"12345SID","customerName":"tully","customerEmail":"tp1@gmail.com","category":"sf","timeStamp":"01:10","message":"Hi"},function(res,err){
+/*
+conversation.insertConversationInitialReq({"clientId":"GattuPally","customerName":"tully","customerEmail":"tp1@gmail.com","category":"sf","message":"Hi"},function(err,res){
 	if(!err)
 		console.log(res);
 });
+*/
 
 //conversation.insertConversationRegular({"clientId":"abcdefgh","customerName":"starbucks","customerEmail":"hahaha@yahoo.com","category":"sj","timeStamp":"01:11","message":"Hello"});
 
@@ -159,6 +159,17 @@ conversation.findConversationByClient(function(err,res){
 
 // CATAGORIES Database All working. Check Test.js
 
+/*
+conversation.getConversationsBetweenT1AndT2(function(err,res){
+	if(!err)
+		console.log(res);
+},{"t1":1399799896452});
 
+*/
 
+//var d = new Date();
+//var timeStamp = d.getTime()
+//"time in Milliseconds since midnight jan 1st 1970: "+timeStamp);
+//json.timeStamp = timeStamp;
+//console.log(timeStamp);
 

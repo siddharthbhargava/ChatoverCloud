@@ -1,56 +1,56 @@
 var MongoClient = require('mongodb').MongoClient;
 
 function insertConversationInitialReq(json,callback){
-
+	
 	//Save conversationId in the Database.
-
+	
 	/*
 	 * The above JSNON object must be of the form:
 	 * {"clientID":value,
-	 * "customerName":value,
-	 * "customerEmail":value,
-	 * "category":value,
-	 * "conversationID":value,
-	 *  "timeStamp":value,
-	 *  "message":value}
+	 * 	"customerName":value,
+	 * 	"customerEmail":value,
+	 * 	"category":value,
+	 * 	"conversationID":value,
+	 *  "timeStamp":value,
+	 *  "message":value}
 	 */
 
 	// if(json.clientId && json.customerName && json.category &&json.customerEmail && json.timeStamp){
-
+	
 	var d = new Date();
 	 var timeStamp = d.getTime()
 	 //"time in Milliseconds since midnight jan 1st 1970: "+timeStamp);
 	 json.timeStamp = timeStamp;
-
-	 //Auto Generating conversationID
-	 json.conversationID = (json.clientId) + (json.timeStamp);
-	 console.log(json.conversationID);
-	 console.log("HERE");
-	 
-	 
-	 MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
-	if(err) throw err;
-	else
-	{
-		db.collection("conversationDB", function (err, connection){
-		connection.insert({"clientId":json.clientId,"customerName":json.customerName,"customerEmail":json.customerEmail,"category":json.category,"conversationID":json.conversationID,"timeStamp":json.timeStamp,"message":json.message},function (err,result){
-		if(err)
-			console.log(err);
-		else
-			console.log("Successfully Inserted");
-		//connection.update({"conversationID":{$in:[]},"clientId":json.clientId},{"conversationID":json.conversationID})
-		callback(err,json.conversationID);
-	});
-	});
-	}
-	 });
+	
+		 //Auto Generating conversationID
+		 json.conversationID = (json.clientId) + (json.timeStamp);
+		 console.log(json.conversationID);
+		 console.log("HERE");
+		 
+		 
+		 MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
+		  if(err) throw err;
+		  else
+			{
+			 	  db.collection("conversationDB", function (err, connection){
+				  		connection.insert({"clientId":json.clientId,"customerName":json.customerName,"customerEmail":json.customerEmail,"category":json.category,"conversationID":json.conversationID,"timeStamp":json.timeStamp,"message":json.message},function (err,result){
+				  			if(err)
+				  				console.log(err);
+				  			else
+					  			console.log("Successfully Inserted");
+				  				//connection.update({"conversationID":{$in:[]},"clientId":json.clientId},{"conversationID":json.conversationID})
+				  			    callback(err,json.conversationID);
+					});
+				});
+			}
+		 });
 	 } 
 	// else{
-	//console.log("Incomplete data.");
+		//	console.log("Incomplete data.");
 	//}
 
 
-	exports.insertConversationInitialReq = insertConversationInitialReq;
+exports.insertConversationInitialReq = insertConversationInitialReq;
 
 function insertConversationCustomer(json){
 	
@@ -508,17 +508,17 @@ function removeConversationByID(json){
 	
 exports.removeConversationByID = removeConversationByID;
 
-function getConversationsBetweenT1AndT2(callback,json){
+function getConversationsGreaterThanT1(callback,json){
 	/*Pass the begining time and end time as parameter to this function*/
 	
-	if(json.t1 && json.t2){
+	if(json.t1){
 		MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 			if(err) throw err;
 			else
 			{
 				db.collection("conversationDB", function (err, connection){
 					if(!err){
-					connection.find({"timeStamp":{$gt:t1},"timeStamp":{$lt:t2}}, function(res,err){
+					connection.find({"timeStamp":{$gt:json.t1}}, function(err,res){
 						
 						if(!err){
 			
@@ -526,40 +526,22 @@ function getConversationsBetweenT1AndT2(callback,json){
 							res.toArray(function(err,docs){
 								if(!docs.length==0)
 									{
-										cat=docs[0].customerName;
-										cat = cat.concat(":");
-										cat = cat.concat(docs[0].customerEmail);
-										cat = cat.concat(":");
-										cat = cat.concat(docs[0].category);
-										cat = cat.concat(":");
-										cat = cat.concat(docs[0].conversationID);
-										cat = cat.concat(":");
-										cat = cat.concat(docs[0].timeStamp);
-										cat = cat.concat(":");
-										cat = cat.concat(docs[0].clientMessage);
-										cat = cat.concat(":");
-										cat = cat.concat(docs[0].customerMessage);
+										var d = new Date();
+										var timeStamp = d.getTime()
+										cat=timeStamp;
+										cat = cat +";";
+										cat = cat.concat(docs[0].message);
+										
 										
 										for(var i=1; i<docs.length;i++)
 											{
-												cat = cat.concat(",");
+												cat = cat.concat(";");
 												
-												cat = cat.concat(docs[i].customerName);
-												cat = cat.concat(":");
-												cat = cat.concat(docs[i].customerEmail);
-												cat = cat.concat(":");
-												cat = cat.concat(docs[i].category);
-												cat = cat.concat(":");
-												cat = cat.concat(docs[i].conversationID);
-												cat = cat.concat(":");
-												cat = cat.concat(docs[i].timeStamp);
-												cat = cat.concat(":");
-												cat = cat.concat(docs[i].clientMessage);
-												cat = cat.concat(":");
-												cat = cat.concat(docs[i].customerMessage);
+												cat = cat.concat(docs[i].message);
 											}
+										callback(err,cat);
 										}
-									callback(cat,err);
+									
 								});
 							}
 							else{
@@ -581,4 +563,4 @@ function getConversationsBetweenT1AndT2(callback,json){
 	}
 }
 
-exports.getConversationsBetweenT1AndT2 = getConversationsBetweenT1AndT2;
+exports.getConversationsGreaterThanT1 = getConversationsGreaterThanT1;
