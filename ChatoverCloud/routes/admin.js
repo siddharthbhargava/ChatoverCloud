@@ -21,6 +21,12 @@
 			throw err;
 		}else{
 			if(results==1){
+				//setting flag to 'online
+				console.log('set flag to online');
+				var json = [];
+				json.clientId= req.body.name;
+				json.clientFlag= req.body.clientFlag;
+				client.setClientFlag({"clientId":json.clientId,"clientFlag":"online"});
 			req.session.clientId = req.body.clientId;
 			res.render('../views/chat.html', { title: 'Chat Over Cloud' });
 			console.log("success");
