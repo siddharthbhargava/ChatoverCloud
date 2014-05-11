@@ -118,24 +118,6 @@ exports.initialRequest = function(req, res){
 		json.clientId=req.body.clientId;
 		json.customerName=req.body.name;
 		json.customerEmail=req.body.email;
-<<<<<<< HEAD
-		json.questionCategory=req.body.category;
-		json.unreadFlag="unread";
-			json.message=req.body.message;
-		
-		
-		
-		console.log("clientId: " +json.clientId);
-		console.log("name : " + json.customerName);
-		console.log("email : " + json.customerEmail);
-		console.log("category : " + json.questionCategory);
-		console.log("message : " + json.message);
-		
-
-
-		offline.insertOfflineMessage(json);	
-		console.log("ticket submitted")
-=======
 		json.category=req.body.category;
 		json.message=req.body.message;
 
@@ -152,12 +134,11 @@ exports.initialRequest = function(req, res){
 
 		});
 
-		res.render('conversation',{conv:conversationID,clientId:req.body.clientId});
+		res.render('conversation',{clientId:req.body.clientId, conv:conversationID});
 
 
 
 
->>>>>>> FETCH_HEAD
 	}
 };
 
@@ -169,61 +150,9 @@ exports.knowledgeBase = function(req, res){
 	{		
 		console.log("all the fields are required");
 
-<<<<<<< HEAD
-		if(!req.body.hasOwnProperty('clientId') || !req.body.hasOwnProperty('name') || !req.body.hasOwnProperty('message')|| !req.body.hasOwnProperty('email')|| !req.body.hasOwnProperty('category')) 
-		{
-			console.log("all fields required!!");
-			res.statusCode = 400;
-			return res.send('1, Error 400: Post syntax incorrect.');
-		}
-		else {
-			var conversationID;
-			console.log("name : " + req.body.hasOwnProperty('name'));
-			var json=[];
-			json.clientId=req.body.clientId;
-			json.customerName=req.body.name;
-			json.customerEmail=req.body.email;
-			json.category=req.body.category;
-			json.message=req.body.message;
-			
-			
-			console.log("email : " +json.clientId);
-			console.log("message : " + json.customerName);
-			console.log("category : " + json.customerEmail);
-			console.log("clientId : " + json.category);
-			console.log("message  :"+json.message);
-
-			res.statusCode=200;
-			conversation.insertConversationInitialReq(json,function(err,res){
-				conversationID=res;
-			
-			});
-			
-			res.render('conversation',{conv:conversationID,clientId:req.body.clientId});
-			
-			
-			
-		
-		}
-	};
-	
-	
-	
-	exports.knowledgeBase = function(req, res){
-		console.log("insert kb req");
-
-		if(!req.body.hasOwnProperty('clientId') || !req.body.hasOwnProperty('name') || !req.body.hasOwnProperty('message')|| !req.body.hasOwnProperty('email')|| !req.body.hasOwnProperty('category')) 
-		{		
-			console.log("all the fields are required");
-		
-			res.statusCode = 400;
-			return res.send('1, Error 400: Post syntax incorrect.');
-		}
-=======
 		res.statusCode = 400;
 		return res.send('1, Error 400: Post syntax incorrect.');
 	}
->>>>>>> FETCH_HEAD
 	else {
 
 		var json=[];
@@ -232,23 +161,6 @@ exports.knowledgeBase = function(req, res){
 		json.category=req.body.category;
 
 		var list=req.body.message.split(" ");
-<<<<<<< HEAD
-		json.message=list;
-		
-			console.log("message : " + req.body.hasOwnProperty('message'));
-			console.log("category : " + req.body.hasOwnProperty('category'));
-			console.log("clientId : " + req.body.hasOwnProperty('clientId'));
-
-			res.statusCode=200;
-			
-			
-	}
-		
-			/*ajax request to search in knowledge base*/
-			
-			
-			
-=======
 		json.keywords=list;
 		console.log("clientId : " + req.body.clientId);
 		console.log("category : " + req.body.category);
@@ -267,9 +179,12 @@ exports.knowledgeBase = function(req, res){
 
 
 
->>>>>>> FETCH_HEAD
 
 };
+
+
+
+
 
 
 
