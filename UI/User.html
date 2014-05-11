@@ -13,6 +13,7 @@ callCloudAjax("http://localhost:3000/categories",params,processRequest);
 
 function chatorTicket(status)
 {
+	document.getElementById('clientId').value=clientId;
 	if(status=="online")
 	{
 		supportStatus=status;
@@ -30,11 +31,14 @@ function chatorTicket(status)
 function startChat()
 {
 	alert("make ajax request to query DB");
+	var params="clientId="+clientId+"&message="+document.getElementById('message').value+"&category="+document.getElementById('category').value;
+	callCloudAjaxSync("http://localhost:3000/knowledgeBase",params,processRequest);
 	document.getElementById('sc').style.visibility="visible";
 	document.getElementById('chat').style.visibility="hidden";
 	
 	document.getElementById("userDetails").action="http://localhost:3000/initialRequest";
 }
+
 
 
 
@@ -119,6 +123,38 @@ function processRequest()
                					 catdrop.add(elem);
             				}
 						}
+					} 
+				}
+			}
+		} 
+		else 
+		{	
+       		alert("Problems communicating with Cloud server");
+       		return false;
+		}
+	}
+} 
+
+function processKbResponse() 
+{
+	if (req.readyState == 4) 
+	{
+		if (req.status == 200) 
+		{
+			results = req.responseText;
+			if (results != null) 
+			{
+				var results_array = results.split(",");
+				var value = trim(results);
+				if ((value != "") && (value.length != 0)) 
+				{
+					if (results_array[0] == "1") 
+					{
+						alert("Please Confirm and Click on Start Chat to initiate a conversation");
+					}
+					else
+					{
+						alert("We found some information that might relate to your query. \n\n " + results_array[2] + "\n\n Click on Start Chat if you still wish to talk to Support");
 					} 
 				}
 			}
