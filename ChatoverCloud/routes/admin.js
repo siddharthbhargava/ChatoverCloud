@@ -26,9 +26,9 @@
 				var json = [];
 				json.clientId= req.body.name;
 				json.clientFlag= req.body.clientFlag;
-				client.setClientFlag({"clientId":json.clientId,"clientFlag":"online"});
+				client.setClientFlag({"clientId": json.clientId});
 			req.session.clientId = req.body.clientId;
-			res.render('../views/chat.html', { title: 'Chat Over Cloud' });
+			res.render('../views/admin.ejs');
 			console.log("success");
 			
 			}
