@@ -47,8 +47,13 @@ app.post('/initialRequest', customer.initialRequest);
 //app.post('/recordMessage', customer.insertLiveMessage);
 app.post('/submitTicket', customer.submitTicket);
 app.post('/knowledgeBase', customer.knowledgeBase);
+<<<<<<< HEAD
 app.post('/insertkb',admin.insertkb);
 app.get('/retrieveTickets',admin.retrieveTickets);
+=======
+
+
+>>>>>>> FETCH_HEAD
 
 
 http.createServer(app).listen(app.get('port'), function(){

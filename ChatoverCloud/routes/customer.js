@@ -67,83 +67,6 @@ exports.getCategories = function(req, res){
 //return str.replace(new RegExp(find,'g'),replace);
 //}
 
-
-function insertLiveMessageGetConvoID(req,res)
-{
-	//alert("inside customer message");
-	if(!req.clientId) {
-		console.log("Request does not have ClientID");
-		res.statusCode = 400;
-		return res.send("Error.");
-	}
-	else{
-		conversation.insertConversationInitialReq(req,function(res,err){
-			if(err)
-				console.log("Error.");
-			else
-				conversationID = res;
-			//write operator response in callback
-		});
-	}
-}
-
-
-exports.insertLiveMessageGetConvoID = insertLiveMessageGetConvoID;
-
-function insertLiveMessage(req,res){
-	//alert("inside customer message");
-	if(!req.clientId) {
-		console.log("Request does not have ClientID");
-		res.statusCode = 400;
-		return res.send("Error.");
-	}
-	else{
-		//req = req.concat("conversationID:");
-		req.conversationID = conversationID;
-		conversation.insertConversationRegular(req);
-	}
-}
-
-exports.insertLiveMessage = insertLiveMessage;
-
-function insertOfflineMessage(req,res){
-	if(!req.clientId){
-		res.statusCode = 400;
-		console.log("Request does not have ClientID");
-		return res.send("Error.");
-	}
-	else{
-		offline.insertOfflineMessage(req);
-		//write code using res to send response from admin console.
-	}
-}
-
-exports.insertOfflineMessage = insertOfflineMessage;
-
-function readFromKnowledgeBase(req,res){
-	if(!req.clientId){
-		res.statusCode = 400;
-		console.log("Request does not have ClientID");
-		return res.send("Error.");
-	}
-	else{
-		knowledge.findKnowledgeDBByClient(req,function(results,err){
-			if(!err){
-				res.statusCode = 200;
-				res.send(results);
-			}
-			else{
-				console.log("No answer in knowledgeDB.");
-			}
-		});
-	}
-}
-
-exports.readFromKnowledgeBase = readFromKnowledgeBase;
-
-
-
-
 exports.submitTicket = function(req, res){
 	console.log("Handling submit Ticket Request");
 
@@ -154,11 +77,48 @@ exports.submitTicket = function(req, res){
 		return res.send('1, Error 400: Post syntax incorrect.');
 	}
 	else {
-		
+
 		var json=[];
 		json.clientId=req.body.clientId;
 		json.customerName=req.body.name;
 		json.customerEmail=req.body.email;
+		json.questionCategory=req.body.category;
+		json.unreadFlag="unread";
+		json.message=req.body.message;
+
+
+
+		console.log("clientId: " +json.clientId);
+		console.log("name : " + json.customerName);
+		console.log("email : " + json.customerEmail);
+		console.log("category : " + json.questionCategory);
+		console.log("message : " + json.message);
+
+
+		offline.insertOfflineMessage(json);	
+	}
+};
+
+
+
+
+exports.initialRequest = function(req, res){
+	console.log("handling initial request");
+
+	if(!req.body.hasOwnProperty('clientId') || !req.body.hasOwnProperty('name') || !req.body.hasOwnProperty('message')|| !req.body.hasOwnProperty('email')|| !req.body.hasOwnProperty('category')) 
+	{
+		console.log("all fields required!!");
+		res.statusCode = 400;
+		return res.send('1, Error 400: Post syntax incorrect.');
+	}
+	else {
+		var conversationID;
+		console.log("name : " + req.body.hasOwnProperty('name'));
+		var json=[];
+		json.clientId=req.body.clientId;
+		json.customerName=req.body.name;
+		json.customerEmail=req.body.email;
+<<<<<<< HEAD
 		json.questionCategory=req.body.category;
 		json.unreadFlag="unread";
 			json.message=req.body.message;
@@ -175,15 +135,41 @@ exports.submitTicket = function(req, res){
 
 		offline.insertOfflineMessage(json);	
 		console.log("ticket submitted")
+=======
+		json.category=req.body.category;
+		json.message=req.body.message;
+
+
+		console.log("email : " +json.clientId);
+		console.log("message : " + json.customerName);
+		console.log("category : " + json.customerEmail);
+		console.log("clientId : " + json.category);
+		console.log("message  :"+json.message);
+
+		res.statusCode=200;
+		conversation.insertConversationInitialReq(json,function(err,res){
+			conversationID=res;
+
+		});
+
+		res.render('conversation',{conv:conversationID,clientId:req.body.clientId});
+
+
+
+
+>>>>>>> FETCH_HEAD
 	}
 };
 
 
 
+exports.knowledgeBase = function(req, res){
 
-	exports.initialRequest = function(req, res){
-		console.log("handling initial request");
+	if(!req.body.hasOwnProperty('clientId') ||  !req.body.hasOwnProperty('message')|| !req.body.hasOwnProperty('category')) 
+	{		
+		console.log("all the fields are required");
 
+<<<<<<< HEAD
 		if(!req.body.hasOwnProperty('clientId') || !req.body.hasOwnProperty('name') || !req.body.hasOwnProperty('message')|| !req.body.hasOwnProperty('email')|| !req.body.hasOwnProperty('category')) 
 		{
 			console.log("all fields required!!");
@@ -233,14 +219,20 @@ exports.submitTicket = function(req, res){
 			res.statusCode = 400;
 			return res.send('1, Error 400: Post syntax incorrect.');
 		}
+=======
+		res.statusCode = 400;
+		return res.send('1, Error 400: Post syntax incorrect.');
+	}
+>>>>>>> FETCH_HEAD
 	else {
-		
+
 		var json=[];
 		json.clientId=req.body.clientId;
-		
+
 		json.category=req.body.category;
-		
+
 		var list=req.body.message.split(" ");
+<<<<<<< HEAD
 		json.message=list;
 		
 			console.log("message : " + req.body.hasOwnProperty('message'));
@@ -256,10 +248,27 @@ exports.submitTicket = function(req, res){
 			
 			
 			
+=======
+		json.keywords=list;
+		console.log("clientId : " + req.body.clientId);
+		console.log("category : " + req.body.category);
+		console.log("message : " + req.body.message);
 
-			
+		res.statusCode=200;
 		
-	
+		res.send("0, Query matched Information from Knowledge Base.");
+
+	}
+
+//	/*ajax request to search in knowledge base*/
+
+
+
+
+
+
+>>>>>>> FETCH_HEAD
+
 };
 
 

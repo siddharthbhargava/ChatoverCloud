@@ -32,7 +32,7 @@ function startChat()
 {
 	alert("make ajax request to query DB");
 	var params="clientId="+clientId+"&message="+document.getElementById('message').value+"&category="+document.getElementById('category').value;
-	callCloudAjaxSync("http://localhost:3000/knowledgeBase",params,processRequest);
+	callCloudAjaxSync("http://localhost:3000/knowledgeBase",params,processKbResponse);
 	document.getElementById('sc').style.visibility="visible";
 	document.getElementById('chat').style.visibility="hidden";
 	
@@ -154,7 +154,7 @@ function processKbResponse()
 					}
 					else
 					{
-						alert("We found some information that might relate to your query. \n\n " + results_array[2] + "\n\n Click on Start Chat if you still wish to talk to Support");
+						alert("We found some information that might relate to your query. \n\n " + results_array[1] + "\n\n Click on Start Chat if you still wish to talk to Support");
 					} 
 				}
 			}
