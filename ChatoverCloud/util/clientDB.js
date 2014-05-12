@@ -7,10 +7,9 @@ function insertClient(json){
 	 * {"clientId":value,
 	 * 	"password":value,
 	 *  "clientName":value,
-	 *  "email":value,
+	 *  "clientEmail":value,
 	 *  "domain":value,
 	 *  "clientFlag":value}
-
 	 */
 
 	if(json.clientId && json.password && json.clientName && json.clientEmail && json.domain){
@@ -46,9 +45,11 @@ function updateClient(json){
 	 * {"clientId":value,
 	 * 	"password":value,
 	 *  "clientName":value,
-	 *  "email":value,
-	 *  "domain":value}
+	 *  "clientEmail":value,
+	 *  "domain":value,
+	 *  "clientFlag":value}
 	 */
+
 	if(json.clientId && json.password && json.clientName && json.email && json.domain){
 
 		MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
@@ -84,9 +85,11 @@ function removeClient(json){
 	 * {"clientId":value,
 	 * 	"password":value,
 	 *  "clientName":value,
-	 *  "email":value,
-	 *  "domain":value}
+	 *  "clientEmail":value,
+	 *  "domain":value,
+	 *  "clientFlag":value}
 	 */
+
 
 	if(json.clientId && json.password && json.clientName && json.email && json.domain){
 
@@ -293,11 +296,11 @@ function changeClientPassword(json){
 exports.changeClientPassword = changeClientPassword;
 
 
-function setClientFlag(json){
+function setClientFlag(clientId){
 
 //	The json object must have clientId and clientFlag {"clientId":value,"clientFlag":value}
 
-	if(json.clientId){
+	if(clientId){
 
 		MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 			if(err) throw err;
@@ -308,7 +311,7 @@ function setClientFlag(json){
 						console.log("No such database exists.");
 					}
 					else{
-						connection.update({"clientId":json.clientId},{$set:{"clientFlag":"online"}},function(err,res){
+						connection.update({"clientId":clientId},{$set:{"clientFlag":"online"}},function(err,res){
 							if(err){
 								console.log("No such client exists.");
 							}
@@ -326,6 +329,42 @@ function setClientFlag(json){
 }
 
 exports.setClientFlag = setClientFlag;
+
+function setClientFlagOffline(clientId){
+
+//	The json object must have clientId and clientFlag {"clientId":value,"clientFlag":value}
+
+	if(clientId){
+
+		MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
+			if(err) throw err;
+			else
+			{
+				db.collection("clientDB", function (err, connection){
+					if(err){
+						console.log("No such database exists.");
+					}
+					else{
+						connection.update({"clientId":clientId},{$set:{"clientFlag":"offline"}},function(err,res){
+							if(err){
+								console.log("No such client exists.");
+							}
+							else{console.log("Flag Set.");}
+						});
+					}
+				});
+			}
+		});
+	}
+	else{
+		console.log("Insufficient Data.");
+	}
+
+}
+
+exports.setClientFlagOffline = setClientFlagOffline;
+
+
 
 function getClientFlag(callback,clientId){
 

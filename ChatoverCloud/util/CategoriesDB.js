@@ -8,7 +8,7 @@ function insertCategoriesDB(json){
 	 * 	"category":value}
 	 */
 		
-	if(json.clientID && json.category){
+	if(json.clientId && json.category){
 	
 		MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 			  if(err) throw err;
@@ -147,18 +147,18 @@ function findAllCategoriesDB(callback){
 
 exports.findAllCategoriesDB = findAllCategoriesDB;
 
-function findCategoriesDBByClient(callback,clientID){
+function findCategoriesDBByClient(callback,clientId){
 	/*
 	 * The above JSON object must contain the clientID in the form: {"clientID":value}
 	 */
 	
-	if(clientID){
+	if(clientId){
 	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 		  if(err) throw err;
 		  else
 			{
 			  db.collection("CategoriesDB", function (err, connection){
-				  connection.find({"clientID": clientID},function(err, results){
+				  connection.find({"clientId": clientId},function(err, results){
 					  if(!err){
 						  
 						  var cat;

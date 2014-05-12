@@ -18,17 +18,17 @@ function insertConversationInitialReq(json,callback){
 	// if(json.clientId && json.customerName && json.category &&json.customerEmail && json.timeStamp){
 	
 	var d = new Date();
-	 var timeStamp = d.getTime()
-	 //"time in Milliseconds since midnight jan 1st 1970: "+timeStamp);
-	 json.timeStamp = timeStamp;
+	var timeStamp = d.getTime()
+	//"time in Milliseconds since midnight jan 1st 1970: "+timeStamp);
+	json.timeStamp = timeStamp;
 	
-		 //Auto Generating conversationID
-		 json.conversationID = (json.clientId) + (json.timeStamp);
-		 console.log(json.conversationID);
-		 console.log("HERE");
+	//Auto Generating conversationID
+	json.conversationID = (json.clientId) + (json.timeStamp);
+	console.log(json.conversationID);
+	//console.log("HERE");
 		 
 		 
-		 MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
+	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 		  if(err) throw err;
 		  else
 			{
@@ -253,9 +253,9 @@ function findConversationByClient(callback,clientId){
 		else
 		{
 			db.collection("conversationDB", function (err, connection){
-			connection.find({"clientID":clientId},function(err,res){
+			connection.find({"clientId":clientId},function(err,res){
 				if(err){
-					console.log("Incorrect Client ID");
+					console.log("Incorrect Client Id");
 				}
 				else{
 					 var cat;
@@ -392,7 +392,7 @@ function findUnreadMessagesByClient(callback,json){
 		else
 		{
 			db.collection("conversationDB", function (err, connection){
-				connection.find({"clientID:":json.clientID, "unreadFlag":{$in:[1]}},function(err,res){
+				connection.find({"clientId:":json.clientId, "unreadFlag":{$in:[1]}},function(err,res){
 					if(!err){
 						
 						 var cat;
@@ -569,3 +569,63 @@ function getConversationsGreaterThanT1(callback,json){
 }
 
 exports.getConversationsGreaterThanT1 = getConversationsGreaterThanT1;
+
+function initialPoll(callback,json){
+	/*Pass the begining time and end time as parameter to this function*/
+	
+	if(json.t1){
+		MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
+			if(err) throw err;
+			else
+			{
+				db.collection("conversationDB", function (err, connection){
+					if(!err){
+					connection.find({"timeStamp":{$gt:parseInt(json.t1)},"clientId":json.clientId}, function(err,res){
+						
+						if(!err){
+			
+							var cat;
+							res.toArray(function(err,docs){
+								var d = new Date();
+								var timeStamp = d.getTime()
+								cat=timeStamp;
+								if(!docs.length==0)
+									{
+										
+										cat = cat +";";
+										cat = cat.concat(docs[0].customerName);
+										cat = cat.concat(";");
+										cat = cat.concat(docs[0].conversationID);
+										cat = cat.concat(";");
+										cat = cat.concat(docs[0].message);
+										
+										callback(err,cat);
+										}
+								else
+									callback(err,cat);
+									
+								});
+							}
+							else{
+								console.log(err);
+							}
+						}
+					);
+				}
+				else{
+					console.log(err);
+				}
+					
+				});
+			}
+		});
+	}
+	else{
+		console.log("Insufficient Data.");
+	}
+}
+
+exports.initialPoll = initialPoll;
+
+
+
