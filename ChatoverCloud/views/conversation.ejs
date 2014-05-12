@@ -93,7 +93,7 @@ function addText(abcd) {
   ocontent.appendChild(op);
   olist.scrollTop = olist.scrollHeight;
   params="message="+document.frmOne.tb1.value+"&conversationId="+conversationId+"&clientId="+clientId;
-  callCloudAjax("http://localhost:3000/customerrequest",params,processRequest);
+  callCloudAjax("/customerrequest",params,processRequest);
   
 } 
 
@@ -130,7 +130,7 @@ function pollRequest()
 	setInterval(function makepollRequest()
 {
 	params="clientId="+clientId+"&conversationId="+conversationId+"&lastReq="+lastReq;
-	callCloudAjax("http://localhost:3000/custPollReq",params,processPollResp);
+	callCloudAjax("/custPollReq",params,processPollResp);
 },30000);
 }
 

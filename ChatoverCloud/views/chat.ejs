@@ -170,12 +170,12 @@ function pollRequest()
 	if(conversationId!=null)
 	{
 	params="clientId="+clientId+"&conversationId="+conversationId+"&lastReq="+lastReq;
-	callCloudAjax("http://localhost:3000/clientPollReq",params,processClientPollResp);
+	callCloudAjax("/clientPollReq",params,processClientPollResp);
 	}
 	else
 	{
 		params="clientId="+clientId+"&lastReq="+lastReq;
-		callCloudAjax("http://localhost:3000/initialClientPollReq",params,processInitPollResp);	
+		callCloudAjax("/initialClientPollReq",params,processInitPollResp);	
 	}
 },30000);
 }
@@ -291,7 +291,7 @@ function addText(abcd) {
   ocontent.appendChild(op);
   olist.scrollTop = olist.scrollHeight;
   params="message="+document.frmOne.tb1.value+"&conversationId="+conversationId;
-  callCloudAjax("http://localhost:3000/clientResp",params,processRequest);
+  callCloudAjax("/clientResp",params,processRequest);
   
 }
 </script>
