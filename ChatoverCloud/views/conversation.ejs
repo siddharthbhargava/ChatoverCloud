@@ -92,7 +92,7 @@ function addText(abcd) {
   ocontent = document.getElementById('content');
   ocontent.appendChild(op);
   olist.scrollTop = olist.scrollHeight;
-  params="message="+document.frmOne.tb1.value;
+  params="message="+document.frmOne.tb1.value+"&conversationId="+conversationId+"&clientId="+clientId;
   callCloudAjax("http://localhost:3000/customerrequest",params,processRequest);
   
 } 
@@ -215,9 +215,9 @@ function processPollResp()
 					{
 						var pollresp = results_array[1].split(";");
 						lastReq=pollresp[0];
-						for(var i=1;i<pollresp.length;i++)
+						for(var i=1;i<pollresp.length-1;i++)
 						{
-							addResponse(results_array[i]);
+							addResponse(pollresp[i]);
 						}
 					} 
 				}
