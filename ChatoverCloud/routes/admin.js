@@ -171,5 +171,25 @@ exports.knowledgeDB=function(req,res)
 {
 	res.render('tables');
 	}
+exports.dashboard=function(req,res)
+{
+	if(req.session.clientId!="" && req.session.clientId!=null)
+		{
+		
+		res.render('admin');
+		}
+		
+	else 
+		{
+		
+		res.render('index');
+		}
+}
+exports.logout=function(req,res)
+{
+req.session.clientId=null;
+res.render('index');
 
+
+}
 
