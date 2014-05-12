@@ -113,7 +113,16 @@ exports.submitTicket = function(req, res){
 	}
 };
 
-
+exports.support=function(req,res)
+{
+		if(req.query.clientId!=null && req.query.clientId!="")
+		{
+			console.log(req.session.clientId);
+			res.render('User',{clientId:req.query.clientId});
+		}
+		else
+			console.log("No ClientId specified");
+}
 
 
 exports.initialRequest = function(req, res){
@@ -233,12 +242,6 @@ exports.custPollReq = function(req, res){
 //	/*ajax request to search in knowledge base*/
 
 };
-
-function sayHello()
-{
-	console.log("Hello Poll");
-}
-
 
 
 
