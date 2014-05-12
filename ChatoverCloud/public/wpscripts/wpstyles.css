@@ -2,8 +2,6 @@ a:link {color:#545454;}
 a:visited {color:#545454;}
 a:hover {color:#805086;}
 a:active {color:#545454;}
-
-
 #clouds{
 	padding: 100px 100px;
 }
@@ -194,13 +192,14 @@ a:active {color:#545454;}
 .basic-grey .button:hover {
     background: #CF7A7A
 }
+
+.Wp-Artistic-Body-P
+{
+    margin:0.0px 0.0px 0.0px 0.0px; text-align:left; font-weight:400;
+}
 .Wp-Body-P
 {
     margin:0.0px 0.0px 12.0px 0.0px; text-align:left; font-weight:400;
-}
-.Wp-Buttons-P
-{
-    margin:0.0px 0.0px 12.0px 0.0px; text-align:center; font-weight:400;
 }
 .Wp-Heading-1-P
 {
