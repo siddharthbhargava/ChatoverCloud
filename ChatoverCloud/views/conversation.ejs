@@ -203,7 +203,7 @@ function processPollResp()
 			results = req.responseText;
 			if (results != null) 
 			{
-				var results_array = results.split(",");
+				var results_array = results.split("^");
 				var value = trim(results);
 				if ((value != "") && (value.length != 0)) 
 				{

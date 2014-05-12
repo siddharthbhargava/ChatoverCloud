@@ -527,13 +527,14 @@ function getConversationsGreaterThanT1(callback,json){
 								var d = new Date();
 								var timeStamp = d.getTime()
 								cat=timeStamp;
+								cat.concat(";");
 								console.log("DOCS length : " +docs.length);
 								if(!docs.length==0)
 									{
 										
-										cat = cat +";";
-										cat = cat.concat(docs[0].message);
 										
+										cat = cat.concat(docs[0].message);
+										cat = cat +";";
 										
 										for(var i=1; i<docs.length;i++)
 											{

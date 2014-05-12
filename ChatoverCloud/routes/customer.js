@@ -209,7 +209,7 @@ exports.custPollReq = function(req, res){
 				{
 					res.statusCode=200;
 					console.log("Poll Response :" + result);
-					res.send("0," + result);
+					res.send("0^" + result);
 
 				}
 		},json);
