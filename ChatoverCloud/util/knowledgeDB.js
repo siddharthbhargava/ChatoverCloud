@@ -17,6 +17,7 @@ function insertKnowledgeDBMessage(json){
 			  if(err) throw err;
 			  else
 				{
+				  db.open();
 				  db.collection("knowledgeDB", function (err, connection){
 					  
 					  connection.insert({"clientId":json.clientId,"question":json.question,"answer":json.answer,"questionCategory":json.questionCategory,"keywords":[json]}, function(err,res){
