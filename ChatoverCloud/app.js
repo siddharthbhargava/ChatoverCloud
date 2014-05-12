@@ -51,6 +51,8 @@ app.post('/custPollReq', customer.custPollReq);
 app.post('/insertkb',admin.insertkb);
 //app.get('/retrieveTickets',admin.retrieveTickets);
 //app.get('/unreadMessages',admin.unreadMessages);
+//app.post('/adminChat',admin.adminChat);
+app.get('/chat',admin.chat);
 
 
 

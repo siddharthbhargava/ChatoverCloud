@@ -97,4 +97,23 @@
    }
  }
     
+exports.adminChat=function(req,res)
+{
+	console.log("Inside admin chat");
+	
+	if(!req.body.hasOwnProperty('message')) {
+		console.log("Does not have message");
+		res.statusCode = 400;
+		return res.send('1, Error 400: Post syntax incorrect.');
+	}
+	console.log("Message from admin : " + req.body.message);
+	//res.set('Content-Type', 'text/plain');
+	res.statusCode=200;
+	
+	res.send("0,*siddy will give you*");
+	}
 
+exports.chat=function(req,res)
+{
+	res.render('chat');
+	}
