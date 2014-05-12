@@ -253,8 +253,15 @@ function trim(x) {
   <p class="systemuser">Please wait and one of our operators will be with you shortly.</p>
   </div>
 </div>
-<div><input id = "tb1" type="text"  value="" class="myclass" name = "textBox1"/></div>
-<button type="button" class="button" value="Send" onclick="addText(this)">Send</button>
+<div><input id = "tb1" type="text"  value="" class="myclass" name = "textBox1" onkeydown="if (eventInstance.which == 13) {
+eventInstance.returnValue = false;
+eventInstance.preventDefault();
+eventInstance.cancelBubble = true;
+var obj = document.getElementById('send');
+obj.click();
+return false;"
+}/></div>
+<button id="send" type="button" class="button" value="Send" onclick="addText(this); return false;">Send</button>
 </form>
 </body>
 

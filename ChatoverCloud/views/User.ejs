@@ -279,7 +279,7 @@ body{overflow:hidden;background-image:url(bg-chat.jpg);background-repeat:no-repe
 <img src="CLOUDHEADER1.png" border="0" title="" alt="Welcome To Chat Over Cloud" style="position:absolute;left:50px;top:0px;">
 <br>
 <br>
-<form name="userDetails" id="userDetails" action="http://localhost:3000/submitTicket" method="post" class="basic-grey">
+<form name="userDetails" id="userDetails" action="/submitTicket" method="post" class="basic-grey">
 	
 		<input id="clientId" type="text" name="clientId" style="visibility:hidden" />
     <label>
@@ -306,7 +306,7 @@ body{overflow:hidden;background-image:url(bg-chat.jpg);background-repeat:no-repe
         <button name ="sc" id="sc" class="button" type="submit" style="visibility:hidden" value="sc">Start Chat</button>
         <button name ="chat" id="chat" type="button" style="visibility:hidden" class="button" value="Chat" onclick="startChat(); return false;">Chat</button> 
         <button name ="close" id="close" type="button" class="button" value="close" onclick="closeWindow()">Close</button>
-        <button name ="ticket" id = "ticket" type="submit" style="visibility:visible" class="button1" value="Submit Ticket" >Submit Ticket</button> 
+        <button name ="ticket" id = "ticket" type="submit" style="visibility:visible" class="button1" value="Submit Ticket" onclick="closeWindow()">Submit Ticket</button> 
 
     </label>    
 </form>

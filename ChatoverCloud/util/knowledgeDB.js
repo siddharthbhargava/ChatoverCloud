@@ -17,14 +17,16 @@ function insertKnowledgeDBMessage(json){
 			  if(err) throw err;
 			  else
 				{
-				  db.open();
+				  //db.open();
 				  db.collection("knowledgeDB", function (err, connection){
 					  
-					  connection.insert({"clientId":json.clientId,"question":json.question,"answer":json.answer,"questionCategory":json.questionCategory,"keywords":[json]}, function(err,res){
+					  connection.insert({"clientId":json.clientId,"question":json.question,"answer":json.answer,"questionCategory":json.questionCategory,"keywords":[json.keywords]}, function(err,res){
 						  if(!err){
+							  db.close();
 							  console.log('Insert Operation Successful.');	
 						  }
 						  else{
+							  db.close();
 							  console.log('Error in Insertion.');
 						  }
 					  });
@@ -133,48 +135,57 @@ function findAllKnowledgeDBMessages(callback){
 
 exports.findAllKnowledgeDBMessages = findAllKnowledgeDBMessages;
 
-function findKnowledgeDBByClient(callback,json){
+function findKnowledgeDBByClient(callback,clientId){
 	/*
 	 * The above JSON object must contain the clientID in the form: {"clientID":value}
 	 */
-	if(json.clientId){
+	if(clientId){
 	
 	MongoClient.connect('mongodb://127.0.0.1:27017/chatDB', function(err, db) {
 		  if(err) throw err;
 		  else
 			{
 			  db.collection("knowledgeDB", function (err, connection){
-				  connection.find({"clientId":json.clientId},function(err,res){
+				  connection.find({"clientId":clientId},function(err,res){
 					  if(err){
 						  console.log("Incorrect Client Id");
 					  }
 					  else{
 						  
 						  var cat;
-							results.toArray(function(err,docs){
+							res.toArray(function(err,docs){
+								if(!err)
+								{
 								if(!docs.length==0)
 									{
-										cat=docs[0].questionCategory;
-										cat = cat.concat(":");
-										cat = cat.concat(docs[0].keywords);
-										cat = cat.concat(":");
-										cat = cat.concat(docs[0].question);
-										cat = cat.concat(":");
-										cat = cat.concat(docs[0].answer);
-										for(var i=1; i<docs.length;i++)
-											{
-												cat = cat.concat(",");
-												
-												cat = cat.concat(docs[i].questionCategory);
-												cat = cat.concat(":");
-												cat = cat.concat(docs[i].keywords);
-												cat = cat.concat(":");
-												cat = cat.concat(docs[i].question);
-												cat = cat.concat(":");
-												cat = cat.concat(docs[i].answer);
-											}
+//										cat=docs[0].questionCategory;
+//										cat = cat.concat(":");
+//										cat = cat.concat(docs[0].keywords);
+//										cat = cat.concat(":");
+//										cat = cat.concat(docs[0].question);
+//										cat = cat.concat(":");
+//										cat = cat.concat(docs[0].answer);
+//										for(var i=1; i<docs.length;i++)
+//											{
+//												cat = cat.concat(",");
+//												
+//												cat = cat.concat(docs[i].questionCategory);
+//												cat = cat.concat(":");
+//												cat = cat.concat(docs[i].keywords);
+//												cat = cat.concat(":");
+//												cat = cat.concat(docs[i].question);
+//												cat = cat.concat(":");
+//												cat = cat.concat(docs[i].answer);
+//											}
+									db.close();
+									callback(err,docs);
+									
 									}
-								callback(cat,err);
+								else
+									console.log("No KB records found for search Criteria");
+								}
+								else
+									console.log(err);
 							});
 					  }
 				  });
@@ -236,7 +247,7 @@ function findKnowledgeDBByCategoryAndKey(callback,json){
 					var queryResults;
 					console.log((json.keywords).length);
 					for(var i = 0; i < (json.keywords).length; i++){
-					connection.find({"clientId":json.clientId,"questionCategory":json.questionCategory, "keywords":json.keywords[i]},function(err,res){
+					connection.find({"clientId":json.clientId,"questionCategory":json.questionCategory, "keywords":json.keywords},function(err,res){
 						if(err){
 							console.log("Incorrect Client Id");
 						}
@@ -279,13 +290,18 @@ exports.findKnowledgeDBByCategoryAndKey = findKnowledgeDBByCategoryAndKey;
 
 //insertKnowledgeDBMessage({"clientId":10010,"questionCategory":"test","keywords":["type1","type2","type3"],"question":"what?","answer":"Like This"});
 
-findKnowledgeDBByCategoryAndKey(function(err,res){
-	if(err)
-		console.log("Error");
-	else{
-		console.log(res);
-	}
-		
-},{"clientId":10010,"questionCategory":"test","keywords":["type1","type2"]});
+//findKnowledgeDBByCategoryAndKey(function(err,res){
+//	if(err)
+//		console.log("Error");
+//	else{
+//		console.log(res);
+//	}
+//		
+//},{"clientId":10010,"questionCategory":"test","keywords":["type1","type2"]});
+//
+findKnowledgeDBByClient(function(err,result){
+	if(!err){
+		console.log(result);
+	}},"Honda");
 
-
+//insertKnowledgeDBMessage({"clientId":"Honda","keywords":["type1","type2"],"question":"What?","answer":"Like This","questionCategory":"faq"});

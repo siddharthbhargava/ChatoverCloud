@@ -33,17 +33,9 @@ Home Page
          <button onclick="openWin()"></button>
 
 <script>
-function openWin()
-{
-var myWindow = window.open('http://localhost:3000/support?clientId=Honda','','toolbar=no,width=500,height=500,location=0'); 
-}
-$(function() {
-    $('.required-icon').tooltip({
-        placement: 'left',
-        title: 'Required field'
-        });
-});
-
+function openWin(){
+var myWindow = window.open('http://localhost:3000/support?clientId=Honda','','toolbar=no,width=500,height=500,location=0'); }
+$(function() {$('.required-icon').tooltip({placement: 'left',title: 'Required field'});});
 </script>
         
     </body>

@@ -215,8 +215,28 @@ exports.initialClientPollReq = function(req, res){
 }
 exports.knowledgeDB=function(req,res)
 {
-	res.render('tables');
+	if(req.session.clientId!="" && req.session.clientId!=null)
+	{
+	console.log(req.session.clientId);
+	knowledge.findKnowledgeDBByClient(function(err,result){
+		console.log("inside get Knowledge DB");
+		if(err)
+			console.log(err);
+		else
+		{
+			console.log("KB results :" + result );
+			res.render('tables',{kbs:result});
+		}
+	},req.session.clientId);
+	
 	}
+	
+	else 
+	{
+	console.log(req.session.clientId);
+	res.render('index');
+	}
+}
 exports.dashboard=function(req,res)
 {
 	if(req.session.clientId!="" && req.session.clientId!=null)
