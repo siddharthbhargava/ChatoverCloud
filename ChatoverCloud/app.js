@@ -38,22 +38,25 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
-app.post('/adminvalidate', admin.adminvalidate)
 
 app.post('/categories', customer.getCategories);
-//app.post('/checkClientStatus', customer.clientOnlineFlag);
 app.post('/customerrequest', customer.processrequest);
 app.post('/initialRequest', customer.initialRequest);
-//app.post('/recordMessage', customer.insertLiveMessage);
 app.post('/submitTicket', customer.submitTicket);
 app.post('/knowledgeBase', customer.knowledgeBase);
 app.post('/custPollReq', customer.custPollReq);
+
+
+
+
+app.post('/clientPollReq',admin.clientPollReq);
 app.post('/insertkb',admin.insertkb);
-//app.get('/retrieveTickets',admin.retrieveTickets);
+app.get('/knowledgeDB',admin.knowledgeDB);
+app.post('/inbox',admin.inbox);
 //app.get('/unreadMessages',admin.unreadMessages);
 //app.post('/adminChat',admin.adminChat);
 app.get('/chat',admin.chat);
-
+app.post('/adminvalidate', admin.adminvalidate);
 
 
 

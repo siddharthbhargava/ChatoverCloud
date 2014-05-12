@@ -1,6 +1,5 @@
 
-
-   var client = require('../util/clientDB');
+var client = require('../util/clientDB');
    var knowledge = require('../util/knowledgeDB');
    var offline=require('../util/conversationDB');
    var conversation=require('../util/offlineDB');
@@ -27,7 +26,8 @@
 				json.clientId= req.body.name;
 				json.clientFlag= req.body.clientFlag;
 				client.setClientFlag({"clientId": json.clientId});
-			req.session.clientId = req.body.clientId;
+				req.session.clientId = req.body.name;
+				console.log(req.session.clientId);
 			res.render('../views/admin.ejs');
 			console.log("success");
 			
@@ -56,12 +56,13 @@
     	}
     	}
     
-    exports.retrieveTickets = function (req, res) {
+    exports.inbox = function (req, res) {
     	if(!req.body.hasOwnProperty('clientId')||!req.body.hasOwnProperty('unreadFlag')) {
     		res.statusCode = 400;
     		return res.send('Error 400: Post syntax incorrect.');
     	}
     	else {
+    		
     	var json = [];
     	json.clientId= req.body.clientId;
     	json.unreadFlag=1;
@@ -71,6 +72,7 @@
     		}else{
     			
     			console.log(results);
+    			res.render('messages');
     		}
     	});
    }
@@ -115,5 +117,59 @@ exports.adminChat=function(req,res)
 
 exports.chat=function(req,res)
 {
-	res.render('chat');
+	if(req.session.clientId!="" && req.session.clientId!=null)
+		{
+		console.log(req.session.clientId);
+		res.render('chat');
+		}
+		
+	else 
+		{
+		console.log(req.session.clientId);
+		res.render('index');
+		}
+}
+
+
+exports.clientPollReq = function(req, res){
+
+	if(!req.body.hasOwnProperty('clientId') ||  !req.body.hasOwnProperty('conversationId')|| !req.body.hasOwnProperty('lastReq')) 
+	{		
+		console.log("all the fields are required");
+
+		res.statusCode = 400;
+		return res.send('1, Error 400: Post syntax incorrect.');
 	}
+	else {
+
+		var json=[];
+		json.conversationID=req.body.conversationId;
+		json.t1=req.body.lastReq;
+		json.clientId=req.body.clientid;
+
+		console.log("clientId : " + req.body.clientId);
+		console.log("conversationID : " + req.body.conversationId);
+		console.log("timeStamp : " + req.body.lastReq);
+
+		//sayHello();
+		conversation.getConversationsGreaterThanT1(function(err,result){
+			console.log("inside get conversation t1");
+			if(err)
+				console.log(err);
+			else
+			{
+				res.statusCode=200;
+				console.log("Poll Response :" + result);
+				res.send("0^" + result);
+
+			}
+		},json);
+
+	}
+}
+exports.knowledgeDB=function(req,res)
+{
+	res.render('tables');
+	}
+
+
