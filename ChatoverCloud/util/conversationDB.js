@@ -525,9 +525,9 @@ function getConversationsGreaterThanT1(callback,json){
 							var cat;
 							res.toArray(function(err,docs){
 								var d = new Date();
-								var timeStamp = d.getTime()
+								var timeStamp = d.getTime();
 								cat=timeStamp;
-								cat.concat(";");
+								cat = cat +";";
 								console.log("DOCS length : " +docs.length);
 								if(!docs.length==0)
 									{
