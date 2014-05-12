@@ -133,6 +133,7 @@ exports.initialRequest = function(req, res){
 
 		});
 		
+		
 
 
 
@@ -174,6 +175,12 @@ exports.knowledgeBase = function(req, res){
 
 };
 
+
+
+
+
+
+
 exports.custPollReq = function(req, res){
 
 	if(!req.body.hasOwnProperty('clientId') ||  !req.body.hasOwnProperty('conversationId')|| !req.body.hasOwnProperty('lastReq')) 
@@ -186,7 +193,6 @@ exports.custPollReq = function(req, res){
 	else {
 
 		var json=[];
-		json.clientId=req.body.clientId;
 		json.conversationID=req.body.conversationId;
 		json.t1=req.body.lastReq;
 

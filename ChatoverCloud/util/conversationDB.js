@@ -518,15 +518,16 @@ function getConversationsGreaterThanT1(callback,json){
 			{
 				db.collection("conversationDB", function (err, connection){
 					if(!err){
-					connection.find({"timeStamp":{$gt:json.t1},"clientId":"null","conversationID":json.conversationID}, function(err,res){
+					connection.find({"timeStamp":{$gt:parseInt(json.t1)},"clientId":"null","conversationID":json.conversationID}, function(err,res){
 						
 						if(!err){
-			
+							console.log("conversationID : " + json.conversationID + "  timestamp: " + json.t1);
 							var cat;
 							res.toArray(function(err,docs){
 								var d = new Date();
 								var timeStamp = d.getTime()
 								cat=timeStamp;
+								console.log("DOCS length : " +docs.length);
 								if(!docs.length==0)
 									{
 										

@@ -114,7 +114,7 @@ function pollRequest()
 {
 	params="clientId="+clientId+"&conversationId="+conversationId+"&lastReq="+lastReq;
 	callCloudAjax("http://localhost:3000/custPollReq",params,processPollResp);
-},8000);
+},30000);
 }
 
 function initRequest() 

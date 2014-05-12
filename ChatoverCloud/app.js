@@ -49,8 +49,8 @@ app.post('/submitTicket', customer.submitTicket);
 app.post('/knowledgeBase', customer.knowledgeBase);
 app.post('/custPollReq', customer.custPollReq);
 app.post('/insertkb',admin.insertkb);
-app.get('/retrieveTickets',admin.retrieveTickets);
-app.get('/unreadMessages',admin.unreadMessages);
+//app.get('/retrieveTickets',admin.retrieveTickets);
+//app.get('/unreadMessages',admin.unreadMessages);
 
 
 

@@ -38,11 +38,16 @@ conversation.insertConversationInitialReq({"clientId":"NGattuPALLY","customerNam
 
 */
 
-//conversation.insertConversationClient({"customerName":"NGattuPALLY","conversationID":"NavyaGattuPALLY1399806476705","customerEmail":"tp1@gmail.com","category":"sf","message":"Hi"});
-
+conversation.insertConversationClient({"customerName":"NGattuPALLY","conversationID":"gattu1399856311613","customerEmail":"tp1@gmail.com","category":"sf","message":"Hi"});
+var json =[];
+json.t1="1399854555555";
+json.conversationID= "gattu1399856311613";
 conversation.getConversationsGreaterThanT1(function(err,res){
 	if(!err){
 		res
 		console.log(res);
 	}
-},{"t1":1399806672177,"clientId":"GATTU"});
+},json);
+
+//conversation.insertConversationClient(
+//		{"conversationID":"gattu1399858473792","message":"Hello i am ba, cant help today?"});
