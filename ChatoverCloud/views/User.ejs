@@ -7,7 +7,6 @@ var supportStatus="offline";
 window.onload =function()
 {
 clientId="<%=clientId%>";
-alert(clientId);
 var params = "clientId="+clientId;
 callCloudAjax("/categories",params,processRequest);
 }
@@ -31,7 +30,6 @@ function chatorTicket(status)
 
 function startChat()
 {
-	alert("make ajax request to query DB");
 	var params="clientId="+clientId+"&message="+document.getElementById('message').value+"&category="+document.getElementById('category').value;
 	callCloudAjaxSync("/knowledgeBase",params,processKbResponse);
 	document.getElementById('sc').style.visibility="visible";
@@ -105,7 +103,6 @@ function processRequest()
 					}
 					else
 					{
-						alert("Support Status: " + results_array[2]);
 						chatorTicket(results_array[2])
 						var catoptions = results_array[1].split(":");
 						var catdrop = document.getElementById("category");
@@ -155,7 +152,7 @@ function processKbResponse()
 					}
 					else
 					{
-						alert("We found some information that might relate to your query. \n\n " + results_array[1] + "\n\n Click on Start Chat if you still wish to talk to Support");
+						alert("No results returned from Knowledge Base.  Click on Start Chat if you still wish to talk to Support");
 					} 
 				}
 			}
@@ -306,7 +303,7 @@ body{overflow:hidden;background-image:url(bg-chat.jpg);background-repeat:no-repe
         <button name ="sc" id="sc" class="button" type="submit" style="visibility:hidden" value="sc">Start Chat</button>
         <button name ="chat" id="chat" type="button" style="visibility:hidden" class="button" value="Chat" onclick="startChat(); return false;">Chat</button> 
         <button name ="close" id="close" type="button" class="button" value="close" onclick="closeWindow()">Close</button>
-        <button name ="ticket" id = "ticket" type="submit" style="visibility:visible" class="button1" value="Submit Ticket" onclick="closeWindow()">Submit Ticket</button> 
+        <button name ="ticket" id = "ticket" type="submit" style="visibility:visible" class="button1" value="Submit Ticket" onclick="alert('Your ticket has been submitted we shall get back to you soon')">Submit Ticket</button> 
 
     </label>    
 </form>

@@ -56,27 +56,29 @@ var client = require('../util/clientDB');
     	}
     	}
     
-    exports.inbox = function (req, res) {
-    	if(!req.body.hasOwnProperty('clientId')||!req.body.hasOwnProperty('unreadFlag')) {
-    		res.statusCode = 400;
-    		return res.send('Error 400: Post syntax incorrect.');
-    	}
-    	else {
-    		
-    	var json = [];
-    	json.clientId= req.body.clientId;
-    	json.unreadFlag=1;
-    	admin.findUnreadMessagesByClient(function(err,results){
-    		if(err){
-    			throw err;
-    		}else{
-    			
-    			console.log(results);
-    			res.render('messages');
+    exports.inbox = function (req, res){
+    	if(req.session.clientId!="" && req.session.clientId!=null)
+    	{
+    	console.log(req.session.clientId);
+    	offline.findOfflineMessageByClient(function(err,result){
+    		console.log("inside get Offline DB");
+    		if(err)
+    			console.log(err);
+    		else
+    		{
+    			console.log("Message results :" + result );
+    			res.render('messages',{messages:result});
     		}
-    	});
-   }
- }
+    	},req.session.clientId);
+    	
+    	}
+    	
+    	else 
+    	{
+    	console.log(req.session.clientId);
+    	res.render('index');
+    	}
+    }
  exports.replyEmails = function (req, res) {
     	console.log("inside retrieve tickets");
     	if(!req.body.hasOwnProperty('clientEmail')||!req.body.hasOwnProperty('message')) {
@@ -254,6 +256,7 @@ exports.dashboard=function(req,res)
 exports.logout=function(req,res)
 {
 req.session.clientId=null;
+client.setClientFlagOffline(req.body.name);
 res.render('index');
 
 

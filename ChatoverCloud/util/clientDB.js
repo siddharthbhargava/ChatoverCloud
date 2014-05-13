@@ -349,7 +349,7 @@ function setClientFlagOffline(clientId){
 							if(err){
 								console.log("No such client exists.");
 							}
-							else{console.log("Flag Set.");}
+							else{console.log("Flag reset.");}
 						});
 					}
 				});

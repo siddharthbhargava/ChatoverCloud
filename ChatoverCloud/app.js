@@ -54,7 +54,7 @@ app.post('/clientPollReq',admin.clientPollReq);
 app.post('/initialClientPollReq',admin.initialClientPollReq);
 app.post('/insertkb',admin.insertkb);
 app.get('/knowledgeDB',admin.knowledgeDB);
-app.post('/inbox',admin.inbox);
+app.get('/inbox',admin.inbox);
 //app.get('/unreadMessages',admin.unreadMessages);
 //app.post('/adminChat',admin.adminChat);
 app.post('/clientResp',admin.clientResp);

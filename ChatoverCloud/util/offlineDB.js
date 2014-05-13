@@ -13,10 +13,9 @@ function insertOfflineMessage(json){
 	 *  "message":value}
 	 */
 
-	var d = new Date();
-	var timeStamp = d.getTime()
+	var myDate = new Date().toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1");
 	//"time in Milliseconds since midnight jan 1st 1970: "+timeStamp);
-	json.timeStamp = timeStamp;
+	json.timeStamp = myDate;
 	
 	if(json.clientId && json.customerName && json.questionCategory && json.timeStamp && json.customerEmail && json.message){
 	
@@ -25,11 +24,16 @@ function insertOfflineMessage(json){
 			  else
 				{
 				  db.collection("offlineDB", function (err, connection){
-				  		connection.insert({"clientId":json.clientId,"customerName":json.customerName,"questionCategory":json.questionCategory,"timeStamp":json.timeStamp,"message":json.message,"unreadFlag":json.unreadFlag},function (err,result){
-				  			if(err)
+				  		connection.insert({"clientId":json.clientId,"customerName":json.customerName,"questionCategory":json.questionCategory,"timeStamp":json.timeStamp,"message":json.message,"unreadFlag":json.unreadFlag,"customerEmail":json.customerEmail},function (err,result){
+				  			if(err){
 				  				console.log(err);
-				  			else
+				  				db.close();
+				  				}
+				  			else{
 					  			console.log("Successfully Inserted");
+					  			db.close();
+				  			}
+				  				
 					  	});
 					  });
 				}	  
@@ -64,10 +68,14 @@ function updateOfflineMessages(json){
 				{
 				  db.collection("offlineDB", function (err, connection){
 				  		connection.update(json,function (err,result){
-				  			if(err)
+				  			if(err){
 				  				console.log(err);
-				  			else
+				  				db.close();
+				  			}
+				  			else{
 					  			console.log("Successfully Updated");
+					  			db.close();
+				  			}
 					  	});
 					  });
 				}	  
@@ -101,10 +109,14 @@ function removeOfflineMessages(json){
 				{
 				  db.collection("offlineDB", function (err, connection){
 				  		connection.remove(json,function (err,result){
-				  			if(err)
+				  			if(err){
 				  				console.log(err);
-				  			else
+				  				db.close();
+				  			}
+				  			else{
 					  			console.log("Successfully removed offline messages.");
+					  			db.close();
+				  			}
 					  	});
 					  });
 				}	  
@@ -126,9 +138,11 @@ function findAllOfflineMessages(callback){
 			  db.collection("offlineDB", function (err, connection){
 				  connection.find(function(err, results){
 					  if(!err){
+						  db.close();
 						  callback(results,err);
 					  }
 					  else{
+						  db.close();
 						  console.log(err);
 					  }
 				  });
@@ -152,6 +166,7 @@ function findOfflineMessageByClient(callback,clientId){
 				  
 			  connection.find({"clientId":clientId,"unreadFlag":"unread"},function(err,res){
 				  if(err){
+					  db.close();
 					  console.log("The client has no unread messages");
 				  }
 				  else{
@@ -160,6 +175,7 @@ function findOfflineMessageByClient(callback,clientId){
 						res.toArray(function(err,docs){
 							if(!docs.length==0)
 								{
+								/*
 									cat=docs[0].timeStamp;
 									cat = cat + ":";
 									cat = cat.concat(docs[0].customerName);
@@ -184,8 +200,15 @@ function findOfflineMessageByClient(callback,clientId){
 											cat = cat.concat(":");
 											cat = cat.concat(docs[i].message);
 										}
+										*/
+								
+								db.close();
+								callback(err,docs);
 								}
-							callback(err,cat);
+							else{
+							console.log("No messages found");
+							db.close();
+							}
 						});
 				  }
 			  });
@@ -210,10 +233,14 @@ function removeReadOfflineMessagesByClient(json){
 			{
 			  db.collection("offlineDB", function (err, connection){
 				  connection.remove({"clientId:":json.clientId, "unreadFlag":{$in:[0,"unread","0"]}},function(err,res){
-					  if(err)
+					  if(err){
 						  console.log("Error removing documents");
-					  else
+						  db.close();
+					  }
+					  else{
 						  console.log("Removed read messages of the client.");
+						  db.close();
+					  }
 				  });
 			  });
 			}
@@ -237,9 +264,11 @@ function changeUnreadFlag(json){
 					  
 					  if(!err){	
 						  connection.update({"clientId":json.clientId},{$set:{"unreadFlag":"read}"}},{ multi: true });
+						  db.close();
 					  }
 					  else{
 						  console.log("Error");
+						  db.close();
 					  }
 				  });
 			}

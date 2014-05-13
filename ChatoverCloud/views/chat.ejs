@@ -109,9 +109,7 @@ var custName;
 window.onload =function()
 {
 	clientId="<%=clientId%>";
-	alert("ClientID :" + clientId);
 	lastReq=getTimeStamp();
-	alert(lastReq);
 	pollRequest();
 }
 function initRequest() 
@@ -177,7 +175,7 @@ function pollRequest()
 		params="clientId="+clientId+"&lastReq="+lastReq;
 		callCloudAjax("/initialClientPollReq",params,processInitPollResp);	
 	}
-},30000);
+},7000);
 }
 function processClientPollResp() 
 {
@@ -270,7 +268,6 @@ function processRequest()
 					}
 					else
 					{
-						alert("response recieved and logged");
 					} 
 				}
 			}
