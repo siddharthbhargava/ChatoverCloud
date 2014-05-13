@@ -34,12 +34,16 @@ function insertConversationInitialReq(json,callback){
 			{
 			 	  db.collection("conversationDB", function (err, connection){
 				  		connection.insert({"clientId":json.clientId,"customerName":json.customerName,"customerEmail":json.customerEmail,"category":json.category,"conversationID":json.conversationID,"timeStamp":json.timeStamp,"message":json.message},function (err,result){
-				  			if(err)
+				  			if(err){
 				  				console.log(err);
-				  			else
+				  				db.close();
+				  			}
+				  			else{
 					  			console.log("Successfully Inserted");
 				  				//connection.update({"conversationID":{$in:[]},"clientId":json.clientId},{"conversationID":json.conversationID})
-				  			    callback(err,json.conversationID);
+				  			db.close();    
+				  			callback(err,json.conversationID);
+				  			}
 					});
 				});
 			}
@@ -79,10 +83,14 @@ function insertConversationCustomer(json){
 			{
 			 	  db.collection("conversationDB", function (err, connection){
 				  		connection.insert({"clientId":json.clientId,"conversationID":json.conversationID,"timeStamp":json.timeStamp,"message":json.message},function (err,result){
-				  			if(err)
+				  			if(err){
 				  				console.log(err);
-				  			else
+				  				db.close();
+				  				}
+				  			else{
 					  			console.log("Successfully Inserted");
+					  			db.close();
+				  			}
 					});
 				});
 			}
@@ -122,10 +130,14 @@ function insertConversationClient(json){
 			{
 			 	  db.collection("conversationDB", function (err, connection){
 				  		connection.insert({"clientId":"null","conversationID":json.conversationID,"timeStamp":json.timeStamp,"message":json.message},function (err,result){
-				  			if(err)
+				  			if(err){
 				  				console.log(err);
-				  			else
+				  				db.close();
+				  			}
+				  			else{
 					  			console.log("Successfully Inserted");
+					  			db.close();
+				  			}
 					});
 				});
 			}
@@ -540,11 +552,13 @@ function getConversationsGreaterThanT1(callback,json){
 												
 												cat = cat.concat(docs[i].message);
 											}
+										db.close();
 										callback(err,cat);
 										}
 								else
 									{
 									console.log("cat: " +cat);
+									db.close();
 									callback(err,cat);
 									}
 									
@@ -601,10 +615,13 @@ function initialPoll(callback,json){
 										cat = cat.concat(";");
 										cat = cat.concat(docs[0].message);
 										
+										db.close();
 										callback(err,cat);
 										}
-								else
+								else{
+									db.close();
 									callback(err,cat);
+								}
 									
 								});
 							}
@@ -664,10 +681,14 @@ function regularPoll(callback,json){
 												
 												cat = cat.concat(docs[i].message);
 											}
+										db.close();
 										callback(err,cat);
 										}
-								else
+								else{
+									db.close();
 									callback(err,cat);
+								}
+									
 									
 								});
 							}
