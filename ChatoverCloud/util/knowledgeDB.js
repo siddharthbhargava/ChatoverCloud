@@ -267,19 +267,22 @@ function findKnowledgeDBByCategoryAndKey(callback,json){
 									cat = cat.concat(docs[0].answer);
 									for(var i=1; i<docs.length;i++)
 									{
-										cat = cat.concat(",");
+										cat = cat.concat("~");
 										cat = cat.concat(docs[i].question);
 										cat = cat.concat(":");
 										cat = cat.concat(docs[i].answer);
 									}
-									console.log(cat);
-									
+									queryResults = queryResults + (cat);
+									callback(err,cat);
 								}
-								queryResults = queryResults + (cat);
+								else{
+									queryResults="No results in the knowledge base.";
+									callback(err,queryResults);
+								}
+									
 							});
 						}
 					});
-				callback(err,queryResults);	
 			});
 		}
 	});
@@ -322,10 +325,10 @@ json.questionCategory = "CMPE";
 json.question = "How is the course 275 202 281 ?";
 
 
-findKnowledgeDBByCategoryAndKey(function(err,res){
-	if(!err){
-		console.log("This is the result of the query!");
-		console.log(res);
-	}
-},json);
+//findKnowledgeDBByCategoryAndKey(function(err,res){
+//	if(!err){
+//		console.log("This is the result of the query!");
+//		console.log(res);
+//	}
+//},json);
 
